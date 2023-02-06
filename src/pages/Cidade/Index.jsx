@@ -12,14 +12,13 @@ const Cidades = () => {
     async function getCidades(page = 1) {
 
         page = page > 1 ? '?page='+page : ''
+        let busca = ''      
 
-        let busca = ''
 
-        
         if (search != "" && page == '') {
             busca = '?nome=' + search
-        } else {
-            busca = ''
+        } else if (search != "" && page != '') {
+            busca = '&nome=' + search
         }
    
         await fetch(`http://webfin.test/api/cidades${page}${busca}`)
@@ -49,7 +48,7 @@ const Cidades = () => {
             </Form>
 
             <Table responsive="sm" size="sm" bordered hover >
-                <caption style={{textAlign: 'center', captionSide: 'bottom'}} >Lista de Cidades</caption>
+                <caption style={{textAlign: 'center', captionSide: 'top '}} >Lista de Cidades</caption>
                 <thead >
                     <tr>
                         <th>Nome da cidade</th>
