@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { Table, Form} from 'react-bootstrap';
+import { Table, Form, Dropdown} from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Paginacao from "../../components/Paginacao";
 
@@ -13,7 +13,6 @@ const Cidades = () => {
 
         page = page > 1 ? '?page='+page : ''
         let busca = ''      
-
 
         if (search != "" && page == '') {
             busca = '?nome=' + search
@@ -48,9 +47,10 @@ const Cidades = () => {
             </Form>
 
             <Table responsive="sm" size="sm" bordered hover >
-                <caption style={{textAlign: 'center', captionSide: 'top '}} >Lista de Cidades</caption>
+                {/* <caption style={{textAlign: 'center', captionSide: 'top '}} >Lista de Cidades</caption> */}
                 <thead >
                     <tr>
+                        <th style={{textAlign: 'center'}} >#</th>
                         <th>Nome da cidade</th>
                         <th style={{width: '4rem', textAlign: 'center'}}>UF</th>
                     </tr>
@@ -59,6 +59,23 @@ const Cidades = () => {
                     {cidades.map(el => {
                         return (
                             <tr key={el.id}>
+                                <td style={{width: '5rem'}} >
+                                    {
+                                        
+                                        <Dropdown>
+                                            <div className="d-grid gap-2">
+                                                <Dropdown.Toggle   size="sm" variant="primary" id="dropdown-basic">
+                                                Opções
+                                                </Dropdown.Toggle>
+                                        
+                                                <Dropdown.Menu variant="dark">
+                                                <Dropdown.Item href="#/action-1">Editar</Dropdown.Item>
+                                                <Dropdown.Item href="#/action-2">Remover</Dropdown.Item>
+                                                </Dropdown.Menu>
+                                            </div>
+                                        </Dropdown>
+                                    }
+                                </td>
                                 <td>{el.nome}</td>
                                 <td style={{textAlign: 'center'}}>{el.uf}</td>
                             </tr>
