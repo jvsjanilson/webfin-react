@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { Table, Form, Dropdown} from 'react-bootstrap';
+import { Table, Form, Dropdown, Button} from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Paginacao from "../../components/Paginacao";
 
@@ -40,11 +40,16 @@ const Cidades = () => {
 
     return (
         <Container fluid>
-            <Form>
-                <Form.Group className="mb-2" controlId="formBasicEmail">
-                    <Form.Control type="text" onChange={(e) => setSearch(e.target.value)} placeholder="Pesquisar" />
-                </Form.Group>
+            <Form className="d-flex mb-2">
+                <Button active className="me-2" variant="primary">Adicionar</Button>
+                  <Form.Control
+                    type="search"
+                    placeholder="Pesquisar"
+                    onChange={(e) => setSearch(e.target.value)}
+                    aria-label="Search"
+                  />
             </Form>
+
 
             <Table responsive="sm" size="sm" bordered hover >
                 {/* <caption style={{textAlign: 'center', captionSide: 'top '}} >Lista de Cidades</caption> */}
