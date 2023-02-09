@@ -62,6 +62,7 @@ const App = () => {
 			<Route path="/" element={<Home/>}/>
 			<Route path="/estados" element={<Estados/>}/>
 			<Route path="/estados/create" element={<CreateEstado/>}/>
+			<Route path="/estados/edit/:_id" element={<CreateEstado/>}/>
 
 			<Route path="/cidades" element={<Cidades/>}/>
 		</Routes>
