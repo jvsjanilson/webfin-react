@@ -1,0 +1,6 @@
+.table-sm td {
+    vertical-align: middle !important;
+    text-transform: capitalize;
+    font-size: 16px !important;
+    font-weight: 400;
+}
