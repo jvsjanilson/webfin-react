@@ -1,12 +1,11 @@
-import {React, useState, useEffect} from 'react'
+import { React, useState, useEffect } from 'react'
 import { Card, Button, Container, Form as FormBootstrap, Row, Col} from 'react-bootstrap';
-import {LinkContainer} from 'react-router-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
 import { useNavigate } from 'react-router-dom';
-import api from '../../config/api';
-import { Formik, Form } from 'formik';
-// import EstadoSchema from '../../schemas/EstadoSchema';
 import { useParams } from 'react-router-dom';
+import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
+import api from '../../config/api';
 
 const CreateEstado = (props) => {
     
@@ -86,7 +85,7 @@ const CreateEstado = (props) => {
     return (<Container >
         <Formik 
             onSubmit={(values) => {
-                console.log(_id)
+
                 if (_id)
                     return onSubmitUpdate(values)
                 else
