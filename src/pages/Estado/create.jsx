@@ -1,12 +1,12 @@
-import {React, useState, useEffect, useCallback} from 'react'
+import {React, useState, useEffect} from 'react'
 import { Card, Button, Container, Form as FormBootstrap, Row, Col} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap'
 import { useNavigate } from 'react-router-dom';
 import api from '../../config/api';
 import { Formik, Form } from 'formik';
-import EstadoSchema from '../../schemas/EstadoSchema';
+// import EstadoSchema from '../../schemas/EstadoSchema';
 import { useParams } from 'react-router-dom';
-
+import * as Yup from 'yup';
 
 const CreateEstado = (props) => {
     
@@ -14,47 +14,72 @@ const CreateEstado = (props) => {
     let { _id } = useParams();
 
     const [estado, setEstado] = useState({})
-
     const estadoDefault = {uf: '', nome: ''}
 
+    const EstadoSchema = Yup.object().shape({
+        uf: Yup.string()
+          .max(2, 'Tamanho máximo do UF é 2 caracteres.')
+          .required('O campo UF é obrigatório')
+          .test('UF unico', 'UF já cadastrada',  async (value) => {
+            return await api.get(`estados/search/${value}`, {params: {id: _id}})
+              .then(() => {
+                return false
+              })
+              .catch(() => {
+                return true
+              })
+          })
+        ,
+        nome: Yup.string()
+          .max(60, 'Tamanho máximo do Nome é 60 caracteres.')
+          .required('O campo Nome é obrigatório.'),
+      });
+   
+
     const onSubmitCreate = async (values) => {
-        console.log('onSubmit')
         await api.post('estados',{
             uf: values.uf,
             nome: values.nome  
         })
         .then(res => {
-            if (res.status == 201)
-                navigate('/estados')
+            navigate('/estados')
         })
         .catch(error => {
-            console.log(error)
             if (error.response.status == 422) {
-
                 alert('Erro campo obrigatorio')
             }
         })
-       
     }
 
     const onSubmitUpdate = async (values) => {
-        console.log('update: ' + _id)
-        console.log('values: ' + values.uf)
-        console.log('values: ' + values.nome)
+        
+        await api.put(`/estados/${_id}`, {
+            uf: values.uf,
+            nome: values.nome
+        })
+        .then(res => {
+            navigate('/estados')
+        }).catch(error => {
+            console.log(error)
+            alert('Error ao atualizar.')
+        })
     }
-
     
-    async function findId() {
+    const findEstado = async () => {
         if (_id) {
             await api.get(`estados/${_id}`)
             .then( res => {
-                setEstado({uf: res.data.uf, nome: res.data.nome})
+                setEstado({
+                        uf: res.data.uf, 
+                        nome: res.data.nome
+                    })
             })
         }
     }
 
     useEffect(() => {
-        findId()
+        findEstado()
+        
         
     },[])
 
