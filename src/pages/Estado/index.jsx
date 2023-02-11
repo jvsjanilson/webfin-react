@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { Table, Form, Dropdown, Button, Container, Modal, FloatingLabel, Row, Col} from 'react-bootstrap';
+import { Table, Form, Dropdown, Button, Container, Modal} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap'
 import api from '../../config/api';
 import Paginacao from "../../components/Paginacao";
@@ -12,9 +12,8 @@ const Estados = () => {
     const [search, setSearch] = useState('')
     const [register, setRegister] = useState(0)
     const [show, setShow] = useState(false);
-    const [ativo, setAtivo] = useState(false)
+
     const handleClose = () => setShow(false);
-  
 
     const handleAtivo = async (id, status) => {
 

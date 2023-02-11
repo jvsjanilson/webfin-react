@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { Table, Form, Dropdown, Button, Modal} from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap'
 import Container from 'react-bootstrap/Container';
 import Paginacao from "../../components/Paginacao";
 import { FaEdit, FaTrash } from "react-icons/fa";
@@ -105,7 +106,10 @@ const Cidades = () => {
             </Modal>
 
             <Form className="d-flex mb-2">
-                <Button active className="me-2" variant="primary">Adicionar</Button>
+                
+                <LinkContainer to="/cidades/create">
+                    <Button active className="me-2" variant="primary">Adicionar</Button>
+                </LinkContainer>
                   <Form.Control
                     type="search"
                     placeholder="Pesquisar"
@@ -122,6 +126,7 @@ const Cidades = () => {
                         <th style={{textAlign: 'center'}} >#</th>
                         <th>Nome da cidade</th>
                         <th style={{width: '4rem', textAlign: 'center'}}>UF</th>
+                        
                         <th style={{width: '4rem'}}>Status</th>
                     </tr>
                 </thead>
@@ -139,7 +144,10 @@ const Cidades = () => {
                                                 </Dropdown.Toggle>
                                         
                                                 <Dropdown.Menu >
-                                                <Dropdown.Item href="javascript:void(0)"><FaEdit className="text-success" /> Editar</Dropdown.Item>
+                                                <LinkContainer to={`/cidades/edit/${el.id}`}>
+                                                        <Dropdown.Item href="javascript:void(0)"><FaEdit className="text-success" /> Editar</Dropdown.Item>
+                                                </LinkContainer>
+                                                
                                                 <Dropdown.Item href="javascript:void(0)" onClick={handleDeleteCidade.bind(this, el.id)}><FaTrash color="red" /> Remover</Dropdown.Item>
                                                 </Dropdown.Menu>
                                             </div>
@@ -148,6 +156,7 @@ const Cidades = () => {
                                 </td>
                                 <td>{el.nome}</td>
                                 <td style={{textAlign: 'center'}}>{el.uf}</td>
+                                
                                 <td>
                                 <Form.Switch style={{textAlign: 'center'}}
                                     type="switch"
