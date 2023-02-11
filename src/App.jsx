@@ -11,6 +11,7 @@ import Home from './pages/Home'
 import {LinkContainer} from 'react-router-bootstrap'
 import Cidades from "./pages/Cidade/Index";
 import CreateEstado from "./pages/Estado/create";
+import CreateCidade from "./pages/Cidade/create";
 
 const App = () => {
   return (
@@ -66,6 +67,8 @@ const App = () => {
 			<Route path="/estados/edit/:_id" element={<CreateEstado/>}/>
 
 			<Route path="/cidades" element={<Cidades/>}/>
+			<Route path="/cidades/create" element={<CreateCidade/>}/>
+			<Route path="/cidades/edit/:_id" element={<CreateCidade/>}/>
 		</Routes>
 		</main>
 	</div>   	
