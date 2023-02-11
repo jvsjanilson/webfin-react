@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import api from '../../config/api';
+import { FaArrowLeft, FaPlus, FaSave } from "react-icons/fa";
 
 const CreateEstado = (props) => {
     
@@ -97,17 +98,19 @@ const CreateEstado = (props) => {
         >
         {({
            handleChange,
+           handleBlur,
            values,
            errors,
+           touched
                  
         }) => (
 
             <Form >
                 <Card >
                     <Card.Header>
-                        <Button className='me-1' type='submit' variant="primary">Criar</Button>
+                        <Button className='me-1'  type='submit' variant={ _id ? 'success' : 'primary' }>{(_id? (<FaSave/>) : (<FaPlus/>))} { _id ? 'SALVAR' : 'CRIAR' }</Button>
                         <LinkContainer to="/estados">
-                            <Button variant="secondary">Voltar</Button>
+                            <Button  variant="secondary"><FaArrowLeft/> VOLTAR</Button>
                         </LinkContainer>
                     </Card.Header>
                     <Card.Body>
@@ -118,6 +121,7 @@ const CreateEstado = (props) => {
                                 <FormBootstrap.Control 
                                         autoFocus type="text" value={values.uf} onChange={handleChange} 
                                         isInvalid={!!errors.uf}
+                                        
                                     />
                                 <FormBootstrap.Control.Feedback type="invalid">
                                     {errors.uf}
@@ -131,6 +135,7 @@ const CreateEstado = (props) => {
                                 <FormBootstrap.Control type="text" value={values.nome} onChange={handleChange}
                                     isInvalid={!!errors.nome}
                                 />
+                                
                                 <FormBootstrap.Control.Feedback type="invalid">
                                     {errors.nome}
                                 </FormBootstrap.Control.Feedback>
