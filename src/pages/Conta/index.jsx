@@ -1,22 +1,21 @@
-import React, {useState, useEffect} from "react";
-import { Table, Form, Dropdown, Button, Container, Modal} from 'react-bootstrap';
-import {LinkContainer} from 'react-router-bootstrap'
-import api from '../../config/api';
-import Paginacao from "../../components/Paginacao";
-import { FaPlus, FaEdit, FaTrash } from "react-icons/fa";
-
+import React, { useState, useEffect } from "react";
+import { Table, Form, Dropdown, Button, Container, Modal } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap'
+import { api } from '../../config/api';
+import { Paginacao } from "../../components/Paginacao";
+import { FaEdit, FaTrash } from "react-icons/fa";
 
 const IndexConta = () => {
 
-    const [dados, setDados ] = useState([])
-    const [paginate, setPaginate ] = useState({});
-    const [search, setSearch] = useState('')
-    const [register, setRegister] = useState(0)
-    const [show, setShow] = useState(false);
-
     const recurso = 'contas'
 
-    const handleClose = () => setShow(false);
+    const [dados, setDados ] = useState([])
+    const [paginate, setPaginate ] = useState({})
+    const [search, setSearch] = useState('')
+    const [register, setRegister] = useState(0)
+    const [show, setShow] = useState(false)
+
+    const handleClose = () => setShow(false)
 
     const handleAtivo = async (id, status) => {
 
@@ -34,7 +33,6 @@ const IndexConta = () => {
                 }))
             }
         }).catch(error => {
-            console.log(error)
             alert('Error')
         })        
     }
@@ -165,7 +163,6 @@ const IndexConta = () => {
                                         type="switch"
                                         id="custom-switch"
                                         checked={el.ativo ? true: false}
-
                                         onChange={handleAtivo.bind(this, el.id, el.ativo)}
                                     />
                                 </td>
@@ -180,7 +177,6 @@ const IndexConta = () => {
                 </tfoot>
         </Container>
     )    
-
 }
 
 export default IndexConta
