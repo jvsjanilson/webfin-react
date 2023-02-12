@@ -12,6 +12,7 @@ import {LinkContainer} from 'react-router-bootstrap'
 import Cidades from "./pages/Cidade/Index";
 import CreateEstado from "./pages/Estado/create";
 import CreateCidade from "./pages/Cidade/create";
+import IndexConta from "./pages/Conta";
 
 const App = () => {
   return (
@@ -32,7 +33,10 @@ const App = () => {
 							<NavDropdown title="Cadastros" id="collasible-nav-dropdown-cadastro" >
 								<NavDropdown.Item href="#action/3.1">Clientes</NavDropdown.Item>
 								<NavDropdown.Item href="#action/3.2">Fornecedores </NavDropdown.Item>
-								<NavDropdown.Item href="#action/3.3">Contas</NavDropdown.Item>
+
+								<LinkContainer to="/contas">
+									<NavDropdown.Item href="javascript:void(0)">Contas</NavDropdown.Item>
+								</LinkContainer>
 								
 								{/* <Link to="/estados">Estados</Link> */}
 								<LinkContainer to="/estados">
@@ -69,6 +73,9 @@ const App = () => {
 			<Route path="/cidades" element={<Cidades/>}/>
 			<Route path="/cidades/create" element={<CreateCidade/>}/>
 			<Route path="/cidades/edit/:_id" element={<CreateCidade/>}/>
+
+			<Route path="/contas" element={<IndexConta/>}/>
+
 		</Routes>
 		</main>
 	</div>   	
