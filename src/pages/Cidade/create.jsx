@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 import api from '../../config/api';
 import { FaArrowLeft, FaPlus, FaSave } from "react-icons/fa";
 
-const CreateCidade = (props) => {
+const CreateCidade = () => {
     
     let navigate = useNavigate()
     let { _id } = useParams();
