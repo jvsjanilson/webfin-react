@@ -13,8 +13,11 @@ import Cidades from "./pages/Cidade/Index";
 import CreateEstado from "./pages/Estado/create";
 import CreateCidade from "./pages/Cidade/create";
 import IndexConta from "./pages/Conta";
+import CreateConta from "./pages/Conta/create";
 
 const App = () => {
+
+	
   return (
     <BrowserRouter>
 	
@@ -75,6 +78,8 @@ const App = () => {
 			<Route path="/cidades/edit/:_id" element={<CreateCidade/>}/>
 
 			<Route path="/contas" element={<IndexConta/>}/>
+			<Route path="/contas/create" element={<CreateConta/>}/>
+			<Route path="/contas/edit/:_id" element={<CreateConta/>}/>
 
 		</Routes>
 		</main>
