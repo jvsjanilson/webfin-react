@@ -14,6 +14,7 @@ import CreateEstado from "./pages/Estado/create";
 import CreateCidade from "./pages/Cidade/create";
 import IndexConta from "./pages/Conta";
 import CreateConta from "./pages/Conta/create";
+import IndexCliente from "./pages/Cliente";
 
 const App = () => {
 
@@ -34,7 +35,10 @@ const App = () => {
 					<Navbar.Collapse id="responsive-navbar-nav">
 						<Nav className="me-auto">
 							<NavDropdown title="Cadastros" id="collasible-nav-dropdown-cadastro" >
-								<NavDropdown.Item href="#action/3.1">Clientes</NavDropdown.Item>
+								<LinkContainer to="/clientes">
+									<NavDropdown.Item href="javascript:void(0)">Clientes</NavDropdown.Item>
+								</LinkContainer>
+								
 								<NavDropdown.Item href="#action/3.2">Fornecedores </NavDropdown.Item>
 
 								<LinkContainer to="/contas">
@@ -81,6 +85,7 @@ const App = () => {
 			<Route path="/contas/create" element={<CreateConta/>}/>
 			<Route path="/contas/edit/:_id" element={<CreateConta/>}/>
 
+			<Route path="/clientes" element={<IndexCliente/>}/>
 		</Routes>
 		</main>
 	</div>   	
