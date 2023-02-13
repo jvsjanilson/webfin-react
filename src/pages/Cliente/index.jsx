@@ -102,7 +102,7 @@ const IndexCliente = () => {
             </Modal>
                 
             <Form className="d-flex mb-2">
-                <LinkContainer to="/contas/create">
+                <LinkContainer to="/clientes/create">
                     <Button active className="me-2" variant="primary">Adicionar</Button>
                 </LinkContainer>
                   <Form.Control
@@ -137,7 +137,7 @@ const IndexCliente = () => {
                                                 </Dropdown.Toggle>
                                         
                                                 <Dropdown.Menu variant="">
-                                                    <LinkContainer to={`/contas/edit/${el.id}`}>
+                                                    <LinkContainer to={`/clientes/edit/${el.id}`}>
                                                         <Dropdown.Item href="javascript:void(0)"><FaEdit className="text-success" /> Editar</Dropdown.Item>
                                                     </LinkContainer>
                                                     <Dropdown.Item href="javascript:void(0)" onClick={handleDeleteRegistro.bind(this,el.id)}><FaTrash color="red" /> Remover</Dropdown.Item>
