@@ -50,7 +50,7 @@ const CreateConta = () => {
             descricao: values.descricao,
             tipo_conta: values.tipo_conta,
             data_abertura: values.data_abertura,
-            user_id: 1,
+            user_id: 1, //obs: remover linha depois que implementar tela de login
             saldo: parseFloat(values.saldo.replace(/[^0-9,]/gi, '').replace(',','.'))
             
         })
