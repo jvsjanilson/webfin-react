@@ -15,6 +15,7 @@ import CreateCidade from "./pages/Cidade/create";
 import IndexConta from "./pages/Conta";
 import CreateConta from "./pages/Conta/create";
 import IndexCliente from "./pages/Cliente";
+import CreateCliente from "./pages/Cliente/create";
 
 const App = () => {
 
@@ -86,6 +87,8 @@ const App = () => {
 			<Route path="/contas/edit/:_id" element={<CreateConta/>}/>
 
 			<Route path="/clientes" element={<IndexCliente/>}/>
+			<Route path="/clientes/create" element={<CreateCliente/>}/>
+			<Route path="/clientes/edit/:_id" element={<CreateCliente/>}/>
 		</Routes>
 		</main>
 	</div>   	
