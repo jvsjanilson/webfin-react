@@ -151,8 +151,12 @@ const CreateConta = () => {
                         <Col sm={2}>
                             <FormBootstrap.Group  controlId="numero_banco">
                                 <FormBootstrap.Label>Número do Banco</FormBootstrap.Label>
-                                <FormBootstrap.Control type="text" value={values.numero_banco} onChange={handleChange}
+                                <FormBootstrap.Control 
+                                    type="text" 
+                                    value={values.numero_banco} 
+                                    onChange={handleChange}
                                     isInvalid={!!errors.numero_banco}
+                                    maxLength={4}
                                 />
                                 
                                 <FormBootstrap.Control.Feedback type="invalid">
@@ -163,8 +167,12 @@ const CreateConta = () => {
                         <Col sm={3}>
                             <FormBootstrap.Group  controlId="numero_agencia">
                                 <FormBootstrap.Label>Número do Agencia</FormBootstrap.Label>
-                                <FormBootstrap.Control type="text" value={values.numero_agencia} onChange={handleChange}
+                                <FormBootstrap.Control 
+                                    type="text" 
+                                    value={values.numero_agencia} 
+                                    onChange={handleChange}
                                     isInvalid={!!errors.numero_agencia}
+                                    maxLength={15}
                                 />
                                 
                                 <FormBootstrap.Control.Feedback type="invalid">
@@ -175,8 +183,12 @@ const CreateConta = () => {
                         <Col sm={3}>
                             <FormBootstrap.Group  controlId="numero_conta">
                                 <FormBootstrap.Label>Número do Conta</FormBootstrap.Label>
-                                <FormBootstrap.Control type="text" value={values.numero_conta} onChange={handleChange}
+                                <FormBootstrap.Control 
+                                    type="text" 
+                                    value={values.numero_conta} 
+                                    onChange={handleChange}
                                     isInvalid={!!errors.numero_conta}
+                                    maxLength={30}
                                 />
                                 
                                 <FormBootstrap.Control.Feedback type="invalid">
@@ -219,7 +231,11 @@ const CreateConta = () => {
                         <Col sm={8}>
                             <FormBootstrap.Group  controlId="descricao">
                                 <FormBootstrap.Label>Descrição</FormBootstrap.Label>
-                                <FormBootstrap.Control type="text" value={values.descricao} onChange={handleChange}
+                                <FormBootstrap.Control 
+                                    type="text" 
+                                    value={values.descricao} 
+                                    onChange={handleChange}
+                                    maxLength={60}
                                     isInvalid={!!errors.descricao}
                                 />
                                 
@@ -237,11 +253,7 @@ const CreateConta = () => {
                                     id="saldo"
                                     className="preco_2"
                                     value={values.saldo}
-                            
-                                    // onBlur={(e) => {
-                                    //     console.log(e.target.value)
-                                    //     setFieldValue('saldo', e.target.value)
-                                    // }}
+                                    maxLength={15}
                                     onBlur={handleChange}
                                     isInvalid={!!errors.saldo}
                                 />
