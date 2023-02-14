@@ -32,8 +32,8 @@ const CreateCliente = () => {
         cep: '',
         complemento: '',
         bairro: '',
-        estado_id: 1,
-        cidade_id: 1,
+        estado_id: 12, //12=RN
+        cidade_id: 1161, //1161=NATAL
         fone: '',
         celular: '',
         email: '',
@@ -53,12 +53,34 @@ const CreateCliente = () => {
         fone: Yup.string().nullable().max(14, 'Tamanho máximo 60 caracteres.'),
         celular: Yup.string().nullable().max(14, 'Tamanho máximo 60 caracteres.'),
         email: Yup.string().nullable().max(120, 'Tamanho máximo 60 caracteres.'),
+        cpfcnpj: Yup.string().nullable().notRequired()
+            .test('Validade CPFCNPJ', 'CPF/CNPJ Inválido', async (value) => {
+                if (value == undefined)
+                    return true
+                return validaDocumento().valid(value)
+            })
+            .test('CPFCNPJ já existente','O CPF/CNPJ já cadastrado', async (value) => {
+                if (value == undefined)
+                    return true
+               
+                if (value.length == 11 || value.length == 14) {
+                    return await api.get(`clientes/find/cpfcnpj/${value}`, {
+                        params: {id: _id}
+                    })
+                        .then(res => {
+                            return res.data.cpfcnpj ? false : true
+                        })
+                        .catch(() => {
+                            return true
+                        })
+                }
+
+            })
       });
    
 
     const onSubmitCreate = async (values) => {
-        
-        await api.post(recurso,{
+        let payload = {
             nome: values.nome,
             nome_fantasia: values.nome_fantasia,
             cpfcnpj: values.cpfcnpj,
@@ -75,12 +97,15 @@ const CreateCliente = () => {
             user_id: 1, //obs: remover linha depois que implementar tela de login
             
             
-        })
+        }
+        
+        await api.post(recurso,payload)
         .then(res => {
             navigate(routeIndex)
         })
         .catch(error => {
             if (error.response.status == 422) {
+                console.log(error)
                 alert('Erro campo obrigatorio')
             }
         })
@@ -88,7 +113,7 @@ const CreateCliente = () => {
 
     const onSubmitUpdate = async (values) => {
 
-        payload = {
+       let payload = {
             nome: values.nome,
             nome_fantasia: values.nome_fantasia,
             cpfcnpj: values.cpfcnpj,
@@ -157,7 +182,7 @@ const CreateCliente = () => {
         getDado()
         getEstados()
         if (_id == undefined)
-            getCidades(1)
+            getCidades(dadoDefault.estado_id)
        
     },[])
 
