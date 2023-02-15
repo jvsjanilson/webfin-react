@@ -7,7 +7,7 @@ import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import api from '../../config/api';
 import { FaArrowLeft, FaPlus, FaSave } from "react-icons/fa";
-
+import MaskedInput from 'react-text-mask'
 
 
 const CreateCliente = () => {
@@ -45,13 +45,13 @@ const CreateCliente = () => {
         nome_fantasia: Yup.string().nullable().max(60, 'Tamanho máximo 60 caracteres.'),
         logradouro: Yup.string().nullable().max(60, 'Tamanho máximo 60 caracteres.'),
         numero: Yup.string().nullable().max(10, 'Tamanho máximo 60 caracteres.'),
-        cep: Yup.string().nullable().max(8, 'Tamanho máximo 60 caracteres.'),
+        cep: Yup.string().nullable().max(9, 'Tamanho máximo 9 caracteres.'),
         complemento: Yup.string().nullable().max(60, 'Tamanho máximo 60 caracteres.'),
         bairro: Yup.string().nullable().max(60, 'Tamanho máximo 60 caracteres.'),
         estado_id: Yup.number().integer().required('O campo obrigatório.'),
         cidade_id: Yup.number().integer().required('O campo obrigatório.'),
-        fone: Yup.string().nullable().max(14, 'Tamanho máximo 60 caracteres.'),
-        celular: Yup.string().nullable().max(14, 'Tamanho máximo 60 caracteres.'),
+        fone: Yup.string().nullable().max(15, 'Tamanho máximo 15 caracteres.'),
+        celular: Yup.string().nullable().max(15, 'Tamanho máximo 15 caracteres.'),
         email: Yup.string().nullable().max(120, 'Tamanho máximo 60 caracteres.'),
         cpfcnpj: Yup.string().nullable().notRequired()
             .test('Validade CPFCNPJ', 'CPF/CNPJ Inválido', async (value) => {
@@ -179,6 +179,7 @@ const CreateCliente = () => {
     }
 
     useEffect(() => {
+
         getDado()
         getEstados()
         if (_id == undefined)
@@ -189,7 +190,7 @@ const CreateCliente = () => {
     return (<Container >
         <Formik 
              onSubmit={(values) => {
-                // console.log(values)
+
                 if (_id)
                     return onSubmitUpdate(values)
                 else
@@ -312,13 +313,13 @@ const CreateCliente = () => {
                             <Col sm={2}>
                                 <FormBootstrap.Group  controlId="cep">
                                     <FormBootstrap.Label>CEP</FormBootstrap.Label>
-                                    <FormBootstrap.Control 
-                                        type="text" 
-                                        value={values.cep} 
+                                    <MaskedInput
+                                        id="cep"
+                                        mask={[/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]}
                                         onChange={handleChange}
-                                        maxLength={8}
-                                        isInvalid={!!errors.cep}
-                                    />
+                                        value={values.cep}
+                                        className="form-control"
+                                        />
                                     
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.cep}
@@ -350,11 +351,9 @@ const CreateCliente = () => {
                                 <FormBootstrap.Group  controlId="estado_id">
                                     <FormBootstrap.Label>UF</FormBootstrap.Label>
                                     <FormBootstrap.Select o
-                                        //onChange={handleChange}
                                         onChange={(e) => {
-                                        setFieldValue('estado_id', e.target.value)
-                                        getCidades(e.target.value)  
-                                        
+                                            setFieldValue('estado_id', e.target.value)
+                                            getCidades(e.target.value)  
                                         }} 
                                         value={values.estado_id}>
                                         {estados.map((e) => (<option  value={e.id} key={e.id}  >{e.uf}</option>))}
@@ -370,10 +369,10 @@ const CreateCliente = () => {
                                         value={values.cidade_id}
                                         >
                                         {cidades.map((e) => {
-                                                return (
-                                                    <option value={e.id} key={e.id} >{e.nome}</option>
-                                                )
-                                            })}
+                                            return (
+                                                <option value={e.id} key={e.id} >{e.nome}</option>
+                                            )
+                                        })}
                                     </FormBootstrap.Select>
                                 </FormBootstrap.Group>
                             </Col>
@@ -383,14 +382,15 @@ const CreateCliente = () => {
                             <Col sm={2}>
                                 <FormBootstrap.Group  controlId="fone">
                                     <FormBootstrap.Label>Fone</FormBootstrap.Label>
-                                    <FormBootstrap.Control 
-                                        type="text" 
-                                        value={values.fone} 
+
+                                    <MaskedInput
+                                        id="fone"
+                                        mask={['(', /[1-9]/, /\d/, ')',  /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
                                         onChange={handleChange}
-                                        maxLength={14}
-                                        isInvalid={!!errors.fone}
+                                        value={values.fone}
+                                        className="form-control"
                                     />
-                                    
+                                   
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.fone}
                                     </FormBootstrap.Control.Feedback>
@@ -399,14 +399,14 @@ const CreateCliente = () => {
                             <Col sm={2}>
                                 <FormBootstrap.Group  controlId="celular">
                                     <FormBootstrap.Label>Celular</FormBootstrap.Label>
-                                    <FormBootstrap.Control 
-                                        type="text" 
-                                        value={values.celular} 
-                                        onChange={handleChange}
-                                        maxLength={14}
-                                        isInvalid={!!errors.celular}
-                                    />
-                                    
+                                <MaskedInput
+                                    id="celular"
+                                    mask={['(', /[1-9]/, /\d/, ')',  /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+                                    onChange={handleChange}
+                                    value={values.celular}
+                                    className="form-control"
+        
+                                />
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.celular}
                                     </FormBootstrap.Control.Feedback>

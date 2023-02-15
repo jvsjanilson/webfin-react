@@ -84,7 +84,7 @@ const CreateCidade = () => {
         findCidade()
         getEstados()
         
-        console.log(cidade)
+        
     },[])
 
     return (<Container >

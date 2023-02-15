@@ -10,6 +10,7 @@ import { FaArrowLeft, FaPlus, FaSave } from "react-icons/fa";
 import { format } from 'date-fns';
 import CurrencyInput from 'react-currency-input-field';
 
+
 const CreateConta = () => {
 
     let navigate = useNavigate()
@@ -51,7 +52,7 @@ const CreateConta = () => {
             tipo_conta: values.tipo_conta,
             data_abertura: values.data_abertura,
             user_id: 1, //obs: remover linha depois que implementar tela de login
-            saldo: parseFloat(values.saldo.replace(/[^0-9,]/gi, '').replace(',','.'))
+            saldo: values.saldo ? parseFloat(values.saldo.replace(/[^0-9,]/gi, '').replace(',','.')) : 0
             
         })
         .then(res => {
@@ -74,7 +75,7 @@ const CreateConta = () => {
             descricao: values.descricao,
             tipo_conta: values.tipo_conta,
             data_abertura: values.data_abertura,
-            saldo: parseFloat(values.saldo.replace(/[^0-9,]/gi, '').replace(',','.'))
+            saldo: values.saldo ? parseFloat(values.saldo.replace(/[^0-9,]/gi, '').replace(',','.')) : 0
         })
         .then(res => {
             navigate(routeIndex)
@@ -87,6 +88,7 @@ const CreateConta = () => {
         if (_id) {
             await api.get(`${recurso}/${_id}`)
             .then( res => {
+                console.log(res.data.saldo)
                
                 setDado({
                     numero_banco: res.data.numero_banco,
@@ -95,28 +97,21 @@ const CreateConta = () => {
                     descricao: res.data.descricao,
                     tipo_conta: res.data.tipo_conta,
                     data_abertura: res.data.data_abertura,
-                    saldo:  parseFloat(res.data.saldo).toLocaleString('pt-BR',{ minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+                    saldo: res.data.saldo,
                 })
             })
         }
     }
 
+ 
     useEffect(() => {
         getDado()
-        $(".preco_2").maskMoney({
-            prefix:'', 
-            allowNegative: false, 
-            thousands:'.', decimal:',', 
-            affixesStay: true, 
-            precision:2, selectAllOnFocus: true, 
-            allowZero: true}
-        );
+       
     },[])
 
     return (<Container >
         <Formik 
              onSubmit={(values) => {
-
                 if (_id)
                     return onSubmitUpdate(values)
                 else
@@ -129,7 +124,6 @@ const CreateConta = () => {
         >
         {({
            handleChange,
-           handleBlur,
            values,
            errors,
            setFieldValue
@@ -247,17 +241,18 @@ const CreateConta = () => {
                         <Col sm={2}>
                             <FormBootstrap.Group >
                                 <FormBootstrap.Label>Saldo</FormBootstrap.Label>
-                                
-                                <FormBootstrap.Control
-                                    type="text"
-                                    id="saldo"
-                                    className="preco_2"
+        
+                                <CurrencyInput
                                     value={values.saldo}
-                                    maxLength={15}
-                                    onBlur={handleChange}
-                                    isInvalid={!!errors.saldo}
-                                />
+                                    className="form-control"
+                                    onValueChange={(value) => {
+                                        setFieldValue('saldo', value)
 
+                                    }}
+                                    >
+
+                                </CurrencyInput>
+                         
                                 <FormBootstrap.Control.Feedback type="invalid">
                                     {errors.saldo}
                                 </FormBootstrap.Control.Feedback>
