@@ -64,7 +64,7 @@ const CreateCliente = () => {
                     return true
                
                 if (value.length == 11 || value.length == 14) {
-                    return await api.get(`clientes/find/cpfcnpj/${value}`, {
+                    return await api.get(`${recurso}/find/cpfcnpj/${value}`, {
                         params: {id: _id}
                     })
                         .then(res => {
@@ -191,7 +191,6 @@ const CreateCliente = () => {
     return (<Container >
         <Formik 
              onSubmit={(values) => {
-
                 if (_id)
                     return onSubmitUpdate(values)
                 else
