@@ -9,14 +9,12 @@ import api from '../../config/api';
 import { FaArrowLeft, FaPlus, FaSave } from "react-icons/fa";
 import MaskedInput from 'react-text-mask'
 
-
-const CreateCliente = () => {
-
+const CreateFornecedor = () => {
     let navigate = useNavigate()
     let { _id } = useParams();
 
-    const recurso = 'clientes'
-    const routeIndex = '/clientes'
+    const recurso = 'fornecedores'
+    const routeIndex = '/fornecedores'
 
     const [dado, setDado] = useState({})
     const [estados, setEstados] = useState([])
@@ -64,7 +62,7 @@ const CreateCliente = () => {
                     return true
                
                 if (value.length == 11 || value.length == 14) {
-                    return await api.get(`clientes/find/cpfcnpj/${value}`, {
+                    return await api.get(`${recurso}/find/cpfcnpj/${value}`, {
                         params: {id: _id}
                     })
                         .then(res => {
@@ -439,7 +437,8 @@ const CreateCliente = () => {
 
           )}
         </Formik>
-    </Container>)
+    </Container>)    
 }
 
-export default CreateCliente    
+
+export default CreateFornecedor

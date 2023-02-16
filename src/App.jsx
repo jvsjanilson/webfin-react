@@ -16,6 +16,8 @@ import IndexConta from "./pages/Conta";
 import CreateConta from "./pages/Conta/create";
 import IndexCliente from "./pages/Cliente";
 import CreateCliente from "./pages/Cliente/create";
+import IndexFornecedor from "./pages/Fornecedor";
+import CreateFornecedor from "./pages/Fornecedor/create";
 
 const App = () => {
 
@@ -40,7 +42,9 @@ const App = () => {
 									<NavDropdown.Item href="javascript:void(0)">Clientes</NavDropdown.Item>
 								</LinkContainer>
 								
-								<NavDropdown.Item href="#action/3.2">Fornecedores </NavDropdown.Item>
+								<LinkContainer to="/fornecedores">
+									<NavDropdown.Item href="#action/3.2">Fornecedores </NavDropdown.Item>
+								</LinkContainer>
 
 								<LinkContainer to="/contas">
 									<NavDropdown.Item href="javascript:void(0)">Contas</NavDropdown.Item>
@@ -89,6 +93,12 @@ const App = () => {
 			<Route path="/clientes" element={<IndexCliente/>}/>
 			<Route path="/clientes/create" element={<CreateCliente/>}/>
 			<Route path="/clientes/edit/:_id" element={<CreateCliente/>}/>
+
+
+
+			<Route path="/fornecedores" element={<IndexFornecedor/>}/>
+			<Route path="/fornecedores/create" element={<CreateFornecedor/>}/>
+			<Route path="/fornecedores/edit/:_id" element={<CreateFornecedor/>}/>
 		</Routes>
 		</main>
 	</div>   	
