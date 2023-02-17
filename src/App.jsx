@@ -18,6 +18,8 @@ import IndexCliente from "./pages/Cliente";
 import CreateCliente from "./pages/Cliente/create";
 import IndexFornecedor from "./pages/Fornecedor";
 import CreateFornecedor from "./pages/Fornecedor/create";
+import IndexContaReceber from "./pages/Contareceber";
+import CreateContaReceber from "./pages/Contareceber/create";
 
 const App = () => {
 
@@ -60,7 +62,9 @@ const App = () => {
 							</NavDropdown>
 
 							<NavDropdown title="Financeiro" id="collasible-nav-dropdown_financeiro" >
-								<NavDropdown.Item href="#action/3.6">Contas a Receber</NavDropdown.Item>
+							<LinkContainer to="/contarecebers">
+								<NavDropdown.Item href="jsvascript:void(0)">Contas a Receber</NavDropdown.Item>
+							</LinkContainer>
 								<NavDropdown.Item href="#action/3.7">Contas a Pagar</NavDropdown.Item>
 								
 							</NavDropdown>
@@ -94,11 +98,14 @@ const App = () => {
 			<Route path="/clientes/create" element={<CreateCliente/>}/>
 			<Route path="/clientes/edit/:_id" element={<CreateCliente/>}/>
 
-
-
 			<Route path="/fornecedores" element={<IndexFornecedor/>}/>
 			<Route path="/fornecedores/create" element={<CreateFornecedor/>}/>
 			<Route path="/fornecedores/edit/:_id" element={<CreateFornecedor/>}/>
+
+
+			<Route path="/contarecebers" element={<IndexContaReceber/>}/>
+			<Route path="/contarecebers/create" element={<CreateContaReceber/>}/>
+			<Route path="/contarecebers/edit/:_id" element={<CreateContaReceber/>}/>
 		</Routes>
 		</main>
 	</div>   	
