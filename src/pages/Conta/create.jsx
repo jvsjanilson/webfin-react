@@ -88,8 +88,6 @@ const CreateConta = () => {
         if (_id) {
             await api.get(`${recurso}/${_id}`)
             .then( res => {
-                console.log(res.data.saldo)
-               
                 setDado({
                     numero_banco: res.data.numero_banco,
                     numero_agencia: res.data.numero_agencia,
@@ -97,7 +95,7 @@ const CreateConta = () => {
                     descricao: res.data.descricao,
                     tipo_conta: res.data.tipo_conta,
                     data_abertura: res.data.data_abertura,
-                    saldo: res.data.saldo,
+                    saldo: new Intl.NumberFormat('pt-BR', {useGrouping:false}).format(parseFloat(res.data.saldo).toFixed(2)),
                 })
             })
         }
