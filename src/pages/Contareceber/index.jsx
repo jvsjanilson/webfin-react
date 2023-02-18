@@ -7,6 +7,7 @@ import { FaEdit, FaTrash, FaFileInvoiceDollar, FaUndo } from "react-icons/fa";
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import CurrencyInput from 'react-currency-input-field';
+import MessageDelete from "../../components/MessageDelete";
 
 
 const IndexContaReceber = () => {
@@ -169,18 +170,7 @@ const IndexContaReceber = () => {
     return (
         <Container fluid>
 
-            <Modal id="dlgRemover" show={show} onHide={handleClose} animation={true}  
-                aria-labelledby="contained-modal-title-vcenter" centered
-            >
-                <Modal.Header closeButton>
-                    <Modal.Title>Remover</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Deseja realmente remover?</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="danger" onClick={handleClose} >Cancelar</Button>
-                    <Button variant="success" onClick={handleConfirmarDelete}>Confirmar</Button>
-                </Modal.Footer>
-            </Modal>
+            <MessageDelete show={show} onHide={handleClose} onConfirm={handleConfirmarDelete} />
 
 
             <Modal show={showEstornar} onHide={handleCloseEstornar} animation={true} id="dlgEstornar" 

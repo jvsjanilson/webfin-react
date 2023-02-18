@@ -4,6 +4,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 import api from '../../config/api';
 import Paginacao from "../../components/Paginacao";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import MessageDelete from "../../components/MessageDelete";
 
 const IndexFornecedor = () => {
 
@@ -87,19 +88,7 @@ const IndexFornecedor = () => {
 
     return (
         <Container fluid>
-
-            <Modal show={show} onHide={handleClose} animation={true}  
-                aria-labelledby="contained-modal-title-vcenter" centered
-            >
-                <Modal.Header closeButton>
-                    <Modal.Title>Remover</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Deseja realmente remover?</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="danger" onClick={handleClose} >Cancelar</Button>
-                    <Button variant="success" onClick={handleConfirmarDelete}>Confirmar</Button>
-                </Modal.Footer>
-            </Modal>
+            <MessageDelete show={show} onHide={handleClose} onConfirm={handleConfirmarDelete} />
                 
             <Form className="d-flex mb-2">
                 <LinkContainer to="/fornecedores/create">

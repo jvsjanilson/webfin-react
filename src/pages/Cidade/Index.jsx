@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Paginacao from "../../components/Paginacao";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import api from '../../config/api';
+import MessageDelete from "../../components/MessageDelete";
 
 const Cidades = () => {
     const [cidades, setCidades ] = useState([])
@@ -92,18 +93,7 @@ const Cidades = () => {
     return (
         <Container fluid>
 
-            <Modal show={show} onHide={handleClose} animation={true}  
-                aria-labelledby="contained-modal-title-vcenter" centered
-            >
-                <Modal.Header closeButton>
-                    <Modal.Title>Remover</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Deseja realmente remover?</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="danger" onClick={handleClose} >Cancelar</Button>
-                    <Button variant="success" onClick={handleConfirmarDelete}>Confirmar</Button>
-                </Modal.Footer>
-            </Modal>
+            <MessageDelete show={show} onHide={handleClose} onConfirm={handleConfirmarDelete} />
 
             <Form className="d-flex mb-2">
                 
