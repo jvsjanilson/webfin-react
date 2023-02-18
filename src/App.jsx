@@ -9,18 +9,17 @@ import { Routes, Route, BrowserRouter, Link } from 'react-router-dom'
 import Home from './pages/Home'
 import {LinkContainer} from 'react-router-bootstrap'
 import IndexEstado from "./pages/Estado";
-import CreateEstado from "./pages/Estado/create";
+import FormEstado from "./pages/Estado/form";
 import IndexCidade from "./pages/Cidade";
-
-import CreateCidade from "./pages/Cidade/create";
+import FormCidade from "./pages/Cidade/form";
 import IndexConta from "./pages/Conta";
-import CreateConta from "./pages/Conta/create";
+import FormConta from "./pages/Conta/form";
 import IndexCliente from "./pages/Cliente";
-import CreateCliente from "./pages/Cliente/create";
+import FormCliente from "./pages/Cliente/form";
 import IndexFornecedor from "./pages/Fornecedor";
-import CreateFornecedor from "./pages/Fornecedor/create";
+import FormFornecedor from "./pages/Fornecedor/form";
 import IndexContaReceber from "./pages/Contareceber";
-import CreateContaReceber from "./pages/Contareceber/create";
+import FormContaReceber from "./pages/Contareceber/form";
 
 const App = () => {
 
@@ -83,30 +82,30 @@ const App = () => {
 	<main>
 		<Routes>
 			<Route path="/" element={<Home/>}/>
+			
 			<Route path="/estados" element={<IndexEstado/>}/>
-			<Route path="/estados/create" element={<CreateEstado/>}/>
-			<Route path="/estados/edit/:_id" element={<CreateEstado/>}/>
+			<Route path="/estados/create" element={<FormEstado/>}/>
+			<Route path="/estados/edit/:_id" element={<FormEstado/>}/>
 
 			<Route path="/cidades" element={<IndexCidade/>}/>
-			<Route path="/cidades/create" element={<CreateCidade/>}/>
-			<Route path="/cidades/edit/:_id" element={<CreateCidade/>}/>
+			<Route path="/cidades/create" element={<FormCidade/>}/>
+			<Route path="/cidades/edit/:_id" element={<FormCidade/>}/>
 
 			<Route path="/contas" element={<IndexConta/>}/>
-			<Route path="/contas/create" element={<CreateConta/>}/>
-			<Route path="/contas/edit/:_id" element={<CreateConta/>}/>
+			<Route path="/contas/create" element={<FormConta/>}/>
+			<Route path="/contas/edit/:_id" element={<FormConta/>}/>
 
 			<Route path="/clientes" element={<IndexCliente/>}/>
-			<Route path="/clientes/create" element={<CreateCliente/>}/>
-			<Route path="/clientes/edit/:_id" element={<CreateCliente/>}/>
+			<Route path="/clientes/create" element={<FormCliente/>}/>
+			<Route path="/clientes/edit/:_id" element={<FormCliente/>}/>
 
 			<Route path="/fornecedores" element={<IndexFornecedor/>}/>
-			<Route path="/fornecedores/create" element={<CreateFornecedor/>}/>
-			<Route path="/fornecedores/edit/:_id" element={<CreateFornecedor/>}/>
-
+			<Route path="/fornecedores/create" element={<FormFornecedor/>}/>
+			<Route path="/fornecedores/edit/:_id" element={<FormFornecedor/>}/>
 
 			<Route path="/contarecebers" element={<IndexContaReceber/>}/>
-			<Route path="/contarecebers/create" element={<CreateContaReceber/>}/>
-			<Route path="/contarecebers/edit/:_id" element={<CreateContaReceber/>}/>
+			<Route path="/contarecebers/create" element={<FormContaReceber/>}/>
+			<Route path="/contarecebers/edit/:_id" element={<FormContaReceber/>}/>
 		</Routes>
 		</main>
 	</div>   	

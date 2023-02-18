@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 import api from '../../config/api';
 import { FaArrowLeft, FaPlus, FaSave } from "react-icons/fa";
 
-export default function CreateEstado() {
+export default function FormEstado() {
     
     let navigate = useNavigate()
     let { _id } = useParams();

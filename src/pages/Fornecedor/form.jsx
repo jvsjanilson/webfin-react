@@ -9,14 +9,12 @@ import api from '../../config/api';
 import { FaArrowLeft, FaPlus, FaSave } from "react-icons/fa";
 import MaskedInput from 'react-text-mask'
 
-
-export default function CreateCliente(){
-
+export default function FormFornecedor() {
     let navigate = useNavigate()
     let { _id } = useParams();
 
-    const recurso = 'clientes'
-    const routeIndex = '/clientes'
+    const recurso = 'fornecedores'
+    const routeIndex = '/fornecedores'
 
     const [dado, setDado] = useState({})
     const [estados, setEstados] = useState([])
@@ -36,6 +34,7 @@ export default function CreateCliente(){
         fone: '',
         celular: '',
         email: '',
+
     }
 
     const DadoSchema = Yup.object().shape({
@@ -66,6 +65,7 @@ export default function CreateCliente(){
                         params: {id: _id}
                     })
                         .then(res => {
+                            console.log(res)
                             return res.data.cpfcnpj ? false : true
                         })
                         .catch(() => {
@@ -93,6 +93,8 @@ export default function CreateCliente(){
             celular: values.celular,
             email: values.email,
             user_id: 1, //obs: remover linha depois que implementar tela de login
+            
+            
         }
         
         await api.post(recurso,payload)
@@ -101,6 +103,7 @@ export default function CreateCliente(){
         })
         .catch(error => {
             if (error.response.status == 422) {
+                console.log(error)
                 alert('Erro campo obrigatorio')
             }
         })
@@ -137,6 +140,7 @@ export default function CreateCliente(){
         if (_id) {
             await api.get(`${recurso}/${_id}`)
             .then( res => {
+                console.log(res.data)
                let data = res.data;
                getCidades(data.estado_id)
                 setDado({
@@ -184,6 +188,7 @@ export default function CreateCliente(){
     return (<Container >
         <Formik 
              onSubmit={(values) => {
+
                 if (_id)
                     return onSubmitUpdate(values)
                 else
@@ -192,6 +197,7 @@ export default function CreateCliente(){
             validationSchema={DadoSchema}
             initialValues={_id ? dado : dadoDefault}
             enableReinitialize
+            
         >
         {({
            handleChange,
@@ -205,11 +211,9 @@ export default function CreateCliente(){
                 <Card >
                     <Card.Header>
                         <Button className='me-1'  type='submit' variant={ _id ? 'success' : 'primary' }>{(_id? (<FaSave/>) : (<FaPlus/>))} { _id ? 'SALVAR' : 'CRIAR' }</Button>
-
                         <LinkContainer to={routeIndex}>
                             <Button  variant="secondary"><FaArrowLeft/> VOLTAR</Button>
                         </LinkContainer>
-
                     </Card.Header>
                     <Card.Body>
 
@@ -350,7 +354,7 @@ export default function CreateCliente(){
                                             getCidades(e.target.value)  
                                         }} 
                                         value={values.estado_id}>
-                                        {estados.map((e) => (<option  value={e.id} key={e.id}>{e.uf}</option>))}
+                                        {estados.map((e) => (<option  value={e.id} key={e.id}  >{e.uf}</option>))}
                                     </FormBootstrap.Select>
                                 </FormBootstrap.Group>
                             </Col>
@@ -432,5 +436,5 @@ export default function CreateCliente(){
 
           )}
         </Formik>
-    </Container>)
+    </Container>)    
 }
