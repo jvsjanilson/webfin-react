@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Table, Form, Dropdown, Button, Container, Modal } from 'react-bootstrap';
+import { Table, Form, Dropdown, Button, Container } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap'
 import api from '../../config/api';
 import Paginacao from "../../components/Paginacao";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import MessageDelete from "../../components/MessageDelete";
 
-const IndexConta = () => {
+export default IndexConta = () => {
 
     const recurso = 'contas'
     const [dados, setDados ] = useState([])
@@ -163,5 +163,3 @@ const IndexConta = () => {
         </Container>
     )    
 }
-
-export default IndexConta

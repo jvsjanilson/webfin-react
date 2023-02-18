@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Table, Form, Dropdown, Button, Container, Modal } from 'react-bootstrap';
+import { Table, Form, Dropdown, Button, Container } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap'
 import api from '../../config/api';
 import Paginacao from "../../components/Paginacao";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import MessageDelete from "../../components/MessageDelete";
 
-const IndexFornecedor = () => {
+export default IndexFornecedor = () => {
 
     const recurso = 'fornecedores'
 
@@ -157,5 +157,3 @@ const IndexFornecedor = () => {
         </Container>
     )    
 }
-
-export default IndexFornecedor

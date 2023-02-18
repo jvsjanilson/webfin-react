@@ -7,7 +7,7 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import api from '../../config/api';
 import MessageDelete from "../../components/MessageDelete";
 
-const Cidades = () => {
+export default Cidades = () => {
     
     const recurso = 'cidades'
     const [dados, setDados ] = useState([])
@@ -166,5 +166,3 @@ const Cidades = () => {
         </Container>
     )
 }
-
-export default Cidades

@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 import api from '../../config/api';
 import { FaArrowLeft, FaPlus, FaSave } from "react-icons/fa";
 
-const CreateEstado = (props) => {
+export default CreateEstado = () => {
     
     let navigate = useNavigate()
     let { _id } = useParams();
@@ -153,5 +153,3 @@ const CreateEstado = (props) => {
         </Formik>
     </Container>)
 }
-
-export default CreateEstado

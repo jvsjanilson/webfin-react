@@ -10,7 +10,7 @@ import CurrencyInput from 'react-currency-input-field';
 import MessageDelete from "../../components/MessageDelete";
 
 
-const IndexContaReceber = () => {
+export default IndexContaReceber = () => {
 
     const recurso = 'contarecebers'
     const [dados, setDados ] = useState([])
@@ -371,5 +371,3 @@ const IndexContaReceber = () => {
         </Container>
     )    
 }
-
-export default IndexContaReceber

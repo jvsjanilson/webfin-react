@@ -10,7 +10,7 @@ import { FaArrowLeft, FaPlus, FaSave } from "react-icons/fa";
 import MaskedInput from 'react-text-mask'
 
 
-const CreateCliente = () => {
+export default CreateCliente = () => {
 
     let navigate = useNavigate()
     let { _id } = useParams();
@@ -21,7 +21,6 @@ const CreateCliente = () => {
     const [dado, setDado] = useState({})
     const [estados, setEstados] = useState([])
     const [cidades, setCidades] = useState([])
-
        
     const dadoDefault = {
         nome: '', 
@@ -37,7 +36,6 @@ const CreateCliente = () => {
         fone: '',
         celular: '',
         email: '',
-
     }
 
     const DadoSchema = Yup.object().shape({
@@ -68,7 +66,6 @@ const CreateCliente = () => {
                         params: {id: _id}
                     })
                         .then(res => {
-                            console.log(res)
                             return res.data.cpfcnpj ? false : true
                         })
                         .catch(() => {
@@ -96,8 +93,6 @@ const CreateCliente = () => {
             celular: values.celular,
             email: values.email,
             user_id: 1, //obs: remover linha depois que implementar tela de login
-            
-            
         }
         
         await api.post(recurso,payload)
@@ -106,7 +101,6 @@ const CreateCliente = () => {
         })
         .catch(error => {
             if (error.response.status == 422) {
-                console.log(error)
                 alert('Erro campo obrigatorio')
             }
         })
@@ -143,7 +137,6 @@ const CreateCliente = () => {
         if (_id) {
             await api.get(`${recurso}/${_id}`)
             .then( res => {
-                console.log(res.data)
                let data = res.data;
                getCidades(data.estado_id)
                 setDado({
@@ -199,7 +192,6 @@ const CreateCliente = () => {
             validationSchema={DadoSchema}
             initialValues={_id ? dado : dadoDefault}
             enableReinitialize
-            
         >
         {({
            handleChange,
@@ -213,9 +205,11 @@ const CreateCliente = () => {
                 <Card >
                     <Card.Header>
                         <Button className='me-1'  type='submit' variant={ _id ? 'success' : 'primary' }>{(_id? (<FaSave/>) : (<FaPlus/>))} { _id ? 'SALVAR' : 'CRIAR' }</Button>
+
                         <LinkContainer to={routeIndex}>
                             <Button  variant="secondary"><FaArrowLeft/> VOLTAR</Button>
                         </LinkContainer>
+
                     </Card.Header>
                     <Card.Body>
 
@@ -356,7 +350,7 @@ const CreateCliente = () => {
                                             getCidades(e.target.value)  
                                         }} 
                                         value={values.estado_id}>
-                                        {estados.map((e) => (<option  value={e.id} key={e.id}  >{e.uf}</option>))}
+                                        {estados.map((e) => (<option  value={e.id} key={e.id}>{e.uf}</option>))}
                                     </FormBootstrap.Select>
                                 </FormBootstrap.Group>
                             </Col>
@@ -440,5 +434,3 @@ const CreateCliente = () => {
         </Formik>
     </Container>)
 }
-
-export default CreateCliente    

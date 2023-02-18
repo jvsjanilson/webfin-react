@@ -6,7 +6,7 @@ import Paginacao from "../../components/Paginacao";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import MessageDelete from "../../components/MessageDelete";
 
-const IndexCliente = () => {
+export default IndexCliente = () => {
 
     const recurso = 'clientes'
     const [dados, setDados ] = useState([])
@@ -155,5 +155,3 @@ const IndexCliente = () => {
         </Container>
     )    
 }
-
-export default IndexCliente

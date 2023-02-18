@@ -3,38 +3,39 @@ import { Card, Button, Container, Form as FormBootstrap, Row, Col} from 'react-b
 import { LinkContainer } from 'react-router-bootstrap'
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import { Formik, Form, Field, useFormikContext } from 'formik';
+import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import api from '../../config/api';
 import { FaArrowLeft, FaPlus, FaSave } from "react-icons/fa";
 
-const CreateCidade = () => {
+export default CreateCidade = () => {
     
     let navigate = useNavigate()
     let { _id } = useParams();
 
-    const [cidade, setCidade] = useState({})
+    const recurso = 'cidades'
+    const routeIndex = '/cidades'
+
+    const [dado, setDado] = useState({})
     const [estados, setEstados] = useState([])
-    
 
-    const cidadeDefault = {nome: '', capital: 0, estado_id: 1}
+    const dadoDefault = {nome: '', capital: 0, estado_id: 1}
 
-    const CidadeSchema = Yup.object().shape({
+    const DadoSchema = Yup.object().shape({
         nome: Yup.string()
           .max(60, 'Tamanho máximo do Nome é 60 caracteres.')
           .required('O campo Nome da cidade é obrigatório.'),
         estado_id: Yup.number().required('O UF é obrigatório')
-      });
+    });
    
-
     const onSubmitCreate = async (values) => {
-        await api.post('cidades',{
+        await api.post(`${recurso}`,{
             nome: values.nome,
             estado_id: values.estado_id,
             capital: values.capital
         })
         .then(res => {
-            navigate('/cidades')
+            navigate(`${routeIndex}`)
         })
         .catch(error => {
             if (error.response.status == 422) {
@@ -44,15 +45,13 @@ const CreateCidade = () => {
     }
 
     const onSubmitUpdate = async (values) => {
-        console.log('update')
-        console.log(values)
-        await api.put(`/cidades/${_id}`, {
+        await api.put(`${recurso}/${_id}`, {
             nome: values.nome,
             estado_id: values.estado_id,
             capital: values.capital
         })
-        .then(res => {
-            navigate('/cidades')
+        .then(() => {
+            navigate(`${routeIndex}`)
         }).catch(error => {
             console.log(error)
             alert('Error ao atualizar.')
@@ -61,10 +60,10 @@ const CreateCidade = () => {
     
     const findCidade = async () => {
         if (_id) {
-            await api.get(`cidades/${_id}`)
+            await api.get(`${recurso}/${_id}`)
             .then( res => {
-                console.log(res.data.capital)
-                setCidade({
+
+                setDado({
                         nome: res.data.nome,
                         estado_id: res.data.estado_id,
                         capital: res.data.capital
@@ -95,8 +94,8 @@ const CreateCidade = () => {
                 else
                     return onSubmitCreate(values)
             }}
-            validationSchema={CidadeSchema}
-            initialValues={_id ? cidade : cidadeDefault}
+            validationSchema={DadoSchema}
+            initialValues={_id ? dado : dadoDefault}
             enableReinitialize
             
         >
@@ -136,7 +135,7 @@ const CreateCidade = () => {
                         <FormBootstrap.Group  controlId="estado_id">
                             <FormBootstrap.Label>UF</FormBootstrap.Label>
                             <FormBootstrap.Select onChange={handleChange} value={values.estado_id}>
-                                {estados.map((e) => (<option  value={e.id} key={e.id} selected={cidade.estado_id == e.id ? true: false} >{e.uf}</option>))}
+                                {estados.map((e) => (<option  value={e.id} key={e.id} >{e.uf}</option>))}
                             </FormBootstrap.Select>
                         </FormBootstrap.Group>
                         </Col>
@@ -173,5 +172,3 @@ const CreateCidade = () => {
         </Formik>
     </Container>)
 }
-
-export default CreateCidade

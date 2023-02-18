@@ -9,7 +9,7 @@ import api from '../../config/api';
 import { FaArrowLeft, FaPlus, FaSave } from "react-icons/fa";
 import MaskedInput from 'react-text-mask'
 
-const CreateFornecedor = () => {
+export default CreateFornecedor = () => {
     let navigate = useNavigate()
     let { _id } = useParams();
 
@@ -19,7 +19,6 @@ const CreateFornecedor = () => {
     const [dado, setDado] = useState({})
     const [estados, setEstados] = useState([])
     const [cidades, setCidades] = useState([])
-
        
     const dadoDefault = {
         nome: '', 
@@ -439,6 +438,3 @@ const CreateFornecedor = () => {
         </Formik>
     </Container>)    
 }
-
-
-export default CreateFornecedor

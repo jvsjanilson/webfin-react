@@ -1,13 +1,12 @@
 import React, {useState, useEffect} from "react";
-import { Table, Form, Dropdown, Button, Container, Modal} from 'react-bootstrap';
-import {LinkContainer} from 'react-router-bootstrap'
+import { Table, Form, Dropdown, Button, Container } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap'
 import api from '../../config/api';
 import Paginacao from "../../components/Paginacao";
-import { FaPlus, FaEdit, FaTrash } from "react-icons/fa";
+import { FaEdit, FaTrash } from "react-icons/fa";
 import MessageDelete from "../../components/MessageDelete";
 
-
-const Estados = () => {
+export default Estados = () => {
     const [estados, setEstados ] = useState([])
     const [paginate, setPaginate ] = useState({});
     const [search, setSearch] = useState('')
@@ -156,5 +155,3 @@ const Estados = () => {
         </Container>
     )
 }
-
-export default Estados

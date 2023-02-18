@@ -3,15 +3,14 @@ import { Card, Button, Container, Form as FormBootstrap, Row, Col} from 'react-b
 import { LinkContainer } from 'react-router-bootstrap'
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import api from '../../config/api';
 import { FaArrowLeft, FaPlus, FaSave } from "react-icons/fa";
 import { format } from 'date-fns';
 import CurrencyInput from 'react-currency-input-field';
 
-
-const CreateConta = () => {
+export default CreateConta = () => {
 
     let navigate = useNavigate()
     let { _id } = useParams();
@@ -269,5 +268,3 @@ const CreateConta = () => {
         </Formik>
     </Container>)
 }
-
-export default CreateConta
