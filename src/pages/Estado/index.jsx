@@ -15,8 +15,7 @@ const Estados = () => {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
-
-    const handleAtivo = async (id, status) => {
+    const handleStatus = async (id, status) => {
 
         await api.put(`estados/${id}`,{
             ativo : status == 1 ? 0 : 1
@@ -74,7 +73,7 @@ const Estados = () => {
         
     }
 
-    const handleDeleteEstado = async (id) => {
+    const dialogDelete = async (id) => {
         setRegister(id)
         setShow(true)
 
@@ -128,7 +127,7 @@ const Estados = () => {
                                                     <LinkContainer to={`/estados/edit/${el.id}`}>
                                                         <Dropdown.Item href="javascript:void(0)"><FaEdit className="text-success" /> Editar</Dropdown.Item>
                                                     </LinkContainer>
-                                                    <Dropdown.Item href="javascript:void(0)" onClick={handleDeleteEstado.bind(this,el.id)}><FaTrash color="red" /> Remover</Dropdown.Item>
+                                                    <Dropdown.Item href="javascript:void(0)" onClick={dialogDelete.bind(this,el.id)}><FaTrash color="red" /> Remover</Dropdown.Item>
                                                 </Dropdown.Menu>
                                             </div>
                                         </Dropdown>
@@ -142,7 +141,7 @@ const Estados = () => {
                                     id="custom-switch"
                                     checked={el.ativo ? true: false}
 
-                                    onChange={handleAtivo.bind(this, el.id, el.ativo)}
+                                    onChange={handleStatus.bind(this, el.id, el.ativo)}
                                 />
                                 </td>
 

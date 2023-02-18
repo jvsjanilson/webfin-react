@@ -13,7 +13,6 @@ import MessageDelete from "../../components/MessageDelete";
 const IndexContaReceber = () => {
 
     const recurso = 'contarecebers'
-
     const [dados, setDados ] = useState([])
     const [paginate, setPaginate ] = useState({})
     const [search, setSearch] = useState('')
@@ -27,11 +26,6 @@ const IndexContaReceber = () => {
     const [totalPago, setTotalPago] = useState("0,00")
     const [dataPagamento, setDataPagamento] = useState(format(new Date(), "yyyy-MM-dd"))
     const [valor, setValor] = useState("0,00")
-
-
-    const handleClose = () => setShow(false)
-    const handleCloseEstornar = () => setShowEstornar(false)
-    const handleCloseBaixar = () => setShowBaixar(false)
 
     const DefaultValueBaixar = () => {
         setJuros("0,00")
@@ -62,6 +56,14 @@ const IndexContaReceber = () => {
                 })
             });
     }
+
+    /**
+     * Handles
+     */
+
+    const handleClose = () => setShow(false)
+    const handleCloseEstornar = () => setShowEstornar(false)
+    const handleCloseBaixar = () => setShowBaixar(false)
 
     const handleConfirmarDelete = async () => {
         setShow(false)
@@ -127,27 +129,27 @@ const IndexContaReceber = () => {
             setShowBaixar(false)
         })
         .catch(e => {
-            console.log(e)
             alert(e.response.data.message)
         })
     }
 
+    /*
+    * Dialogs
+    */
     const dialogBaixar = async (id, vlr) => {
         setRegister(id)
         setShowBaixar(true)
         DefaultValueBaixar()
         setTotalPago((parseFloat(vlr).toFixed(2)))
         setValor((parseFloat(vlr).toFixed(2)))
-
-        
     }
 
-    const alertEstornarTitulo = async (id) => {
+    const dialogEstornar = async (id) => {
         setRegister(id)
         setShowEstornar(true)
     }
 
-    const handleDeleteRegistro = async (id) => {
+    const dialogDelete = async (id) => {
         setRegister(id)
         setShow(true)
     }
@@ -163,7 +165,6 @@ const IndexContaReceber = () => {
         m = multa ? parseFloat(multa.replace(/[^0-9,]/gi, '').replace(',','.')) : 0
         d = desconto ? parseFloat(desconto.replace(/[^0-9,]/gi, '').replace(',','.')) : 0
         v = valor ? parseFloat(valor.replace(/[^0-9,]/gi, '').replace(',','.')) : 0
-
         setTotalPago((parseFloat(valor)+parseFloat(j)+parseFloat(m)-parseFloat(d)).toFixed(2))
     },[juros, multa, desconto])
 
@@ -335,9 +336,9 @@ const IndexContaReceber = () => {
                                                         </LinkContainer>
                                                     }
 
-                                                    { el.total_pago == 0 && <Dropdown.Item href="javascript:void(0)" onClick={handleDeleteRegistro.bind(this,el.id)}><FaTrash color="red" /> Remover</Dropdown.Item>}
+                                                    { el.total_pago == 0 && <Dropdown.Item href="javascript:void(0)" onClick={dialogDelete.bind(this,el.id)}><FaTrash color="red" /> Remover</Dropdown.Item>}
                                                     { el.total_pago == 0 && <Dropdown.Item href="javascript:void(0)" onClick={dialogBaixar.bind(this, el.id, el.valor)} ><FaFileInvoiceDollar color="blue" /> Baixar</Dropdown.Item>}
-                                                    { el.total_pago != 0 && <Dropdown.Item href="javascript:void(0)" onClick={alertEstornarTitulo.bind(this, el.id)}><FaUndo color="red" /> Estornar</Dropdown.Item>} 
+                                                    { el.total_pago != 0 && <Dropdown.Item href="javascript:void(0)" onClick={dialogEstornar.bind(this, el.id)}><FaUndo color="red" /> Estornar</Dropdown.Item>} 
                                                     
                                                 </Dropdown.Menu>
                                             </div>

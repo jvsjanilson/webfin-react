@@ -8,15 +8,18 @@ import api from '../../config/api';
 import MessageDelete from "../../components/MessageDelete";
 
 const Cidades = () => {
+    
+    const recurso = 'cidades'
     const [dados, setDados ] = useState([])
     const [paginate, setPaginate ] = useState({});
     const [search, setSearch] = useState('')
     const [register, setRegister] = useState(0)
     const [show, setShow] = useState(false);
 
-    const recurso = 'cidades'
+    /**
+     * Handles
+     */
     const handleClose = () => setShow(false);
-    
     const handleStatus = async (id, status) => {
 
         await api.put(`${recurso}/${id}`,{
@@ -51,7 +54,10 @@ const Cidades = () => {
         
     }
 
-    const DialogDelete = async (id) => {
+    /**
+     * Dialogs
+     */
+    const dialogDelete = async (id) => {
         setRegister(id)
         setShow(true)
 
@@ -132,7 +138,7 @@ const Cidades = () => {
                                                             <Dropdown.Item href="javascript:void(0)"><FaEdit className="text-success" /> Editar</Dropdown.Item>
                                                     </LinkContainer>
 
-                                                    <Dropdown.Item href="javascript:void(0)" onClick={DialogDelete.bind(this, el.id)}><FaTrash color="red" /> Remover</Dropdown.Item>
+                                                    <Dropdown.Item href="javascript:void(0)" onClick={dialogDelete.bind(this, el.id)}><FaTrash color="red" /> Remover</Dropdown.Item>
                                                 </Dropdown.Menu>
                                             </div>
                                         </Dropdown>
