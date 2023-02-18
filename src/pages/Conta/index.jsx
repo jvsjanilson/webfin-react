@@ -25,12 +25,10 @@ const IndexConta = () => {
         })
         .then(res => {
             if (res.status == 204) {
-                setDados([...dados], dados.map((el) => {
-                    if (el.id == id) {
-                        el.ativo = el.ativo == 0 ? 1 : 0
-                        return el
-                    }
-                    return el
+                setDados(dados.map(e => {
+                    if (e.id == id) 
+                        e.ativo = e.ativo == 0 ? 1 : 0
+                    return e
                 }))
             }
         }).catch(error => {
@@ -66,7 +64,7 @@ const IndexConta = () => {
         await api.delete(`${recurso}/${register}`)
             .then(res => {
                 if (res.status == 204){
-                    setDados(dados.filter((i) => i.id != register))
+                    setDados(dados.filter(e => e.id != register))
                 } 
             })
             .catch(e => {

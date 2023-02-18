@@ -69,7 +69,7 @@ const IndexContaReceber = () => {
         await api.delete(`${recurso}/${register}`)
             .then(res => {
                 if (res.status == 204){
-                    setDados(dados.filter((i) => i.id != register))
+                    setDados(dados.filter(e => e.id != register))
                 } 
             })
             .catch(e => {

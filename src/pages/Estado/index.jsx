@@ -23,12 +23,10 @@ const Estados = () => {
         })
         .then(res => {
             if (res.status == 204) {
-                setEstados([...estados], estados.map((el) => {
-                    if (el.id == id) {
-                        el.ativo = el.ativo == 0 ? 1 : 0
-                        return el
-                    }
-                    return el
+                setEstados(estados.map(e => {
+                    if (e.id == id) 
+                        e.ativo = e.ativo == 0 ? 1 : 0
+                    return e
                 }))
             }
         }).catch(error => {
@@ -66,7 +64,7 @@ const Estados = () => {
             .then(res => {
 
                 if (res.status == 204){
-                    setEstados(estados.filter((i) => i.id != register))
+                    setEstados(estados.filter(e => e.id != register))
                 } 
             })
             .catch(e => {
