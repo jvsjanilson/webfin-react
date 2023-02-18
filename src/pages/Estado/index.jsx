@@ -6,7 +6,7 @@ import Paginacao from "../../components/Paginacao";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import MessageDelete from "../../components/MessageDelete";
 
-export default Estados = () => {
+export default function IndexEstado() {
     const [estados, setEstados ] = useState([])
     const [paginate, setPaginate ] = useState({});
     const [search, setSearch] = useState('')

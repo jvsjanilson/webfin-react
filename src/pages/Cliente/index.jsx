@@ -6,7 +6,7 @@ import Paginacao from "../../components/Paginacao";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import MessageDelete from "../../components/MessageDelete";
 
-export default IndexCliente = () => {
+export default function IndexCliente() {
 
     const recurso = 'clientes'
     const [dados, setDados ] = useState([])

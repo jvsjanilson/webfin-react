@@ -6,7 +6,7 @@ import Paginacao from "../../components/Paginacao";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import MessageDelete from "../../components/MessageDelete";
 
-export default IndexFornecedor = () => {
+export default function IndexFornecedor() {
 
     const recurso = 'fornecedores'
 

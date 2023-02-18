@@ -10,7 +10,7 @@ import { FaArrowLeft, FaPlus, FaSave } from "react-icons/fa";
 import MaskedInput from 'react-text-mask'
 
 
-export default CreateCliente = () => {
+export default function CreateCliente(){
 
     let navigate = useNavigate()
     let { _id } = useParams();

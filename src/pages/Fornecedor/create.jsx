@@ -9,7 +9,7 @@ import api from '../../config/api';
 import { FaArrowLeft, FaPlus, FaSave } from "react-icons/fa";
 import MaskedInput from 'react-text-mask'
 
-export default CreateFornecedor = () => {
+export default function CreateFornecedor() {
     let navigate = useNavigate()
     let { _id } = useParams();
 

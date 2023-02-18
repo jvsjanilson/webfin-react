@@ -6,11 +6,12 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Routes, Route, BrowserRouter, Link } from 'react-router-dom'
-import Estados from './pages/Estado'
 import Home from './pages/Home'
 import {LinkContainer} from 'react-router-bootstrap'
-import Cidades from "./pages/Cidade/Index";
+import IndexEstado from "./pages/Estado";
 import CreateEstado from "./pages/Estado/create";
+import IndexCidade from "./pages/Cidade";
+
 import CreateCidade from "./pages/Cidade/create";
 import IndexConta from "./pages/Conta";
 import CreateConta from "./pages/Conta/create";
@@ -82,11 +83,11 @@ const App = () => {
 	<main>
 		<Routes>
 			<Route path="/" element={<Home/>}/>
-			<Route path="/estados" element={<Estados/>}/>
+			<Route path="/estados" element={<IndexEstado/>}/>
 			<Route path="/estados/create" element={<CreateEstado/>}/>
 			<Route path="/estados/edit/:_id" element={<CreateEstado/>}/>
 
-			<Route path="/cidades" element={<Cidades/>}/>
+			<Route path="/cidades" element={<IndexCidade/>}/>
 			<Route path="/cidades/create" element={<CreateCidade/>}/>
 			<Route path="/cidades/edit/:_id" element={<CreateCidade/>}/>
 

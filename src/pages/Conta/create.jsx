@@ -10,7 +10,7 @@ import { FaArrowLeft, FaPlus, FaSave } from "react-icons/fa";
 import { format } from 'date-fns';
 import CurrencyInput from 'react-currency-input-field';
 
-export default CreateConta = () => {
+export default function CreateConta() {
 
     let navigate = useNavigate()
     let { _id } = useParams();

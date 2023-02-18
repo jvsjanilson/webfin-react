@@ -6,7 +6,7 @@ import Paginacao from "../../components/Paginacao";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import MessageDelete from "../../components/MessageDelete";
 
-export default IndexConta = () => {
+export default function IndexConta() {
 
     const recurso = 'contas'
     const [dados, setDados ] = useState([])
