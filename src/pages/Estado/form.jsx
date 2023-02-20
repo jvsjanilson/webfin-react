@@ -1,8 +1,7 @@
 import { React, useState, useEffect } from 'react'
 import { Card, Button, Container, Form as FormBootstrap, Row, Col} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap'
-import { useNavigate } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import api from '../../config/api';
@@ -12,16 +11,19 @@ export default function FormEstado() {
     
     let navigate = useNavigate()
     let { _id } = useParams();
+    const endpoint = 'estados'
+    const routeIndex = '/estados'
 
-    const [estado, setEstado] = useState({})
-    const estadoDefault = {uf: '', nome: ''}
+    const [dado, setDado] = useState({})
 
-    const EstadoSchema = Yup.object().shape({
+    const initialValues = {uf: '', nome: ''}
+
+    const validationSchema = Yup.object().shape({
         uf: Yup.string()
           .max(2, 'Tamanho máximo do UF é 2 caracteres.')
-          .required('O campo UF é obrigatório')
+          .required('Preenchimento obrigatório')
           .test('UF unico', 'UF já cadastrada',  async (value) => {
-            return await api.get(`estados/search/${value}`, {params: {id: _id}})
+            return await api.get(`${endpoint}/search/${value}`, {params: {id: _id}})
               .then(() => {
                 return false
               })
@@ -32,17 +34,17 @@ export default function FormEstado() {
         ,
         nome: Yup.string()
           .max(60, 'Tamanho máximo do Nome é 60 caracteres.')
-          .required('O campo Nome é obrigatório.'),
+          .required('Preenchimento obrigatório.'),
       });
    
 
     const onSubmitCreate = async (values) => {
-        await api.post('estados',{
+        await api.post(`${endpoint}`,{
             uf: values.uf,
             nome: values.nome  
         })
-        .then(res => {
-            navigate('/estados')
+        .then(() => {
+            navigate(routeIndex)
         })
         .catch(error => {
             if (error.response.status == 422) {
@@ -53,63 +55,56 @@ export default function FormEstado() {
 
     const onSubmitUpdate = async (values) => {
         
-        await api.put(`/estados/${_id}`, {
+        await api.put(`${endpoint}/${_id}`, {
             uf: values.uf,
             nome: values.nome
         })
-        .then(res => {
-            navigate('/estados')
+        .then(() => {
+            navigate(routeIndex)
         }).catch(error => {
-            console.log(error)
             alert('Error ao atualizar.')
         })
     }
     
-    const findEstado = async () => {
+    const findDado = async () => {
         if (_id) {
-            await api.get(`estados/${_id}`)
+            await api.get(`${endpoint}/${_id}`)
             .then( res => {
-                setEstado({
-                        uf: res.data.uf, 
-                        nome: res.data.nome
-                    })
+                setDado({
+                    uf: res.data.uf, 
+                    nome: res.data.nome
+                })
             })
         }
     }
 
     useEffect(() => {
-        findEstado()
-        
-        
+        findDado()
     },[])
 
     return (<Container >
         <Formik 
             onSubmit={(values) => {
-
                 if (_id)
                     return onSubmitUpdate(values)
                 else
                     return onSubmitCreate(values)
             }}
-            validationSchema={EstadoSchema}
-            initialValues={_id ? estado : estadoDefault}
+            validationSchema={validationSchema}
+            initialValues={_id ? dado : initialValues}
             enableReinitialize
         >
         {({
            handleChange,
-           handleBlur,
            values,
            errors,
-           touched
-                 
         }) => (
 
             <Form >
                 <Card >
                     <Card.Header>
                         <Button className='me-1'  type='submit' variant={ _id ? 'success' : 'primary' }>{(_id? (<FaSave/>) : (<FaPlus/>))} { _id ? 'SALVAR' : 'CRIAR' }</Button>
-                        <LinkContainer to="/estados">
+                        <LinkContainer to={routeIndex}>
                             <Button  variant="secondary"><FaArrowLeft/> VOLTAR</Button>
                         </LinkContainer>
                     </Card.Header>
