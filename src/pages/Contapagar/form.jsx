@@ -10,16 +10,16 @@ import { FaArrowLeft, FaPlus, FaSave } from "react-icons/fa";
 import { format } from 'date-fns';
 import CurrencyInput from 'react-currency-input-field';
 
-export default function FormContaReceber() {
+export default function FormContaPagar() {
     
     let navigate = useNavigate()
     let { _id } = useParams();
 
-    const recurso = 'contarecebers'
-    const routeIndex = '/contarecebers'
+    const recurso = 'contapagars'
+    const routeIndex = '/contapagars'
 
     const [dado, setDado] = useState({})
-    const [clientes, setClientes] = useState([])
+    const [fornecedores, setFornecedores] = useState([])
     const [contas, setContas] = useState([])
     const [desativado, setDesativado] = useState(false)
        
@@ -29,7 +29,7 @@ export default function FormContaReceber() {
         vencimento: format(new Date(), "yyyy-MM-dd"),
         valor: '0,00',
         conta_id: 1,
-        cliente_id: 1,
+        fornecedor_id: 1,
 
     }
 
@@ -57,7 +57,7 @@ export default function FormContaReceber() {
         emissao: Yup.date().required('O campo obrigatório.'),
         vencimento: Yup.date().required('O campo obrigatório.'),
         conta_id: Yup.number().integer('Aceita somente inteiro.').required('O campo obrigatório.') ,
-        cliente_id: Yup.number().integer('Aceita somente inteiro.').required('O campo obrigatório.') ,
+        fornecedor_id: Yup.number().integer('Aceita somente inteiro.').required('O campo obrigatório.') ,
 
       });
    
@@ -69,7 +69,7 @@ export default function FormContaReceber() {
             emissao: values.emissao,
             vencimento: values.vencimento,
             conta_id: values.conta_id,
-            cliente_id: values.cliente_id,
+            fornecedor_id: values.fornecedor_id,
             user_id: 1, //obs: remover linha depois que implementar tela de login
             valor: values.valor ? parseFloat(values.valor.replace(/[^0-9,]/gi, '').replace(',','.')) : 0
             
@@ -91,10 +91,10 @@ export default function FormContaReceber() {
             emissao: values.emissao,
             vencimento: values.vencimento,
             conta_id: values.conta_id,
-            cliente_id: values.cliente_id,
+            fornecedor_id: values.fornecedor_id,
             valor: values.valor ? parseFloat(values.valor.replace(/[^0-9,]/gi, '').replace(',','.')) : 0
         })
-        .then(res => {
+        .then(() => {
             navigate(routeIndex)
         }).catch(error => {
             alert('Error ao atualizar.')
@@ -115,7 +115,7 @@ export default function FormContaReceber() {
                     emissao: res.data.emissao,
                     vencimento: res.data.vencimento,
                     conta_id: res.data.conta_id,
-                    cliente_id: res.data.cliente_id,
+                    fornecedor_id: res.data.fornecedor_id,
                     valor:  new Intl.NumberFormat('pt-BR', {useGrouping:false}).format(parseFloat(res.data.valor).toFixed(2)) ,
                 })
               
@@ -124,10 +124,10 @@ export default function FormContaReceber() {
         }
     }
 
-    const getClientes = async () => {
-        await api.get('clientes/search/all')
+    const getFornecedores = async () => {
+        await api.get('fornecedores/search/all')
             .then(res => {
-                setClientes(res.data)
+                setFornecedores(res.data)
             })
     }
     const getContas = async () => {
@@ -139,7 +139,7 @@ export default function FormContaReceber() {
  
     useEffect(() => {
         getDado()
-        getClientes()
+        getFornecedores()
         getContas()
     },[])
 
@@ -198,10 +198,10 @@ export default function FormContaReceber() {
 
                             <Col sm={6}>
 
-                                <FormBootstrap.Group  controlId="cliente_id">
-                                    <FormBootstrap.Label>Clientes</FormBootstrap.Label>
-                                    <FormBootstrap.Select onChange={handleChange} value={values.cliente_id} disabled={desativado} >
-                                        {clientes.map((e) => (<option  value={e.id} key={e.id} >{e.nome}</option>))}
+                                <FormBootstrap.Group  controlId="fornecedor_id">
+                                    <FormBootstrap.Label>Fornecedores</FormBootstrap.Label>
+                                    <FormBootstrap.Select onChange={handleChange} value={values.fornecedor_id} disabled={desativado} >
+                                        {fornecedores.map((e) => (<option  value={e.id} key={e.id} >{e.nome}</option>))}
                                     </FormBootstrap.Select>
                                 </FormBootstrap.Group>
                             </Col>

@@ -50,7 +50,7 @@ export default function FormCliente(){
         cidade_id: Yup.number().integer().required('O campo obrigatório.'),
         fone: Yup.string().nullable().max(15, 'Tamanho máximo 15 caracteres.'),
         celular: Yup.string().nullable().max(15, 'Tamanho máximo 15 caracteres.'),
-        email: Yup.string().nullable().max(120, 'Tamanho máximo 60 caracteres.'),
+        email: Yup.string().email('e-mail inválido').nullable().max(120, 'Tamanho máximo 60 caracteres.'),
         cpfcnpj: Yup.string().nullable().notRequired()
             .test('Validade CPFCNPJ', 'CPF/CNPJ Inválido', async (value) => {
                 if (value == undefined)

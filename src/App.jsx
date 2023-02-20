@@ -20,6 +20,8 @@ import IndexFornecedor from "./pages/Fornecedor";
 import FormFornecedor from "./pages/Fornecedor/form";
 import IndexContaReceber from "./pages/Contareceber";
 import FormContaReceber from "./pages/Contareceber/form";
+import IndexContaPagar from "./pages/Contapagar";
+import FormContaPagar from "./pages/Contapagar/form";
 
 const App = () => {
 
@@ -65,7 +67,10 @@ const App = () => {
 							<LinkContainer to="/contarecebers">
 								<NavDropdown.Item href="jsvascript:void(0)">Contas a Receber</NavDropdown.Item>
 							</LinkContainer>
-								<NavDropdown.Item href="#action/3.7">Contas a Pagar</NavDropdown.Item>
+							<LinkContainer to="/contapagars">
+								<NavDropdown.Item href="jsvascript:void(0)">Contas a Pagar</NavDropdown.Item>
+							</LinkContainer>
+								
 								
 							</NavDropdown>
 						</Nav>
@@ -106,6 +111,10 @@ const App = () => {
 			<Route path="/contarecebers" element={<IndexContaReceber/>}/>
 			<Route path="/contarecebers/create" element={<FormContaReceber/>}/>
 			<Route path="/contarecebers/edit/:_id" element={<FormContaReceber/>}/>
+
+			<Route path="/contapagars" element={<IndexContaPagar/>}/>
+			<Route path="/contapagars/create" element={<FormContaPagar/>}/>
+			<Route path="/contapagars/edit/:_id" element={<FormContaPagar/>}/>
 		</Routes>
 		</main>
 	</div>   	
