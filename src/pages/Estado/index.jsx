@@ -7,47 +7,48 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import MessageDelete from "../../components/MessageDelete";
 
 export default function IndexEstado() {
-    const [estados, setEstados ] = useState([])
-    const [paginate, setPaginate ] = useState({});
-    const [search, setSearch] = useState('')
-    const [register, setRegister] = useState(0)
-    const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
+    const [ dados, setDados ] = useState([])
+    const [ paginate, setPaginate ] = useState({});
+    const [ searchText, setSearchText ] = useState('')
+    const [ pk, setPk ] = useState(0)
+    const [ showDelete, setShowDelete] = useState(false);
+    const endpoint = 'estados';
+
+    const handleClose = () => setShowDelete(false);
     const handleStatus = async (id, status) => {
 
-        await api.put(`estados/${id}`,{
+        await api.put(`${endpoint}/${id}`,{
             ativo : status == 1 ? 0 : 1
         })
         .then(res => {
             if (res.status == 204) {
-                setEstados(estados.map(e => {
+                setDados(dados.map(e => {
                     if (e.id == id) 
                         e.ativo = e.ativo == 0 ? 1 : 0
                     return e
                 }))
             }
         }).catch(error => {
-            console.log(error)
             alert('Error')
         })        
     }
 
-    async function getEstados(page = 1) {
+    async function getDados(page = 1) {
         page = page > 1 ? '?page='+page : ''
 
         let busca = ''      
 
-        if (search != "" && page == '') {
-            busca = '?nome=' + search
-        } else if (search != "" && page != '') {
-            busca = '&nome=' + search
+        if (searchText != "" && page == '') {
+            busca = '?nome=' + searchText
+        } else if (searchText != "" && page != '') {
+            busca = '&nome=' + searchText
         }
         
-        await api.get(`estados${page}${busca}`)
+        await api.get(`${endpoint}${page}${busca}`)
            
             .then((res) => {
-                setEstados(res.data.data)
+                setDados(res.data.data)
                 setPaginate({
                     meta: res.data.meta,
                     links: res.data.links
@@ -56,13 +57,12 @@ export default function IndexEstado() {
     }
 
     const handleConfirmarDelete = async () => {
-        setShow(false)
+        setShowDelete(false)
        
-        await api.delete('estados/'+register)
+        await api.delete(`${endpoint}/${pk}`)
             .then(res => {
-
                 if (res.status == 204){
-                    setEstados(estados.filter(e => e.id != register))
+                    setDados(dados.filter(e => e.id != pk))
                 } 
             })
             .catch(e => {
@@ -73,20 +73,19 @@ export default function IndexEstado() {
     }
 
     const dialogDelete = async (id) => {
-        setRegister(id)
-        setShow(true)
-
+        setPk(id)
+        setShowDelete(true)
     }
 
     useEffect( () => {
-        getEstados()
+        getDados()
 
-    }, [search])
+    }, [searchText])
 
     return (
         <Container fluid>
 
-            <MessageDelete show={show} onHide={handleClose} onConfirm={handleConfirmarDelete} />
+            <MessageDelete show={showDelete} onHide={handleClose} onConfirm={handleConfirmarDelete} />
                 
             <Form className="d-flex mb-2">
                 <LinkContainer to="/estados/create">
@@ -95,7 +94,7 @@ export default function IndexEstado() {
                   <Form.Control
                     type="search"
                     placeholder="Pesquisar"
-                    onChange={(e) => setSearch(e.target.value)}
+                    onChange={(e) => setSearchText(e.target.value)}
                     aria-label="Search"
                   />
     
@@ -110,7 +109,7 @@ export default function IndexEstado() {
                     </tr>
                 </thead>
                 <tbody>
-                    {estados.map(el => {
+                    {dados.map(el => {
                         return (
                             <tr key={el.id}>
                                 <td style={{width: '5rem'}} >
@@ -135,23 +134,21 @@ export default function IndexEstado() {
                                 <td style={{textAlign: 'center'}}>{el.uf}</td>
                                 <td>{el.nome}</td>
                                 <td>
-                                <Form.Switch style={{textAlign: 'center'}}
-                                    type="switch"
-                                    id="custom-switch"
-                                    checked={el.ativo ? true: false}
-
-                                    onChange={handleStatus.bind(this, el.id, el.ativo)}
-                                />
+                                    <Form.Switch style={{textAlign: 'center'}}
+                                        type="switch"
+                                        id="custom-switch"
+                                        checked={el.ativo ? true: false}
+                                        onChange={handleStatus.bind(this, el.id, el.ativo)}
+                                    />
                                 </td>
-
                             </tr>
                         )
                     })}
                 </tbody>
-                </Table>
-                 <tfoot>
-                    <Paginacao paginas={paginate} evento={getEstados.bind(this)} />
-                </tfoot>
+            </Table>
+            <tfoot>
+                <Paginacao paginas={paginate} evento={getDados.bind(this)} />
+            </tfoot>
         </Container>
     )
 }
