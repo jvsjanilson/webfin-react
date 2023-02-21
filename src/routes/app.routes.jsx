@@ -22,14 +22,17 @@ import IndexContaPagar from "../pages/Contapagar";
 import FormContaPagar from "../pages/Contapagar/form";
 
 import { useAuth } from "../hooks/auth";
+import { useNavigate } from "react-router-dom";
 
 
 export default function AppRoutes() {
     const { sigOut, logado } = useAuth()
+    const navigate = useNavigate()
     
 
     const handleLogout = async () => {
         sigOut()
+        navigate("/")
     }
 
     return (
@@ -57,7 +60,6 @@ export default function AppRoutes() {
                                     <NavDropdown.Item href="javascript:void(0)">Contas</NavDropdown.Item>
                                 </LinkContainer>
                                 
-                                {/* <Link to="/estados">Estados</Link> */}
                                 <LinkContainer to="/estados">
                                     <NavDropdown.Item href="javascript:void(0)" >Estados</NavDropdown.Item>
                                 </LinkContainer>

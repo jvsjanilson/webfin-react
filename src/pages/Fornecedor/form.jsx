@@ -13,7 +13,7 @@ export default function FormFornecedor() {
     let navigate = useNavigate()
     let { _id } = useParams();
 
-    const recurso = '/api/fornecedores'
+    const recurso = 'api/fornecedores'
     const routeIndex = '/fornecedores'
 
     const [dado, setDado] = useState({})
@@ -163,14 +163,14 @@ export default function FormFornecedor() {
     }
 
     const getEstados = async () => {
-        await api.get('estados/search/all')
+        await api.get('api/estados/search/all')
             .then(res => {
                 setEstados(res.data.data)
             })
     }
 
     const getCidades = async (estado_id) => {
-        await api.get(`cidades/lookup/${estado_id}`)
+        await api.get(`api/cidades/lookup/${estado_id}`)
             .then(res => {
                 setCidades(res.data.data)
             })

@@ -15,7 +15,7 @@ export default function FormCliente(){
     let navigate = useNavigate()
     let { _id } = useParams();
 
-    const recurso = '/api/clientes'
+    const recurso = 'api/clientes'
     const routeIndex = '/clientes'
 
     const [dado, setDado] = useState({})
@@ -159,16 +159,21 @@ export default function FormCliente(){
     }
 
     const getEstados = async () => {
-        await api.get('estados/search/all')
+        await api.get('api/estados/search/all')
             .then(res => {
                 setEstados(res.data.data)
+            }).catch(error => {
+                console.error(error)
             })
     }
 
     const getCidades = async (estado_id) => {
-        await api.get(`cidades/lookup/${estado_id}`)
+        await api.get(`api/cidades/lookup/${estado_id}`)
             .then(res => {
+
                 setCidades(res.data.data)
+            }).catch(error => {
+                console.error(error)
             })
     }
 

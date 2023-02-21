@@ -15,7 +15,7 @@ export default function FormContaPagar() {
     let navigate = useNavigate()
     let { _id } = useParams();
 
-    const recurso = '/api/contapagars'
+    const recurso = 'api/contapagars'
     const routeIndex = '/contapagars'
 
     const [dado, setDado] = useState({})
@@ -125,13 +125,13 @@ export default function FormContaPagar() {
     }
 
     const getFornecedores = async () => {
-        await api.get('fornecedores/search/all')
+        await api.get('api/fornecedores/search/all')
             .then(res => {
                 setFornecedores(res.data)
             })
     }
     const getContas = async () => {
-        await api.get('contas/search/all')
+        await api.get('api/contas/search/all')
             .then(res => {
                 setContas(res.data.data)
             })

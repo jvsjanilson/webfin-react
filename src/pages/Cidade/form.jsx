@@ -73,7 +73,7 @@ export default function FormCidade() {
     }
 
     const getEstados = async () => {
-        await api.get('estados/search/all')
+        await api.get('api/estados/search/all')
             .then(res => {
                 setEstados(res.data.data)
             })

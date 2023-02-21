@@ -15,7 +15,7 @@ export default function FormContaReceber() {
     let navigate = useNavigate()
     let { _id } = useParams();
 
-    const recurso = '/api/contarecebers'
+    const recurso = 'api/contarecebers'
     const routeIndex = '/contarecebers'
 
     const [dado, setDado] = useState({})
@@ -125,13 +125,13 @@ export default function FormContaReceber() {
     }
 
     const getClientes = async () => {
-        await api.get('clientes/search/all')
+        await api.get('api/clientes/search/all')
             .then(res => {
                 setClientes(res.data)
             })
     }
     const getContas = async () => {
-        await api.get('contas/search/all')
+        await api.get('api/contas/search/all')
             .then(res => {
                 setContas(res.data.data)
             })
