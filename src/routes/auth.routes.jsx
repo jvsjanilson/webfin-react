@@ -1,8 +1,12 @@
 import React from "react";
+import { Route, Routes } from "react-router-dom";
+import Signin from "../pages/Signin";
 
 
 export default function AuthRoute() {
     return (
-        <h1>Auth</h1>
+        <Routes>
+            <Route path="/" element={<Signin/>}/>
+        </Routes>
     )
 }

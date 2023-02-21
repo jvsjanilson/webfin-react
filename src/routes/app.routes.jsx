@@ -21,7 +21,17 @@ import FormContaReceber from "../pages/Contareceber/form";
 import IndexContaPagar from "../pages/Contapagar";
 import FormContaPagar from "../pages/Contapagar/form";
 
+import { useAuth } from "../hooks/auth";
+
+
 export default function AppRoutes() {
+    const { sigOut, logado } = useAuth()
+    
+
+    const handleLogout = async () => {
+        sigOut()
+    }
+
     return (
         <div className="App">
         <header className="mb-2">
@@ -58,10 +68,10 @@ export default function AppRoutes() {
 
                             <NavDropdown title="Financeiro" id="collasible-nav-dropdown_financeiro" >
                             <LinkContainer to="/contarecebers">
-                                <NavDropdown.Item href="jsvascript:void(0)">Contas a Receber</NavDropdown.Item>
+                                <NavDropdown.Item href="javascript:void(0)">Contas a Receber</NavDropdown.Item>
                             </LinkContainer>
                             <LinkContainer to="/contapagars">
-                                <NavDropdown.Item href="jsvascript:void(0)">Contas a Pagar</NavDropdown.Item>
+                                <NavDropdown.Item href="javascript:void(0)">Contas a Pagar</NavDropdown.Item>
                             </LinkContainer>
                                 
                                 
@@ -70,7 +80,7 @@ export default function AppRoutes() {
 
                         <Nav>
                             <NavDropdown title="Janilson Varela" id="collasible-nav-dropdown-user" >
-                                <NavDropdown.Item href="#action/3.1">Sair</NavDropdown.Item>
+                                <NavDropdown.Item onClick={handleLogout} href="javascript:void(0)">Sair</NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
                     </Navbar.Collapse>
@@ -79,6 +89,8 @@ export default function AppRoutes() {
     </header>
     <main>
         <Routes>
+            
+                
             <Route path="/" element={<Home/>}/>
             
             <Route path="/estados" element={<IndexEstado/>}/>
@@ -108,6 +120,9 @@ export default function AppRoutes() {
             <Route path="/contapagars" element={<IndexContaPagar/>}/>
             <Route path="/contapagars/create" element={<FormContaPagar/>}/>
             <Route path="/contapagars/edit/:_id" element={<FormContaPagar/>}/>
+                
+             
+            
         </Routes>
         </main>
     </div> 

@@ -2,8 +2,10 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 
 const api = axios.create({
-    baseURL: 'http://webfin.test/api/',
-    headers: {'Accept': 'application/json'},
+    baseURL: 'http://webfin.test',
+    headers: {
+      'X-Requested-Width': 'XMLHttpRequest',
+    },
     withCredentials: true,
         
   });
