@@ -8,7 +8,7 @@ import MessageDelete from "../../components/MessageDelete";
 
 export default function IndexFornecedor() {
 
-    const recurso = 'fornecedores'
+    const recurso = '/api/fornecedores'
 
     const [dados, setDados ] = useState([])
     const [paginate, setPaginate ] = useState({})

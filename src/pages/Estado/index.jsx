@@ -13,7 +13,7 @@ export default function IndexEstado() {
     const [ searchText, setSearchText ] = useState('')
     const [ pk, setPk ] = useState(0)
     const [ showDelete, setShowDelete] = useState(false);
-    const endpoint = 'estados';
+    const endpoint = '/api/estados';
 
     const handleClose = () => setShowDelete(false);
     const handleStatus = async (id, status) => {
@@ -48,6 +48,7 @@ export default function IndexEstado() {
         await api.get(`${endpoint}${page}${busca}`)
            
             .then((res) => {
+                console.log(res.data.data)
                 setDados(res.data.data)
                 setPaginate({
                     meta: res.data.meta,

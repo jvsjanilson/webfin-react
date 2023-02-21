@@ -12,7 +12,7 @@ import MessageDelete from "../../components/MessageDelete";
 
 export default function IndexContaPagar() {
 
-    const recurso = 'contapagars'
+    const recurso = '/api/contapagars'
     const [dados, setDados ] = useState([])
     const [paginate, setPaginate ] = useState({})
     const [search, setSearch] = useState('')

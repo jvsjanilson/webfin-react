@@ -13,7 +13,7 @@ export default function FormCidade() {
     let navigate = useNavigate()
     let { _id } = useParams();
 
-    const recurso = 'cidades'
+    const recurso = '/api/cidades'
     const routeIndex = '/cidades'
 
     const [dado, setDado] = useState({})

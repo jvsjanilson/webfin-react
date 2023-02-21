@@ -11,7 +11,7 @@ export default function FormEstado() {
     
     let navigate = useNavigate()
     let { _id } = useParams();
-    const endpoint = 'estados'
+    const endpoint = '/api/estados'
     const routeIndex = '/estados'
 
     const [dado, setDado] = useState({})

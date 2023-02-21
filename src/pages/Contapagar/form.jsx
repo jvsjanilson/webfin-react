@@ -15,7 +15,7 @@ export default function FormContaPagar() {
     let navigate = useNavigate()
     let { _id } = useParams();
 
-    const recurso = 'contapagars'
+    const recurso = '/api/contapagars'
     const routeIndex = '/contapagars'
 
     const [dado, setDado] = useState({})

@@ -8,7 +8,7 @@ import MessageDelete from "../../components/MessageDelete";
 
 export default function IndexConta () {
 
-    const recurso = 'contas'
+    const recurso = '/api/contas'
     const [dados, setDados ] = useState([])
     const [paginate, setPaginate ] = useState({})
     const [search, setSearch] = useState('')

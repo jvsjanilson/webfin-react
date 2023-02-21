@@ -15,7 +15,7 @@ export default function FormContaReceber() {
     let navigate = useNavigate()
     let { _id } = useParams();
 
-    const recurso = 'contarecebers'
+    const recurso = '/api/contarecebers'
     const routeIndex = '/contarecebers'
 
     const [dado, setDado] = useState({})

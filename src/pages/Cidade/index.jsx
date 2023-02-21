@@ -9,7 +9,7 @@ import MessageDelete from "../../components/MessageDelete";
 
 export default function IndexCidade() {
     
-    const recurso = 'cidades'
+    const recurso = '/api/cidades'
     const [dados, setDados ] = useState([])
     const [paginate, setPaginate ] = useState({});
     const [search, setSearch] = useState('')

@@ -15,7 +15,7 @@ export default function FormCliente(){
     let navigate = useNavigate()
     let { _id } = useParams();
 
-    const recurso = 'clientes'
+    const recurso = '/api/clientes'
     const routeIndex = '/clientes'
 
     const [dado, setDado] = useState({})

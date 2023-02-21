@@ -12,7 +12,7 @@ import MessageDelete from "../../components/MessageDelete";
 
 export default function IndexContaReceber() {
 
-    const recurso = 'contarecebers'
+    const recurso = '/api/contarecebers'
     const [dados, setDados ] = useState([])
     const [paginate, setPaginate ] = useState({})
     const [search, setSearch] = useState('')

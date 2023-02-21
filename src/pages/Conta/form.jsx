@@ -15,7 +15,7 @@ export default function FormConta() {
     let navigate = useNavigate()
     let { _id } = useParams();
 
-    const recurso = 'contas'
+    const recurso = '/api/contas'
     const routeIndex = '/contas'
 
     const [dado, setDado] = useState({})

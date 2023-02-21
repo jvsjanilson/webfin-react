@@ -13,7 +13,7 @@ export default function FormFornecedor() {
     let navigate = useNavigate()
     let { _id } = useParams();
 
-    const recurso = 'fornecedores'
+    const recurso = '/api/fornecedores'
     const routeIndex = '/fornecedores'
 
     const [dado, setDado] = useState({})
