@@ -8,7 +8,7 @@ import MessageDelete from "../../components/MessageDelete";
 
 export default function IndexFornecedor() {
 
-    const recurso = '/api/fornecedores'
+    const endpoint = '/api/fornecedores'
 
     const [dados, setDados ] = useState([])
     const [paginate, setPaginate ] = useState({})
@@ -20,7 +20,7 @@ export default function IndexFornecedor() {
 
     const handleStatus = async (id, status) => {
 
-        await api.put(`${recurso}/${id}`,{
+        await api.put(`${endpoint}/${id}`,{
             ativo : status == 1 ? 0 : 1
         })
         .then(res => {
@@ -47,7 +47,7 @@ export default function IndexFornecedor() {
             busca = '&nome=' + search
         }
         
-        await api.get(`${recurso}${page}${busca}`)
+        await api.get(`${endpoint}${page}${busca}`)
            
             .then((res) => {
                 setDados(res.data.data)
@@ -61,7 +61,7 @@ export default function IndexFornecedor() {
     const handleConfirmarDelete = async () => {
         setShow(false)
        
-        await api.delete(`${recurso}/${register}`)
+        await api.delete(`${endpoint}/${register}`)
             .then(res => {
                 if (res.status == 204){
                     setDados(dados.filter(e => e.id != register))

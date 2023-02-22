@@ -9,7 +9,7 @@ import MessageDelete from "../../components/MessageDelete";
 
 export default function IndexCidade() {
     
-    const recurso = '/api/cidades'
+    const endpoint = '/api/cidades'
     const [dados, setDados ] = useState([])
     const [paginate, setPaginate ] = useState({});
     const [search, setSearch] = useState('')
@@ -22,7 +22,7 @@ export default function IndexCidade() {
     const handleClose = () => setShow(false);
     const handleStatus = async (id, status) => {
 
-        await api.put(`${recurso}/${id}`,{
+        await api.put(`${endpoint}/${id}`,{
             ativo : status == 1 ? 0 : 1
         })
         .then(res => {
@@ -41,7 +41,7 @@ export default function IndexCidade() {
     const handleConfirmarDelete = async () => {
         setShow(false)
        
-        await api.delete(`${recurso}/${register}`)
+        await api.delete(`${endpoint}/${register}`)
             .then(res => {
                 if (res.status == 204){
                     setDados(dados.filter(e => e.id != register))
@@ -75,7 +75,7 @@ export default function IndexCidade() {
             busca = '&nome=' + search
         }
         
-        await api.get(`${recurso}${page}${busca}`)
+        await api.get(`${endpoint}${page}${busca}`)
            
             .then((res) => {
                 setDados(res.data.data)

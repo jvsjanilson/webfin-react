@@ -8,7 +8,7 @@ import MessageDelete from "../../components/MessageDelete";
 
 export default function IndexCliente() {
 
-    const recurso = '/api/clientes'
+    const endpoint = '/api/clientes'
     const [dados, setDados ] = useState([])
     const [paginate, setPaginate ] = useState({})
     const [search, setSearch] = useState('')
@@ -18,7 +18,7 @@ export default function IndexCliente() {
     const handleClose = () => setShow(false)
     const handleStatus = async (id, status) => {
 
-        await api.put(`${recurso}/${id}`,{
+        await api.put(`${endpoint}/${id}`,{
             ativo : status == 1 ? 0 : 1
         })
         .then(res => {
@@ -45,7 +45,7 @@ export default function IndexCliente() {
             busca = '&nome=' + search
         }
         
-        await api.get(`${recurso}${page}${busca}`)
+        await api.get(`${endpoint}${page}${busca}`)
            
             .then((res) => {
                 setDados(res.data.data)
@@ -59,7 +59,7 @@ export default function IndexCliente() {
     const handleConfirmarDelete = async () => {
         setShow(false)
        
-        await api.delete(`${recurso}/${register}`)
+        await api.delete(`${endpoint}/${register}`)
             .then(res => {
                 if (res.status == 204){
                     setDados(dados.filter(e => e.id != register))

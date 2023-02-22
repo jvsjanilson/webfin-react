@@ -15,7 +15,7 @@ export default function FormConta() {
     let navigate = useNavigate()
     let { _id } = useParams();
 
-    const recurso = '/api/contas'
+    const endpoint = '/api/contas'
     const routeIndex = '/contas'
 
     const [dado, setDado] = useState({})
@@ -43,7 +43,7 @@ export default function FormConta() {
 
     const onSubmitCreate = async (values) => {
         console.log(values.saldo.toString())
-        await api.post(recurso,{
+        await api.post(endpoint,{
             numero_banco: values.numero_banco,
             numero_agencia: values.numero_agencia,
             numero_conta: values.numero_conta,
@@ -67,7 +67,7 @@ export default function FormConta() {
 
     const onSubmitUpdate = async (values) => {
 
-        await api.put(`${recurso}/${_id}`, {
+        await api.put(`${endpoint}/${_id}`, {
             numero_banco: values.numero_banco,
             numero_agencia: values.numero_agencia,
             numero_conta: values.numero_conta,
@@ -85,7 +85,7 @@ export default function FormConta() {
     
     const getDado = async () => {
         if (_id) {
-            await api.get(`${recurso}/${_id}`)
+            await api.get(`${endpoint}/${_id}`)
             .then( res => {
                 setDado({
                     numero_banco: res.data.numero_banco,

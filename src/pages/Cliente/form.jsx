@@ -15,7 +15,7 @@ export default function FormCliente(){
     let navigate = useNavigate()
     let { _id } = useParams();
 
-    const recurso = 'api/clientes'
+    const endpoint = 'api/clientes'
     const routeIndex = '/clientes'
 
     const [dado, setDado] = useState({})
@@ -62,7 +62,7 @@ export default function FormCliente(){
                     return true
                
                 if (value.length == 11 || value.length == 14) {
-                    return await api.get(`${recurso}/find/cpfcnpj/${value}`, {
+                    return await api.get(`${endpoint}/find/cpfcnpj/${value}`, {
                         params: {id: _id}
                     })
                         .then(res => {
@@ -95,7 +95,7 @@ export default function FormCliente(){
             user_id: 1, //obs: remover linha depois que implementar tela de login
         }
         
-        await api.post(recurso,payload)
+        await api.post(endpoint,payload)
         .then(res => {
             navigate(routeIndex)
         })
@@ -125,7 +125,7 @@ export default function FormCliente(){
 
         }
 
-        await api.put(`${recurso}/${_id}`, payload)
+        await api.put(`${endpoint}/${_id}`, payload)
         .then(res => {
             navigate(routeIndex)
         }).catch(error => {
@@ -135,7 +135,7 @@ export default function FormCliente(){
     
     const getDado = async () => {
         if (_id) {
-            await api.get(`${recurso}/${_id}`)
+            await api.get(`${endpoint}/${_id}`)
             .then( res => {
                let data = res.data;
                getCidades(data.estado_id)

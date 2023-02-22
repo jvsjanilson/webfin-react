@@ -6,10 +6,11 @@ import { useAuth } from "../../hooks/auth";
 export default function Signin() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const { signIn } = useAuth()
+    const { signIn, msgError } = useAuth()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+   
         signIn(email, password);
        
     }
@@ -18,7 +19,7 @@ export default function Signin() {
         <Container fluid className="" >
          {/* <Container fluid className="" style={{backgroundColor: '#1a565a'}}> */}
 
-            <form className="" onSubmit={handleSubmit}>
+            <Form noValidate onSubmit={handleSubmit}>
                 
 
                 <Row className="d-flex justify-content-center align-items-center vh-100">
@@ -29,12 +30,11 @@ export default function Signin() {
                                 <Form.Label>E-mail</Form.Label>
                                 <Form.Control type="email" required autoFocus 
                                     className="mb-3" onChange={(e) => setEmail(e.target.value)}/>
-                                <Form.Control.Feedback  type="invalid"/>
                     
                                 <Form.Label>Senha</Form.Label>
-                                <Form.Control type="password" required 
+                                <Form.Control type="password" required minLength={6}
                                     className="mb-3"  onChange={(e) => setPassword(e.target.value)}/>
-                                <Form.Control.Feedback type="invalid"/>
+                                <Form.Control.Feedback style={{display: msgError ? 'block': 'none'}} type="invalid">{msgError}</Form.Control.Feedback>
 
                             </Card.Body>
                             <Card.Footer className="d-flex justify-content-end">
@@ -45,7 +45,7 @@ export default function Signin() {
                 </Row>
                 
 
-            </form>
+            </Form>
         </Container>
     )
 }

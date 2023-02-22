@@ -15,7 +15,7 @@ export default function FormContaPagar() {
     let navigate = useNavigate()
     let { _id } = useParams();
 
-    const recurso = 'api/contapagars'
+    const endpoint = 'api/contapagars'
     const routeIndex = '/contapagars'
 
     const [dado, setDado] = useState({})
@@ -43,7 +43,7 @@ export default function FormContaPagar() {
 
                 if (value != "")
                 {
-                    return await api.get(`${recurso}/find/documento/${value}`, {
+                    return await api.get(`${endpoint}/find/documento/${value}`, {
                         params: {id: _id}
                     })
                     .then(res => {
@@ -64,7 +64,7 @@ export default function FormContaPagar() {
 
     const onSubmitCreate = async (values) => {
         
-        await api.post(recurso,{
+        await api.post(endpoint,{
             documento: values.documento,
             emissao: values.emissao,
             vencimento: values.vencimento,
@@ -86,7 +86,7 @@ export default function FormContaPagar() {
 
     const onSubmitUpdate = async (values) => {
 
-        await api.put(`${recurso}/${_id}`, {
+        await api.put(`${endpoint}/${_id}`, {
             documento: values.documento,
             emissao: values.emissao,
             vencimento: values.vencimento,
@@ -103,7 +103,7 @@ export default function FormContaPagar() {
     
     const getDado = async () => {
         if (_id) {
-            await api.get(`${recurso}/${_id}`)
+            await api.get(`${endpoint}/${_id}`)
             .then( res => {
                 
                 if (res.data.data_pagamento) {

@@ -12,7 +12,7 @@ import MessageDelete from "../../components/MessageDelete";
 
 export default function IndexContaPagar() {
 
-    const recurso = '/api/contapagars'
+    const endpoint = '/api/contapagars'
     const [dados, setDados ] = useState([])
     const [paginate, setPaginate ] = useState({})
     const [search, setSearch] = useState('')
@@ -56,7 +56,7 @@ export default function IndexContaPagar() {
             busca = '&nome=' + search
         }
         
-        await api.get(`${recurso}${page}${busca}`)
+        await api.get(`${endpoint}${page}${busca}`)
            
             .then((res) => {
                 setDados(res.data.data)
@@ -78,7 +78,7 @@ export default function IndexContaPagar() {
     const handleConfirmarDelete = async () => {
         setShowDelete(false)
        
-        await api.delete(`${recurso}/${register}`)
+        await api.delete(`${endpoint}/${register}`)
             .then(res => {
                 if (res.status == 204){
                     setDados(dados.filter(e => e.id != register))
@@ -91,7 +91,7 @@ export default function IndexContaPagar() {
     }
 
     const handleEstornar = async () => {
-        await api.put(`${recurso}/estornar/${register}`)
+        await api.put(`${endpoint}/estornar/${register}`)
         .then(res => {
             if (res.status == 200) {
                 setDados(dados.map((value) => {
@@ -128,7 +128,7 @@ export default function IndexContaPagar() {
             conta_id: contaSeleted
         }
 
-        await api.put(`${recurso}/baixar/${register}`, payload)
+        await api.put(`${endpoint}/baixar/${register}`, payload)
         .then(() => {
             setDados(dados.map((value) => {
                 if (value.id == register) {

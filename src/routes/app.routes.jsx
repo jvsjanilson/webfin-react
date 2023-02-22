@@ -26,7 +26,7 @@ import { useNavigate } from "react-router-dom";
 
 
 export default function AppRoutes() {
-    const { sigOut, logado } = useAuth()
+    const { sigOut, logado, nomeLogin } = useAuth()
     const navigate = useNavigate()
     
 
@@ -81,7 +81,7 @@ export default function AppRoutes() {
                         </Nav>
 
                         <Nav>
-                            <NavDropdown title="Janilson Varela" id="collasible-nav-dropdown-user" >
+                            <NavDropdown title={nomeLogin} id="collasible-nav-dropdown-user" >
                                 <NavDropdown.Item onClick={handleLogout} href="javascript:void(0)">Sair</NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
@@ -91,7 +91,6 @@ export default function AppRoutes() {
     </header>
     <main>
         <Routes>
-            
                 
             <Route path="/" element={<Home/>}/>
             
@@ -122,8 +121,7 @@ export default function AppRoutes() {
             <Route path="/contapagars" element={<IndexContaPagar/>}/>
             <Route path="/contapagars/create" element={<FormContaPagar/>}/>
             <Route path="/contapagars/edit/:_id" element={<FormContaPagar/>}/>
-                
-             
+            <Route path="*" element={<Home/>}/>   
             
         </Routes>
         </main>

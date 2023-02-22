@@ -15,6 +15,27 @@ export default function IndexEstado() {
     const [ showDelete, setShowDelete] = useState(false);
     const endpoint = '/api/estados';
 
+    async function getDados(page = 1) {
+        page = page > 1 ? '?page='+page : ''
+
+        let busca = ''      
+
+        if (searchText != "" && page == '') {
+            busca = '?nome=' + searchText
+        } else if (searchText != "" && page != '') {
+            busca = '&nome=' + searchText
+        }
+        
+        await api.get(`${endpoint}${page}${busca}`)
+            .then((res) => {
+                setDados(res.data.data)
+                setPaginate({
+                    meta: res.data.meta,
+                    links: res.data.links
+                })
+            });
+    }
+
     const handleClose = () => setShowDelete(false);
     const handleStatus = async (id, status) => {
 
@@ -34,29 +55,7 @@ export default function IndexEstado() {
         })        
     }
 
-    async function getDados(page = 1) {
-        page = page > 1 ? '?page='+page : ''
-
-        let busca = ''      
-
-        if (searchText != "" && page == '') {
-            busca = '?nome=' + searchText
-        } else if (searchText != "" && page != '') {
-            busca = '&nome=' + searchText
-        }
-        
-        await api.get(`${endpoint}${page}${busca}`)
-           
-            .then((res) => {
-                console.log(res.data.data)
-                setDados(res.data.data)
-                setPaginate({
-                    meta: res.data.meta,
-                    links: res.data.links
-                })
-            });
-    }
-
+    
     const handleConfirmarDelete = async () => {
         setShowDelete(false)
        

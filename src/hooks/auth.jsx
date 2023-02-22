@@ -5,6 +5,8 @@ import { redirect } from "react-router-dom";
 
 const defaultValue = {
     logado: false,
+    nomeLogin: '',
+    msgError: '',
     signIn: (email, password) => {},
     sigOut: () => {}
 }
@@ -18,33 +20,36 @@ const AuthProvider = ({children}) => {
         return !!isLogado
     })
 
+    const [nomeLogin, setNomeLogin] = useState('')
+    const [msgError, setMsgError] = useState('')
+
     const signIn = async (email, password) => {
         
         await api.get('/sanctum/csrf-cookie')
         await api.post('/api/login',{
             email,
             password
-        }).then(() => {
+        }).then((res) => {
+            setMsgError('')
+            setNomeLogin(res.data.name)
             setLogado(true)
             localStorage.setItem('webfin:isLogado', true)
-        }).catch(() => {
+        }).catch((e) => {
             setLogado(false)
+            setMsgError(e.response.data.message)
             localStorage.removeItem('webfin:isLogado')
         })
     }
 
     const sigOut = async () => {
        const logout =  await api.post('/api/logout').then(() => {
-            
             setLogado(false)
             localStorage.removeItem('webfin:isLogado')
             return redirect("/")
-
-
        })
     }
 
-    return (<AuthContext.Provider value={{logado, signIn, sigOut}}>{children}</AuthContext.Provider> )
+    return (<AuthContext.Provider value={{logado, nomeLogin, msgError, signIn, sigOut }}>{children}</AuthContext.Provider> )
 }
 
 function useAuth() {

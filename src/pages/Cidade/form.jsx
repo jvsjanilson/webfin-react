@@ -13,7 +13,7 @@ export default function FormCidade() {
     let navigate = useNavigate()
     let { _id } = useParams();
 
-    const recurso = '/api/cidades'
+    const endpoint = '/api/cidades'
     const routeIndex = '/cidades'
 
     const [dado, setDado] = useState({})
@@ -29,7 +29,7 @@ export default function FormCidade() {
     });
    
     const onSubmitCreate = async (values) => {
-        await api.post(`${recurso}`,{
+        await api.post(`${endpoint}`,{
             nome: values.nome,
             estado_id: values.estado_id,
             capital: values.capital
@@ -45,7 +45,7 @@ export default function FormCidade() {
     }
 
     const onSubmitUpdate = async (values) => {
-        await api.put(`${recurso}/${_id}`, {
+        await api.put(`${endpoint}/${_id}`, {
             nome: values.nome,
             estado_id: values.estado_id,
             capital: values.capital
@@ -60,7 +60,7 @@ export default function FormCidade() {
     
     const findCidade = async () => {
         if (_id) {
-            await api.get(`${recurso}/${_id}`)
+            await api.get(`${endpoint}/${_id}`)
             .then( res => {
 
                 setDado({

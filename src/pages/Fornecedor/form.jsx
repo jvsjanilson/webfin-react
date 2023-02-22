@@ -13,7 +13,7 @@ export default function FormFornecedor() {
     let navigate = useNavigate()
     let { _id } = useParams();
 
-    const recurso = 'api/fornecedores'
+    const endpoint = 'api/fornecedores'
     const routeIndex = '/fornecedores'
 
     const [dado, setDado] = useState({})
@@ -61,7 +61,7 @@ export default function FormFornecedor() {
                     return true
                
                 if (value.length == 11 || value.length == 14) {
-                    return await api.get(`${recurso}/find/cpfcnpj/${value}`, {
+                    return await api.get(`${endpoint}/find/cpfcnpj/${value}`, {
                         params: {id: _id}
                     })
                         .then(res => {
@@ -97,7 +97,7 @@ export default function FormFornecedor() {
             
         }
         
-        await api.post(recurso,payload)
+        await api.post(endpoint,payload)
         .then(res => {
             navigate(routeIndex)
         })
@@ -128,7 +128,7 @@ export default function FormFornecedor() {
 
         }
 
-        await api.put(`${recurso}/${_id}`, payload)
+        await api.put(`${endpoint}/${_id}`, payload)
         .then(res => {
             navigate(routeIndex)
         }).catch(error => {
@@ -138,7 +138,7 @@ export default function FormFornecedor() {
     
     const getDado = async () => {
         if (_id) {
-            await api.get(`${recurso}/${_id}`)
+            await api.get(`${endpoint}/${_id}`)
             .then( res => {
                 console.log(res.data)
                let data = res.data;
