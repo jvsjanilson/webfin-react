@@ -18,11 +18,9 @@ export default function FormCliente(){
     const endpoint = 'api/clientes'
     const routeIndex = '/clientes'
 
-    const [dado, setDado] = useState({})
     const [estados, setEstados] = useState([])
     const [cidades, setCidades] = useState([])
-       
-    const dadoDefault = {
+    const [initialValues, setInitialValues] = useState({
         nome: '', 
         nome_fantasia: '', 
         cpfcnpj: '',
@@ -35,10 +33,10 @@ export default function FormCliente(){
         cidade_id: 1161, //1161=NATAL
         fone: '',
         celular: '',
-        email: '',
-    }
+        email: ''
+    })
 
-    const DadoSchema = Yup.object().shape({
+    const validationSchema = Yup.object().shape({
         nome: Yup.string().max(60, 'Tamanho máximo 60 caracteres.').required('O campo obrigatório.'),
         nome_fantasia: Yup.string().nullable().max(60, 'Tamanho máximo 60 caracteres.'),
         logradouro: Yup.string().nullable().max(60, 'Tamanho máximo 60 caracteres.'),
@@ -139,7 +137,7 @@ export default function FormCliente(){
             .then( res => {
                let data = res.data;
                getCidades(data.estado_id)
-                setDado({
+               setInitialValues({
                     nome: data.nome,
                     nome_fantasia: data.nome_fantasia,
                     cpfcnpj: data.cpfcnpj,
@@ -170,7 +168,6 @@ export default function FormCliente(){
     const getCidades = async (estado_id) => {
         await api.get(`api/cidades/lookup/${estado_id}`)
             .then(res => {
-
                 setCidades(res.data.data)
             }).catch(error => {
                 console.error(error)
@@ -182,20 +179,15 @@ export default function FormCliente(){
         getDado()
         getEstados()
         if (_id == undefined)
-            getCidades(dadoDefault.estado_id)
+            getCidades(initialValues.estado_id)
        
     },[])
 
     return (<Container >
         <Formik 
-             onSubmit={(values) => {
-                if (_id)
-                    return onSubmitUpdate(values)
-                else
-                    return onSubmitCreate(values)
-            }}
-            validationSchema={DadoSchema}
-            initialValues={_id ? dado : dadoDefault}
+            onSubmit={(values) => _id ? onSubmitUpdate(values) : onSubmitCreate(values)}
+            validationSchema={validationSchema}
+            initialValues={initialValues}
             enableReinitialize
         >
         {({

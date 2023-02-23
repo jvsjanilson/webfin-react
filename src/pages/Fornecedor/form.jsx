@@ -16,11 +16,7 @@ export default function FormFornecedor() {
     const endpoint = 'api/fornecedores'
     const routeIndex = '/fornecedores'
 
-    const [dado, setDado] = useState({})
-    const [estados, setEstados] = useState([])
-    const [cidades, setCidades] = useState([])
-       
-    const dadoDefault = {
+    const [initialValues, setInitialValues] = useState({
         nome: '', 
         nome_fantasia: '', 
         cpfcnpj: '',
@@ -34,10 +30,11 @@ export default function FormFornecedor() {
         fone: '',
         celular: '',
         email: '',
+    })
+    const [estados, setEstados] = useState([])
+    const [cidades, setCidades] = useState([])
 
-    }
-
-    const DadoSchema = Yup.object().shape({
+    const validationSchema = Yup.object().shape({
         nome: Yup.string().max(60, 'Tamanho máximo 60 caracteres.').required('O campo obrigatório.'),
         nome_fantasia: Yup.string().nullable().max(60, 'Tamanho máximo 60 caracteres.'),
         logradouro: Yup.string().nullable().max(60, 'Tamanho máximo 60 caracteres.'),
@@ -76,7 +73,6 @@ export default function FormFornecedor() {
             })
       });
    
-
     const onSubmitCreate = async (values) => {
         let payload = {
             nome: values.nome,
@@ -93,12 +89,10 @@ export default function FormFornecedor() {
             celular: values.celular,
             email: values.email,
             user_id: 1, //obs: remover linha depois que implementar tela de login
-            
-            
         }
         
         await api.post(endpoint,payload)
-        .then(res => {
+        .then(() => {
             navigate(routeIndex)
         })
         .catch(error => {
@@ -125,11 +119,10 @@ export default function FormFornecedor() {
             fone: values.fone,
             celular: values.celular,
             email: values.email,
-
         }
 
         await api.put(`${endpoint}/${_id}`, payload)
-        .then(res => {
+        .then(() => {
             navigate(routeIndex)
         }).catch(error => {
             alert('Error ao atualizar.')
@@ -140,10 +133,9 @@ export default function FormFornecedor() {
         if (_id) {
             await api.get(`${endpoint}/${_id}`)
             .then( res => {
-                console.log(res.data)
-               let data = res.data;
-               getCidades(data.estado_id)
-                setDado({
+                let data = res.data;
+                getCidades(data.estado_id)
+                setInitialValues({
                     nome: data.nome,
                     nome_fantasia: data.nome_fantasia,
                     cpfcnpj: data.cpfcnpj,
@@ -177,25 +169,18 @@ export default function FormFornecedor() {
     }
 
     useEffect(() => {
-
         getDado()
         getEstados()
         if (_id == undefined)
-            getCidades(dadoDefault.estado_id)
+            getCidades(initialValues.estado_id)
        
     },[])
 
     return (<Container >
         <Formik 
-             onSubmit={(values) => {
-
-                if (_id)
-                    return onSubmitUpdate(values)
-                else
-                    return onSubmitCreate(values)
-            }}
-            validationSchema={DadoSchema}
-            initialValues={_id ? dado : dadoDefault}
+             onSubmit={(values) => _id ? onSubmitUpdate(values) : onSubmitCreate(values)}
+            validationSchema={validationSchema}
+            initialValues={initialValues}
             enableReinitialize
             
         >
@@ -210,15 +195,14 @@ export default function FormFornecedor() {
             <Form >
                 <Card >
                     <Card.Header>
-                        <Button className='me-1'  type='submit' variant={ _id ? 'success' : 'primary' }>{(_id? (<FaSave/>) : (<FaPlus/>))} { _id ? 'SALVAR' : 'CRIAR' }</Button>
+                        <Button className='me-1' type='submit' variant={ _id ? 'success' : 'primary' }>{(_id ? (<FaSave/>) : (<FaPlus/>))} { _id ? 'SALVAR' : 'CRIAR' }</Button>
                         <LinkContainer to={routeIndex}>
-                            <Button  variant="secondary"><FaArrowLeft/> VOLTAR</Button>
+                            <Button variant="secondary"><FaArrowLeft/> VOLTAR</Button>
                         </LinkContainer>
                     </Card.Header>
                     <Card.Body>
 
                         <Row className="mb-3">
-
                             <Col sm={5}>
                                 <FormBootstrap.Group  controlId="nome">
                                     <FormBootstrap.Label>Nome</FormBootstrap.Label>
@@ -354,7 +338,7 @@ export default function FormFornecedor() {
                                             getCidades(e.target.value)  
                                         }} 
                                         value={values.estado_id}>
-                                        {estados.map((e) => (<option  value={e.id} key={e.id}  >{e.uf}</option>))}
+                                        {estados.map((e) => <option value={e.id} key={e.id}  >{e.uf}</option>)}
                                     </FormBootstrap.Select>
                                 </FormBootstrap.Group>
                             </Col>
@@ -366,11 +350,7 @@ export default function FormFornecedor() {
                                         onChange={handleChange} 
                                         value={values.cidade_id}
                                         >
-                                        {cidades.map((e) => {
-                                            return (
-                                                <option value={e.id} key={e.id} >{e.nome}</option>
-                                            )
-                                        })}
+                                        {cidades.map((e) => <option value={e.id} key={e.id} >{e.nome}</option>)}
                                     </FormBootstrap.Select>
                                 </FormBootstrap.Group>
                             </Col>

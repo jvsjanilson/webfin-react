@@ -5,8 +5,7 @@ import Container from 'react-bootstrap/Container';
 const Home = () => {
     return (
         <Container>
-            {/* <h1>Home</h1>
-            <Link to="/estados">Estados</Link> */}
+
         </Container>
     );
 }

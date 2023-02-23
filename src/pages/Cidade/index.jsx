@@ -20,16 +20,15 @@ export default function IndexCidade() {
      * Handles
      */
     const handleClose = () => setShow(false);
-    const handleStatus = async (id, status) => {
+    const handleStatus = async ({id, ativo}) => {
 
         await api.put(`${endpoint}/${id}`,{
-            ativo : status == 1 ? 0 : 1
+            ativo : !ativo
         })
         .then(res => {
             if (res.status == 204) {
                 setDados(dados.map(e => {
-                    if (e.id == id) 
-                        e.ativo = e.ativo == 0 ? 1 : 0
+                    if (e.id == id) e.ativo = !ativo
                     return e
                 }))
             }
@@ -37,6 +36,7 @@ export default function IndexCidade() {
             alert('Error')
         })        
     }
+
 
     const handleConfirmarDelete = async () => {
         setShow(false)
@@ -60,14 +60,12 @@ export default function IndexCidade() {
     const dialogDelete = async (id) => {
         setRegister(id)
         setShow(true)
-
     }
 
     async function getDados(page = 1) {
         page = page > 1 ? '?page='+page : ''
 
         let busca = ''      
-
       
         if (search != "" && page == '') {
             busca = '?nome=' + search
@@ -116,7 +114,6 @@ export default function IndexCidade() {
                         <th style={{textAlign: 'center'}} >#</th>
                         <th>Nome da cidade</th>
                         <th style={{width: '4rem', textAlign: 'center'}}>UF</th>
-                        
                         <th style={{width: '4rem'}}>Status</th>
                     </tr>
                 </thead>
@@ -129,13 +126,13 @@ export default function IndexCidade() {
                                         
                                         <Dropdown>
                                             <div className="d-grid gap-2">
-                                                <Dropdown.Toggle   size="sm" variant="primary" id="dropdown-basic">
+                                                <Dropdown.Toggle size="sm" variant="primary" id="dropdown-basic">
                                                     Opções
                                                 </Dropdown.Toggle>
                                         
                                                 <Dropdown.Menu >
                                                     <LinkContainer to={`/cidades/edit/${el.id}`}>
-                                                            <Dropdown.Item href="javascript:void(0)"><FaEdit className="text-success" /> Editar</Dropdown.Item>
+                                                        <Dropdown.Item href="javascript:void(0)"><FaEdit className="text-success" /> Editar</Dropdown.Item>
                                                     </LinkContainer>
 
                                                     <Dropdown.Item href="javascript:void(0)" onClick={dialogDelete.bind(this, el.id)}><FaTrash color="red" /> Remover</Dropdown.Item>
@@ -152,7 +149,7 @@ export default function IndexCidade() {
                                     type="switch"
                                     id="custom-switch"
                                     checked={el.ativo ? true: false}
-                                    onChange={handleStatus.bind(this, el.id, el.ativo)}
+                                    onChange={handleStatus.bind(this, el)}
                                 />
                                 </td>
                             </tr>

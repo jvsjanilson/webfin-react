@@ -37,16 +37,15 @@ export default function IndexEstado() {
     }
 
     const handleClose = () => setShowDelete(false);
-    const handleStatus = async (id, status) => {
+    const handleStatus = async ({id, ativo}) => {
 
         await api.put(`${endpoint}/${id}`,{
-            ativo : status == 1 ? 0 : 1
+            ativo : !ativo
         })
         .then(res => {
             if (res.status == 204) {
                 setDados(dados.map(e => {
-                    if (e.id == id) 
-                        e.ativo = e.ativo == 0 ? 1 : 0
+                    if (e.id == id) e.ativo = !ativo
                     return e
                 }))
             }
@@ -79,7 +78,6 @@ export default function IndexEstado() {
 
     useEffect( () => {
         getDados()
-
     }, [searchText])
 
     return (
@@ -138,7 +136,7 @@ export default function IndexEstado() {
                                         type="switch"
                                         id="custom-switch"
                                         checked={el.ativo ? true: false}
-                                        onChange={handleStatus.bind(this, el.id, el.ativo)}
+                                        onChange={handleStatus.bind(this, el)}
                                     />
                                 </td>
                             </tr>

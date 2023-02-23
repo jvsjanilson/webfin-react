@@ -17,13 +17,10 @@ export default function FormContaPagar() {
 
     const endpoint = 'api/contapagars'
     const routeIndex = '/contapagars'
-
-    const [dado, setDado] = useState({})
     const [fornecedores, setFornecedores] = useState([])
     const [contas, setContas] = useState([])
     const [desativado, setDesativado] = useState(false)
-       
-    const dadoDefault = {
+    const [initialValues, setInitialValues] = useState({
         documento: '', 
         emissao: format(new Date(), "yyyy-MM-dd"), 
         vencimento: format(new Date(), "yyyy-MM-dd"),
@@ -31,9 +28,9 @@ export default function FormContaPagar() {
         conta_id: 1,
         fornecedor_id: 1,
 
-    }
+    })
 
-    const DadoSchema = Yup.object().shape({
+    const validationSchema = Yup.object().shape({
         documento: Yup.string()
             .max(10, 'Tamanho máximo 60 caracteres.')
             .required('O campo obrigatório..')
@@ -62,16 +59,16 @@ export default function FormContaPagar() {
       });
    
 
-    const onSubmitCreate = async (values) => {
+    const onSubmitCreate = async ({documento, emissao, vencimento, conta_id, fornecedor_id, valor }) => {
         
         await api.post(endpoint,{
-            documento: values.documento,
-            emissao: values.emissao,
-            vencimento: values.vencimento,
-            conta_id: values.conta_id,
-            fornecedor_id: values.fornecedor_id,
+            documento,
+            emissao,
+            vencimento,
+            conta_id,
+            fornecedor_id,
             user_id: 1, //obs: remover linha depois que implementar tela de login
-            valor: values.valor ? parseFloat(values.valor.replace(/[^0-9,]/gi, '').replace(',','.')) : 0
+            valor: valor ? parseFloat(valor.replace(/[^0-9,]/gi, '').replace(',','.')) : 0
             
         })
         .then(() => {
@@ -84,15 +81,15 @@ export default function FormContaPagar() {
         })
     }
 
-    const onSubmitUpdate = async (values) => {
+    const onSubmitUpdate = async ({documento, emissao, vencimento, conta_id, fornecedor_id, valor }) => {
 
         await api.put(`${endpoint}/${_id}`, {
-            documento: values.documento,
-            emissao: values.emissao,
-            vencimento: values.vencimento,
-            conta_id: values.conta_id,
-            fornecedor_id: values.fornecedor_id,
-            valor: values.valor ? parseFloat(values.valor.replace(/[^0-9,]/gi, '').replace(',','.')) : 0
+            documento ,
+            emissao,
+            vencimento,
+            conta_id,
+            fornecedor_id,
+            valor: valor ? parseFloat(valor.replace(/[^0-9,]/gi, '').replace(',','.')) : 0
         })
         .then(() => {
             navigate(routeIndex)
@@ -106,11 +103,10 @@ export default function FormContaPagar() {
             await api.get(`${endpoint}/${_id}`)
             .then( res => {
                 
-                if (res.data.data_pagamento) {
+                if (res.data.data_pagamento) 
                     setDesativado(true)
-                }
 
-                setDado({
+                setInitialValues({
                     documento: res.data.documento,
                     emissao: res.data.emissao,
                     vencimento: res.data.vencimento,
@@ -145,15 +141,9 @@ export default function FormContaPagar() {
 
     return (<Container >
         <Formik 
-             onSubmit={(values) => {
-                if (_id)
-                    return onSubmitUpdate(values)
-                else
-                    return onSubmitCreate(values)
-            }}
-
-            validationSchema={DadoSchema}
-            initialValues={_id ? dado : dadoDefault}
+             onSubmit={(values) => _id ? onSubmitUpdate(values) : onSubmitCreate(values)}
+            validationSchema={validationSchema}
+            initialValues={initialValues}
             enableReinitialize
         >
         {({
@@ -201,7 +191,7 @@ export default function FormContaPagar() {
                                 <FormBootstrap.Group  controlId="fornecedor_id">
                                     <FormBootstrap.Label>Fornecedores</FormBootstrap.Label>
                                     <FormBootstrap.Select onChange={handleChange} value={values.fornecedor_id} disabled={desativado} >
-                                        {fornecedores.map((e) => (<option  value={e.id} key={e.id} >{e.nome}</option>))}
+                                        {fornecedores.map((e) => <option  value={e.id} key={e.id} >{e.nome}</option>)}
                                     </FormBootstrap.Select>
                                 </FormBootstrap.Group>
                             </Col>
@@ -254,10 +244,7 @@ export default function FormContaPagar() {
                                     <CurrencyInput
                                         value={values.valor}
                                         className="form-control"
-                                        onValueChange={(value) => {
-                                            setFieldValue('valor', value)
-
-                                        }}
+                                        onValueChange={(value) => setFieldValue('valor', value)}
                                         disabled={desativado} 
                                         >
 

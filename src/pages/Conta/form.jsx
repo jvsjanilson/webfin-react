@@ -18,9 +18,7 @@ export default function FormConta() {
     const endpoint = '/api/contas'
     const routeIndex = '/contas'
 
-    const [dado, setDado] = useState({})
-       
-    const dadoDefault = {
+    const [initialValues, setInitialValues] = useState({
         numero_banco: '', 
         numero_agencia: '', 
         numero_conta: '',
@@ -29,9 +27,9 @@ export default function FormConta() {
         data_abertura: format(new Date(), "yyyy-MM-dd"),
         saldo: '0,00',
 
-    }
-
-    const DadoSchema = Yup.object().shape({
+    })
+    
+    const validationSchema = Yup.object().shape({
         descricao: Yup.string().max(60, 'Tamanho máximo 60 caracteres.').required('O campo obrigatório..'),
         numero_banco: Yup.string().max(4, 'Tamanho máximo 4 caracteres.').required('O campo obrigatório.') ,
         numero_agencia: Yup.string().max(15, 'Tamanho máximo 15 caracteres.').required('O campo obrigatório.') ,
@@ -41,17 +39,19 @@ export default function FormConta() {
       });
    
 
-    const onSubmitCreate = async (values) => {
-        console.log(values.saldo.toString())
+    const onSubmitCreate = async ({
+        numero_banco, numero_agencia, numero_conta, descricao, 
+        tipo_conta, data_abertura, saldo
+    }) => {
         await api.post(endpoint,{
-            numero_banco: values.numero_banco,
-            numero_agencia: values.numero_agencia,
-            numero_conta: values.numero_conta,
-            descricao: values.descricao,
-            tipo_conta: values.tipo_conta,
-            data_abertura: values.data_abertura,
+            numero_banco,
+            numero_agencia,
+            numero_conta,
+            descricao,
+            tipo_conta,
+            data_abertura,
             user_id: 1, //obs: remover linha depois que implementar tela de login
-            saldo: values.saldo ? parseFloat(values.saldo.replace(/[^0-9,]/gi, '').replace(',','.')) : 0
+            saldo: saldo ? parseFloat(saldo.replace(/[^0-9,]/gi, '').replace(',','.')) : 0
             
         })
         .then(res => {
@@ -65,16 +65,19 @@ export default function FormConta() {
         })
     }
 
-    const onSubmitUpdate = async (values) => {
+    const onSubmitUpdate = async ({
+        numero_banco, numero_agencia, numero_conta, descricao, 
+        tipo_conta, data_abertura, saldo
+    }) => {
 
         await api.put(`${endpoint}/${_id}`, {
-            numero_banco: values.numero_banco,
-            numero_agencia: values.numero_agencia,
-            numero_conta: values.numero_conta,
-            descricao: values.descricao,
-            tipo_conta: values.tipo_conta,
-            data_abertura: values.data_abertura,
-            saldo: values.saldo ? parseFloat(values.saldo.replace(/[^0-9,]/gi, '').replace(',','.')) : 0
+            numero_banco,
+            numero_agencia,
+            numero_conta,
+            descricao,
+            tipo_conta,
+            data_abertura,
+            saldo: saldo ? parseFloat(saldo.replace(/[^0-9,]/gi, '').replace(',','.')) : 0
         })
         .then(res => {
             navigate(routeIndex)
@@ -87,7 +90,7 @@ export default function FormConta() {
         if (_id) {
             await api.get(`${endpoint}/${_id}`)
             .then( res => {
-                setDado({
+                setInitialValues({
                     numero_banco: res.data.numero_banco,
                     numero_agencia: res.data.numero_agencia,
                     numero_conta: res.data.numero_conta,
@@ -99,7 +102,6 @@ export default function FormConta() {
             })
         }
     }
-
  
     useEffect(() => {
         getDado()
@@ -108,16 +110,10 @@ export default function FormConta() {
 
     return (<Container >
         <Formik 
-             onSubmit={(values) => {
-                if (_id)
-                    return onSubmitUpdate(values)
-                else
-                    return onSubmitCreate(values)
-            }}
-            validationSchema={DadoSchema}
-            initialValues={_id ? dado : dadoDefault}
+            onSubmit={(values) => _id ? onSubmitUpdate(values) : onSubmitCreate(values) }
+            validationSchema={validationSchema}
+            initialValues={initialValues}
             enableReinitialize
-            
         >
         {({
            handleChange,
@@ -137,129 +133,125 @@ export default function FormConta() {
                     </Card.Header>
                     <Card.Body>
 
-                    <Row className="mb-3">
+                        <Row className="mb-3">
+                            <Col sm={2}>
+                                <FormBootstrap.Group  controlId="numero_banco">
+                                    <FormBootstrap.Label>Número do Banco</FormBootstrap.Label>
+                                    
+                                    <FormBootstrap.Control 
+                                        type="text" 
+                                        value={values.numero_banco} 
+                                        onChange={handleChange}
+                                        isInvalid={!!errors.numero_banco}
+                                        maxLength={4}
+                                    />
+                                    
+                                    <FormBootstrap.Control.Feedback type="invalid">
+                                        {errors.numero_banco}
+                                    </FormBootstrap.Control.Feedback>
+                                </FormBootstrap.Group>
+                            </Col>
 
-                        <Col sm={2}>
-                            <FormBootstrap.Group  controlId="numero_banco">
-                                <FormBootstrap.Label>Número do Banco</FormBootstrap.Label>
-                                <FormBootstrap.Control 
-                                    type="text" 
-                                    value={values.numero_banco} 
-                                    onChange={handleChange}
-                                    isInvalid={!!errors.numero_banco}
-                                    maxLength={4}
-                                />
-                                
-                                <FormBootstrap.Control.Feedback type="invalid">
-                                    {errors.numero_banco}
-                                </FormBootstrap.Control.Feedback>
-                            </FormBootstrap.Group>
-                        </Col>
-                        <Col sm={3}>
-                            <FormBootstrap.Group  controlId="numero_agencia">
-                                <FormBootstrap.Label>Número do Agencia</FormBootstrap.Label>
-                                <FormBootstrap.Control 
-                                    type="text" 
-                                    value={values.numero_agencia} 
-                                    onChange={handleChange}
-                                    isInvalid={!!errors.numero_agencia}
-                                    maxLength={15}
-                                />
-                                
-                                <FormBootstrap.Control.Feedback type="invalid">
-                                    {errors.numero_agencia}
-                                </FormBootstrap.Control.Feedback>
-                            </FormBootstrap.Group>
-                        </Col>
-                        <Col sm={3}>
-                            <FormBootstrap.Group  controlId="numero_conta">
-                                <FormBootstrap.Label>Número do Conta</FormBootstrap.Label>
-                                <FormBootstrap.Control 
-                                    type="text" 
-                                    value={values.numero_conta} 
-                                    onChange={handleChange}
-                                    isInvalid={!!errors.numero_conta}
-                                    maxLength={30}
-                                />
-                                
-                                <FormBootstrap.Control.Feedback type="invalid">
-                                    {errors.numero_conta}
-                                </FormBootstrap.Control.Feedback>
-                            </FormBootstrap.Group>
-                        </Col>
+                            <Col sm={3}>
+                                <FormBootstrap.Group  controlId="numero_agencia">
+                                    <FormBootstrap.Label>Número do Agencia</FormBootstrap.Label>
 
-                        <Col sm={4}>
+                                    <FormBootstrap.Control 
+                                        type="text" 
+                                        value={values.numero_agencia} 
+                                        onChange={handleChange}
+                                        isInvalid={!!errors.numero_agencia}
+                                        maxLength={15}
+                                    />
+                                    
+                                    <FormBootstrap.Control.Feedback type="invalid">
+                                        {errors.numero_agencia}
+                                    </FormBootstrap.Control.Feedback>
+                                </FormBootstrap.Group>
+                            </Col>
 
-                            <FormBootstrap.Group  controlId="tipo_conta">
-                                <FormBootstrap.Label>Tipo Conta</FormBootstrap.Label>
-                                <FormBootstrap.Select onChange={handleChange} value={values.tipo_conta}>
-                                    <option key={1} selected={values.tipo_conta == 1} value="1">1 - Conta Corrente</option>
-                                    <option key={2} selected={values.tipo_conta == 2} value="2">2 - Conta Poupança</option>
+                            <Col sm={3}>
+                                <FormBootstrap.Group  controlId="numero_conta">
+                                    <FormBootstrap.Label>Número do Conta</FormBootstrap.Label>
 
-                                </FormBootstrap.Select>
-                            </FormBootstrap.Group>
-                        </Col>
+                                    <FormBootstrap.Control 
+                                        type="text" 
+                                        value={values.numero_conta} 
+                                        onChange={handleChange}
+                                        isInvalid={!!errors.numero_conta}
+                                        maxLength={30}
+                                    />
+                                    
+                                    <FormBootstrap.Control.Feedback type="invalid">
+                                        {errors.numero_conta}
+                                    </FormBootstrap.Control.Feedback>
+                                </FormBootstrap.Group>
+                            </Col>
 
+                            <Col sm={4}>
+                                <FormBootstrap.Group  controlId="tipo_conta">
+                                    <FormBootstrap.Label>Tipo Conta</FormBootstrap.Label>
 
-                    </Row>
+                                    <FormBootstrap.Select onChange={handleChange} value={values.tipo_conta}>
+                                        <option key={1} selected={values.tipo_conta == 1} value="1">1 - Conta Corrente</option>
+                                        <option key={2} selected={values.tipo_conta == 2} value="2">2 - Conta Poupança</option>
+                                    </FormBootstrap.Select>
+                                </FormBootstrap.Group>
+                            </Col>
 
+                        </Row>
 
-                    <Row className="mb-3">
+                        <Row className="mb-3">
+                            <Col sm={2}>
+                                <FormBootstrap.Group  controlId="data_abertura">
+                                    <FormBootstrap.Label>Data Abertura </FormBootstrap.Label>
 
-                        <Col sm={2}>
-                            <FormBootstrap.Group  controlId="data_abertura">
-                                <FormBootstrap.Label>Data Abertura </FormBootstrap.Label>
-                                <FormBootstrap.Control type="date" value={values.data_abertura} onChange={handleChange}
-                                    isInvalid={!!errors.data_abertura}
-                                />
-                                
-                                <FormBootstrap.Control.Feedback type="invalid">
-                                    {errors.data_abertura}
-                                </FormBootstrap.Control.Feedback>
-                            </FormBootstrap.Group>
-                        </Col>
-                
-                        <Col sm={8}>
-                            <FormBootstrap.Group  controlId="descricao">
-                                <FormBootstrap.Label>Descrição</FormBootstrap.Label>
-                                <FormBootstrap.Control 
-                                    type="text" 
-                                    value={values.descricao} 
-                                    onChange={handleChange}
-                                    maxLength={60}
-                                    isInvalid={!!errors.descricao}
-                                />
-                                
-                                <FormBootstrap.Control.Feedback type="invalid">
-                                    {errors.descricao}
-                                </FormBootstrap.Control.Feedback>
-                            </FormBootstrap.Group>
-                        </Col>
-                        <Col sm={2}>
-                            <FormBootstrap.Group >
-                                <FormBootstrap.Label>Saldo</FormBootstrap.Label>
-        
-                                <CurrencyInput
-                                    value={values.saldo}
-                                    className="form-control"
-                                    onValueChange={(value) => {
-                                        setFieldValue('saldo', value)
-
-                                    }}
-                                    >
-
-                                </CurrencyInput>
-                         
-                                <FormBootstrap.Control.Feedback type="invalid">
-                                    {errors.saldo}
-                                </FormBootstrap.Control.Feedback>
-                            </FormBootstrap.Group>
-                        </Col>
-                
-                    </Row>
+                                    <FormBootstrap.Control type="date" value={values.data_abertura} onChange={handleChange}
+                                        isInvalid={!!errors.data_abertura}
+                                    />
+                                    
+                                    <FormBootstrap.Control.Feedback type="invalid">
+                                        {errors.data_abertura}
+                                    </FormBootstrap.Control.Feedback>
+                                </FormBootstrap.Group>
+                            </Col>
                     
-                        
-                        
+                            <Col sm={8}>
+                                <FormBootstrap.Group  controlId="descricao">
+                                    <FormBootstrap.Label>Descrição</FormBootstrap.Label>
+
+                                    <FormBootstrap.Control 
+                                        type="text" 
+                                        value={values.descricao} 
+                                        onChange={handleChange}
+                                        maxLength={60}
+                                        isInvalid={!!errors.descricao}
+                                    />
+                                    
+                                    <FormBootstrap.Control.Feedback type="invalid">
+                                        {errors.descricao}
+                                    </FormBootstrap.Control.Feedback>
+                                </FormBootstrap.Group>
+                            </Col>
+                            <Col sm={2}>
+                                <FormBootstrap.Group >
+                                    <FormBootstrap.Label>Saldo</FormBootstrap.Label>
+            
+                                    <CurrencyInput
+                                        value={values.saldo}
+                                        className="form-control"
+                                        onValueChange={(value) => setFieldValue('saldo', value)}
+                                        >
+
+                                    </CurrencyInput>
+                            
+                                    <FormBootstrap.Control.Feedback type="invalid">
+                                        {errors.saldo}
+                                    </FormBootstrap.Control.Feedback>
+                                </FormBootstrap.Group>
+                            </Col>
+                  
+                        </Row>
                     </Card.Body>
                 </Card>
             </Form>

@@ -24,7 +24,7 @@ const AuthProvider = ({children}) => {
     const [msgError, setMsgError] = useState('')
 
     const signIn = async (email, password) => {
-        
+        // console.log(email, password)
         await api.get('/sanctum/csrf-cookie')
         await api.post('/api/login',{
             email,

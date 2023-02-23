@@ -12,29 +12,26 @@ export default function FormCidade() {
     
     let navigate = useNavigate()
     let { _id } = useParams();
-
     const endpoint = '/api/cidades'
     const routeIndex = '/cidades'
 
-    const [dado, setDado] = useState({})
+    const [initialValues, setInitialValues] = useState({nome: '', capital: 0, estado_id: 1});
     const [estados, setEstados] = useState([])
 
-    const dadoDefault = {nome: '', capital: 0, estado_id: 1}
-
-    const DadoSchema = Yup.object().shape({
+    const schema = Yup.object().shape({
         nome: Yup.string()
           .max(60, 'Tamanho máximo do Nome é 60 caracteres.')
           .required('O campo Nome da cidade é obrigatório.'),
         estado_id: Yup.number().required('O UF é obrigatório')
     });
    
-    const onSubmitCreate = async (values) => {
+    const onSubmitCreate = async ({nome, estado_id, capital}) => {
         await api.post(`${endpoint}`,{
-            nome: values.nome,
-            estado_id: values.estado_id,
-            capital: values.capital
+            nome,
+            estado_id,
+            capital
         })
-        .then(res => {
+        .then(() => {
             navigate(`${routeIndex}`)
         })
         .catch(error => {
@@ -44,16 +41,15 @@ export default function FormCidade() {
         })
     }
 
-    const onSubmitUpdate = async (values) => {
+    const onSubmitUpdate = async ({nome, estado_id, capital}) => {
         await api.put(`${endpoint}/${_id}`, {
-            nome: values.nome,
-            estado_id: values.estado_id,
-            capital: values.capital
+            nome,
+            estado_id,
+            capital
         })
         .then(() => {
             navigate(`${routeIndex}`)
         }).catch(error => {
-            console.log(error)
             alert('Error ao atualizar.')
         })
     }
@@ -62,12 +58,11 @@ export default function FormCidade() {
         if (_id) {
             await api.get(`${endpoint}/${_id}`)
             .then( res => {
-
-                setDado({
-                        nome: res.data.nome,
-                        estado_id: res.data.estado_id,
-                        capital: res.data.capital
-                    })
+                setInitialValues({
+                    nome: res.data.nome,
+                    estado_id: res.data.estado_id,
+                    capital: res.data.capital
+                })
             })
         }
     }
@@ -82,22 +77,14 @@ export default function FormCidade() {
     useEffect(() => {
         findCidade()
         getEstados()
-        
-        
     },[])
 
     return (<Container >
         <Formik 
-             onSubmit={(values) => {
-                if (_id)
-                    return onSubmitUpdate(values)
-                else
-                    return onSubmitCreate(values)
-            }}
-            validationSchema={DadoSchema}
-            initialValues={_id ? dado : dadoDefault}
+            onSubmit={(values) => _id ? onSubmitUpdate(values) : onSubmitCreate(values) }
+            validationSchema={schema}
+            initialValues={initialValues}
             enableReinitialize
-            
         >
         {({
            handleChange,
@@ -110,8 +97,8 @@ export default function FormCidade() {
             <Form >
                 <Card >
                     <Card.Header>
-                        <Button className='me-1'  type='submit' variant={ _id ? 'success' : 'primary' }>{(_id? (<FaSave/>) : (<FaPlus/>))} { _id ? 'SALVAR' : 'CRIAR' }</Button>
-                        <LinkContainer to="/cidades">
+                        <Button className='me-1' type='submit' variant={ _id ? 'success' : 'primary' }>{(_id? (<FaSave/>) : (<FaPlus/>))} { _id ? 'SALVAR' : 'CRIAR' }</Button>
+                        <LinkContainer to={routeIndex}>
                             <Button  variant="secondary"><FaArrowLeft/> VOLTAR</Button>
                         </LinkContainer>
                     </Card.Header>
@@ -145,18 +132,11 @@ export default function FormCidade() {
                     <Col sm={2}>
 
                         <FormBootstrap.Group  controlId="capital">
-                            
                             <FormBootstrap.Switch 
                                     type="switch"
                                     value={values.capital}
                                     checked={values.capital == 1 ? true: false}
-                                    onChange={(e) => {
-                                        if (e.target.checked) 
-                                            setFieldValue('capital', 1)
-                                        else
-                                            setFieldValue('capital', 0)
-                                    }}
-                                    
+                                    onChange={(e) => setFieldValue('capital', e.target.checked ? 1 : 0)}
                                     label="Capital?"
                                 />
                         </FormBootstrap.Group>

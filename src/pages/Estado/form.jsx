@@ -14,9 +14,7 @@ export default function FormEstado() {
     const endpoint = '/api/estados'
     const routeIndex = '/estados'
 
-    const [dado, setDado] = useState({})
-
-    const initialValues = {uf: '', nome: ''}
+    const [initialValues, setInitialValues] = useState({uf: '', nome: ''})
 
     const validationSchema = Yup.object().shape({
         uf: Yup.string()
@@ -38,10 +36,10 @@ export default function FormEstado() {
       });
    
 
-    const onSubmitCreate = async (values) => {
+    const onSubmitCreate = async ({uf, nome}) => {
         await api.post(`${endpoint}`,{
-            uf: values.uf,
-            nome: values.nome  
+            uf,
+            nome
         })
         .then(() => {
             navigate(routeIndex)
@@ -53,11 +51,11 @@ export default function FormEstado() {
         })
     }
 
-    const onSubmitUpdate = async (values) => {
+    const onSubmitUpdate = async ({uf, nome}) => {
         
         await api.put(`${endpoint}/${_id}`, {
-            uf: values.uf,
-            nome: values.nome
+            uf,
+            nome
         })
         .then(() => {
             navigate(routeIndex)
@@ -69,12 +67,7 @@ export default function FormEstado() {
     const findDado = async () => {
         if (_id) {
             await api.get(`${endpoint}/${_id}`)
-            .then( res => {
-                setDado({
-                    uf: res.data.uf, 
-                    nome: res.data.nome
-                })
-            })
+            .then( res => setInitialValues({uf: res.data.uf, nome: res.data.nome}))
         }
     }
 
@@ -84,14 +77,9 @@ export default function FormEstado() {
 
     return (<Container >
         <Formik 
-            onSubmit={(values) => {
-                if (_id)
-                    return onSubmitUpdate(values)
-                else
-                    return onSubmitCreate(values)
-            }}
+            onSubmit={(values) =>_id ? onSubmitUpdate(values) : onSubmitCreate(values)}
             validationSchema={validationSchema}
-            initialValues={_id ? dado : initialValues}
+            initialValues={initialValues}
             enableReinitialize
         >
         {({

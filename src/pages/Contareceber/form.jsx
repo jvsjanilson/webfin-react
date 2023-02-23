@@ -18,22 +18,19 @@ export default function FormContaReceber() {
     const endpoint = 'api/contarecebers'
     const routeIndex = '/contarecebers'
 
-    const [dado, setDado] = useState({})
-    const [clientes, setClientes] = useState([])
-    const [contas, setContas] = useState([])
-    const [desativado, setDesativado] = useState(false)
-       
-    const dadoDefault = {
+    const [initialValues, setInitialValues] = useState({
         documento: '', 
         emissao: format(new Date(), "yyyy-MM-dd"), 
         vencimento: format(new Date(), "yyyy-MM-dd"),
         valor: '0,00',
         conta_id: 1,
         cliente_id: 1,
+    })
+    const [clientes, setClientes] = useState([])
+    const [contas, setContas] = useState([])
+    const [desativado, setDesativado] = useState(false)
 
-    }
-
-    const DadoSchema = Yup.object().shape({
+    const validationSchema = Yup.object().shape({
         documento: Yup.string()
             .max(10, 'Tamanho máximo 60 caracteres.')
             .required('O campo obrigatório..')
@@ -61,17 +58,16 @@ export default function FormContaReceber() {
 
       });
    
-
-    const onSubmitCreate = async (values) => {
+    const onSubmitCreate = async ({documento, emissao, vencimento, conta_id, cliente_id, valor}) => {
         
         await api.post(endpoint,{
-            documento: values.documento,
-            emissao: values.emissao,
-            vencimento: values.vencimento,
-            conta_id: values.conta_id,
-            cliente_id: values.cliente_id,
+            documento,
+            emissao,
+            vencimento,
+            conta_id,
+            cliente_id,
             user_id: 1, //obs: remover linha depois que implementar tela de login
-            valor: values.valor ? parseFloat(values.valor.replace(/[^0-9,]/gi, '').replace(',','.')) : 0
+            valor: valor ? parseFloat(valor.replace(/[^0-9,]/gi, '').replace(',','.')) : 0
             
         })
         .then(() => {
@@ -84,17 +80,17 @@ export default function FormContaReceber() {
         })
     }
 
-    const onSubmitUpdate = async (values) => {
+    const onSubmitUpdate = async ({documento, emissao, vencimento, conta_id, cliente_id, valor}) => {
 
         await api.put(`${endpoint}/${_id}`, {
-            documento: values.documento,
-            emissao: values.emissao,
-            vencimento: values.vencimento,
-            conta_id: values.conta_id,
-            cliente_id: values.cliente_id,
-            valor: values.valor ? parseFloat(values.valor.replace(/[^0-9,]/gi, '').replace(',','.')) : 0
+            documento,
+            emissao,
+            vencimento,
+            conta_id,
+            cliente_id,
+            valor: valor ? parseFloat(valor.replace(/[^0-9,]/gi, '').replace(',','.')) : 0
         })
-        .then(res => {
+        .then(() => {
             navigate(routeIndex)
         }).catch(error => {
             alert('Error ao atualizar.')
@@ -106,11 +102,10 @@ export default function FormContaReceber() {
             await api.get(`${endpoint}/${_id}`)
             .then( res => {
                 
-                if (res.data.data_pagamento) {
+                if (res.data.data_pagamento)
                     setDesativado(true)
-                }
-
-                setDado({
+                
+                setInitialValues({
                     documento: res.data.documento,
                     emissao: res.data.emissao,
                     vencimento: res.data.vencimento,
@@ -118,8 +113,6 @@ export default function FormContaReceber() {
                     cliente_id: res.data.cliente_id,
                     valor:  new Intl.NumberFormat('pt-BR', {useGrouping:false}).format(parseFloat(res.data.valor).toFixed(2)) ,
                 })
-              
-
             })
         }
     }
@@ -145,15 +138,9 @@ export default function FormContaReceber() {
 
     return (<Container >
         <Formik 
-             onSubmit={(values) => {
-                if (_id)
-                    return onSubmitUpdate(values)
-                else
-                    return onSubmitCreate(values)
-            }}
-
-            validationSchema={DadoSchema}
-            initialValues={_id ? dado : dadoDefault}
+            onSubmit={(values) => _id ? onSubmitUpdate(values) : onSubmitCreate(values)}
+            validationSchema={validationSchema}
+            initialValues={initialValues}
             enableReinitialize
         >
         {({
@@ -201,7 +188,7 @@ export default function FormContaReceber() {
                                 <FormBootstrap.Group  controlId="cliente_id">
                                     <FormBootstrap.Label>Clientes</FormBootstrap.Label>
                                     <FormBootstrap.Select onChange={handleChange} value={values.cliente_id} disabled={desativado} >
-                                        {clientes.map((e) => (<option  value={e.id} key={e.id} >{e.nome}</option>))}
+                                        {clientes.map((e) => <option value={e.id} key={e.id} >{e.nome}</option>)}
                                     </FormBootstrap.Select>
                                 </FormBootstrap.Group>
                             </Col>
@@ -211,7 +198,7 @@ export default function FormContaReceber() {
                                 <FormBootstrap.Group  controlId="conta_id">
                                     <FormBootstrap.Label>Contas</FormBootstrap.Label>
                                     <FormBootstrap.Select onChange={handleChange} value={values.conta_id} disabled={desativado} >
-                                        {contas.map((e) => (<option  value={e.id} key={e.id}  >Bco: {e.numero_banco} - Ag: {e.numero_agencia} - CC: {e.numero_conta}</option>))}
+                                        {contas.map((e) => <option value={e.id} key={e.id}>Bco: {e.numero_banco} - Ag: {e.numero_agencia} - CC: {e.numero_conta}</option>)}
                                     </FormBootstrap.Select>
                                 </FormBootstrap.Group>
                             </Col>
@@ -254,10 +241,7 @@ export default function FormContaReceber() {
                                     <CurrencyInput
                                         value={values.valor}
                                         className="form-control"
-                                        onValueChange={(value) => {
-                                            setFieldValue('valor', value)
-
-                                        }}
+                                        onValueChange={(value) => setFieldValue('valor', value)}
                                         disabled={desativado} 
                                         >
 
