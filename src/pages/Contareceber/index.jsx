@@ -332,13 +332,13 @@ export default function IndexContaReceber() {
                                                     
                                                     { el.total_pago == 0 && 
                                                         <LinkContainer to={`/contarecebers/edit/${el.id}`}>
-                                                            <Dropdown.Item href="javascript:void(0)"><FaEdit className="text-success" /> Editar</Dropdown.Item>
+                                                            <Dropdown.Item ><FaEdit className="text-success" /> Editar</Dropdown.Item>
                                                         </LinkContainer>
                                                     }
 
-                                                    { el.total_pago == 0 && <Dropdown.Item href="javascript:void(0)" onClick={dialogDelete.bind(this,el.id)}><FaTrash color="red" /> Remover</Dropdown.Item>}
-                                                    { el.total_pago == 0 && <Dropdown.Item href="javascript:void(0)" onClick={dialogBaixar.bind(this, el.id, el.valor)} ><FaFileInvoiceDollar color="blue" /> Baixar</Dropdown.Item>}
-                                                    { el.total_pago != 0 && <Dropdown.Item href="javascript:void(0)" onClick={dialogEstornar.bind(this, el.id)}><FaUndo color="red" /> Estornar</Dropdown.Item>} 
+                                                    { el.total_pago == 0 && <Dropdown.Item onClick={dialogDelete.bind(this,el.id)}><FaTrash color="red" /> Remover</Dropdown.Item>}
+                                                    { el.total_pago == 0 && <Dropdown.Item onClick={dialogBaixar.bind(this, el.id, el.valor)} ><FaFileInvoiceDollar color="blue" /> Baixar</Dropdown.Item>}
+                                                    { el.total_pago != 0 && <Dropdown.Item onClick={dialogEstornar.bind(this, el.id)}><FaUndo color="red" /> Estornar</Dropdown.Item>} 
                                                     
                                                 </Dropdown.Menu>
                                             </div>

@@ -359,13 +359,13 @@ export default function IndexContaPagar() {
                                                     
                                                     { el.total_pago == 0 && 
                                                         <LinkContainer to={`/contapagars/edit/${el.id}`}>
-                                                            <Dropdown.Item href="javascript:void(0)"><FaEdit className="text-success" /> Editar</Dropdown.Item>
+                                                            <Dropdown.Item ><FaEdit className="text-success" /> Editar</Dropdown.Item>
                                                         </LinkContainer>
                                                     }
 
-                                                    { el.total_pago == 0 && <Dropdown.Item href="javascript:void(0)" onClick={dialogDelete.bind(this,el.id)}><FaTrash color="red" /> Remover</Dropdown.Item>}
-                                                    { el.total_pago == 0 && <Dropdown.Item href="javascript:void(0)" onClick={dialogBaixar.bind(this, el.id, el.valor, el.conta_id)} ><FaFileInvoiceDollar color="blue" /> Baixar</Dropdown.Item>}
-                                                    { el.total_pago != 0 && <Dropdown.Item href="javascript:void(0)" onClick={dialogEstornar.bind(this, el.id)}><FaUndo color="red" /> Estornar</Dropdown.Item>} 
+                                                    { el.total_pago == 0 && <Dropdown.Item onClick={dialogDelete.bind(this,el.id)}><FaTrash color="red" /> Remover</Dropdown.Item>}
+                                                    { el.total_pago == 0 && <Dropdown.Item onClick={dialogBaixar.bind(this, el.id, el.valor, el.conta_id)} ><FaFileInvoiceDollar color="blue" /> Baixar</Dropdown.Item>}
+                                                    { el.total_pago != 0 && <Dropdown.Item onClick={dialogEstornar.bind(this, el.id)}><FaUndo color="red" /> Estornar</Dropdown.Item>} 
                                                     
                                                 </Dropdown.Menu>
                                             </div>
@@ -375,18 +375,10 @@ export default function IndexContaPagar() {
                                 <td>{el.documento}</td>
                                 <td>{el.fornecedor.nome}</td>
                                 <td>{format(new Date(el.emissao.replace("-","/")), "dd/MM/Y", {locale: ptBR})}</td>
-                                
-                                
                                 <td>{format(new Date(el.vencimento.replace("-","/")), "dd/MM/Y", {locale: ptBR})}</td>
-                                
-                                
                                 <td style={{textAlign: 'right'}}>{new Intl.NumberFormat('pt-BR',{ style: 'currency', currency: 'BRL' }).format(parseFloat(el.valor).toFixed(2))}</td>
-                                
-                                
                                 <td>{el.data_pagamento ? format(new Date(el.data_pagamento.replace("-","/") ), "dd/MM/Y ", {locale: ptBR}) : ''}</td>
-                                
                                 <td style={{textAlign: 'right'}}>{new Intl.NumberFormat('pt-BR',{ style: 'currency', currency: 'BRL' }).format(parseFloat(el.total_pago).toFixed(2))}</td>
-
                             </tr>
                         )
                     })}

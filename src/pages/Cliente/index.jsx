@@ -123,9 +123,9 @@ export default function IndexCliente() {
                                         
                                                 <Dropdown.Menu variant="">
                                                     <LinkContainer to={`/clientes/edit/${el.id}`}>
-                                                        <Dropdown.Item href="javascript:void(0)"><FaEdit className="text-success" /> Editar</Dropdown.Item>
+                                                        <Dropdown.Item ><FaEdit className="text-success" /> Editar</Dropdown.Item>
                                                     </LinkContainer>
-                                                    <Dropdown.Item href="javascript:void(0)" onClick={dialogDelete.bind(this,el.id)}><FaTrash color="red" /> Remover</Dropdown.Item>
+                                                    <Dropdown.Item  onClick={dialogDelete.bind(this,el.id)}><FaTrash color="red" /> Remover</Dropdown.Item>
                                                 </Dropdown.Menu>
                                             </div>
                                         </Dropdown>
