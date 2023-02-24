@@ -39,8 +39,8 @@ export default function AppRoutes() {
         <div className="App">
         <header className="mb-2">
         
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                <Container>
+            <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark"  >
+                <Container  >
                     <LinkContainer to="/">
                         <Navbar.Brand href="javascript:void(0)">Home</Navbar.Brand>
                     </LinkContainer>
@@ -80,7 +80,7 @@ export default function AppRoutes() {
                             </NavDropdown>
                         </Nav>
 
-                        <Nav>
+                        <Nav  >
                             <NavDropdown title={nomeLogin} id="collasible-nav-dropdown-user" >
                                 <NavDropdown.Item onClick={handleLogout} href="javascript:void(0)">Sair</NavDropdown.Item>
                             </NavDropdown>
