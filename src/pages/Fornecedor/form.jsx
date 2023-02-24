@@ -92,14 +92,10 @@ export default function FormFornecedor() {
         }
         
         await api.post(endpoint,payload)
-        .then(() => {
-            navigate(routeIndex)
-        })
+        .then(() => navigate(routeIndex))
         .catch(error => {
-            if (error.response.status == 422) {
-                console.log(error)
+            if (error.response.status == 422) 
                 alert('Erro campo obrigatorio')
-            }
         })
     }
 
@@ -122,9 +118,8 @@ export default function FormFornecedor() {
         }
 
         await api.put(`${endpoint}/${_id}`, payload)
-        .then(() => {
-            navigate(routeIndex)
-        }).catch(error => {
+        .then(() => navigate(routeIndex)
+        ).catch(error => {
             alert('Error ao atualizar.')
         })
     }
@@ -156,33 +151,26 @@ export default function FormFornecedor() {
 
     const getEstados = async () => {
         await api.get('api/estados/search/all')
-            .then(res => {
-                setEstados(res.data.data)
-            })
+            .then(res => setEstados(res.data.data))
     }
 
     const getCidades = async (estado_id) => {
         await api.get(`api/cidades/lookup/${estado_id}`)
-            .then(res => {
-                setCidades(res.data.data)
-            })
+            .then(res => setCidades(res.data.data))
     }
 
     useEffect(() => {
         getDado()
         getEstados()
-        if (_id == undefined)
-            getCidades(initialValues.estado_id)
-       
+        if (_id == undefined) getCidades(initialValues.estado_id)
     },[])
 
     return (<Container >
         <Formik 
-             onSubmit={(values) => _id ? onSubmitUpdate(values) : onSubmitCreate(values)}
+            onSubmit={(values) => _id ? onSubmitUpdate(values) : onSubmitCreate(values)}
             validationSchema={validationSchema}
             initialValues={initialValues}
             enableReinitialize
-            
         >
         {({
            handleChange,

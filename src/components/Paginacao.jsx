@@ -17,11 +17,11 @@ const Paginacao = ({evento, paginas }) => {
                     
                     if (index > 0) {
                         if (item.url == null && item.label == '...')
-                            return (<Pagination.Ellipsis disabled />)
+                            return (<Pagination.Ellipsis key={index} disabled />)
                         else {
                             if (!isNaN(parseInt(item.label))) {
 
-                                return <Pagination.Item 
+                                return <Pagination.Item key={index}
                                             disabled={item.active ? true: false} 
                                             onClick={evento.bind(this, parseInt(item.label))}
                                         >{item.label}</Pagination.Item>
@@ -31,7 +31,7 @@ const Paginacao = ({evento, paginas }) => {
 
                 })
             }
-            <Pagination.Next disabled={ links?.next == null ? true : false }
+            <Pagination.Next  disabled={ links?.next == null ? true : false }
                 onClick={links?.next == null ? null : evento.bind(this, links?.next.split('?')[1].split('=')[1])}
             />
             <Pagination.Last onClick={evento.bind(this, meta?.last_page)}/>

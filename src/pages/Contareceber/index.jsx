@@ -364,10 +364,9 @@ export default function IndexContaReceber() {
                         )
                     })}
                 </tbody>
-                </Table>
-                 <tfoot>
-                    <Paginacao paginas={paginate} evento={getDados.bind(this)} />
-                </tfoot>
+            </Table>
+            <Paginacao paginas={paginate} evento={getDados.bind(this)} />
+                
         </Container>
     )    
 }

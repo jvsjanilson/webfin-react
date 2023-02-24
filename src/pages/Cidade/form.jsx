@@ -31,13 +31,11 @@ export default function FormCidade() {
             estado_id,
             capital
         })
-        .then(() => {
-            navigate(`${routeIndex}`)
-        })
+        .then(() => navigate(routeIndex))
         .catch(error => {
-            if (error.response.status == 422) {
+            if (error.response.status == 422) 
                 alert('Erro campo obrigatorio')
-            }
+            
         })
     }
 
@@ -47,9 +45,8 @@ export default function FormCidade() {
             estado_id,
             capital
         })
-        .then(() => {
-            navigate(`${routeIndex}`)
-        }).catch(error => {
+        .then(() => navigate(routeIndex))
+        .catch(error => {
             alert('Error ao atualizar.')
         })
     }
@@ -57,7 +54,7 @@ export default function FormCidade() {
     const findCidade = async () => {
         if (_id) {
             await api.get(`${endpoint}/${_id}`)
-            .then( res => {
+            .then(res => {
                 setInitialValues({
                     nome: res.data.nome,
                     estado_id: res.data.estado_id,
@@ -69,9 +66,7 @@ export default function FormCidade() {
 
     const getEstados = async () => {
         await api.get('api/estados/search/all')
-            .then(res => {
-                setEstados(res.data.data)
-            })
+            .then(res => setEstados(res.data.data))
     }
 
     useEffect(() => {
@@ -103,47 +98,45 @@ export default function FormCidade() {
                         </LinkContainer>
                     </Card.Header>
                     <Card.Body>
-                    <Row className="mb-3">
+                        <Row className="mb-3">
 
-                        <Col sm={10}>
-                            <FormBootstrap.Group  controlId="nome">
-                                <FormBootstrap.Label>Nome da cidade</FormBootstrap.Label>
-                                <FormBootstrap.Control type="text" value={values.nome} onChange={handleChange}
-                                    isInvalid={!!errors.nome}
-                                />
-                                
-                                <FormBootstrap.Control.Feedback type="invalid">
-                                    {errors.nome}
-                                </FormBootstrap.Control.Feedback>
+                            <Col sm={10}>
+                                <FormBootstrap.Group  controlId="nome">
+                                    <FormBootstrap.Label>Nome da cidade</FormBootstrap.Label>
+                                    <FormBootstrap.Control type="text" value={values.nome} onChange={handleChange}
+                                        isInvalid={!!errors.nome}
+                                    />
+                                    
+                                    <FormBootstrap.Control.Feedback type="invalid">
+                                        {errors.nome}
+                                    </FormBootstrap.Control.Feedback>
+                                </FormBootstrap.Group>
+                            </Col>
+                            <Col sm={2}>
+
+                            <FormBootstrap.Group  controlId="estado_id">
+                                <FormBootstrap.Label>UF</FormBootstrap.Label>
+                                <FormBootstrap.Select onChange={handleChange} value={values.estado_id}>
+                                    {estados.map((e) => <option  value={e.id} key={e.id} >{e.uf}</option>)}
+                                </FormBootstrap.Select>
                             </FormBootstrap.Group>
-                        </Col>
+                            </Col>
+                    
+                        </Row>
+                        <Row className="mb-3">
                         <Col sm={2}>
 
-                        <FormBootstrap.Group  controlId="estado_id">
-                            <FormBootstrap.Label>UF</FormBootstrap.Label>
-                            <FormBootstrap.Select onChange={handleChange} value={values.estado_id}>
-                                {estados.map((e) => (<option  value={e.id} key={e.id} >{e.uf}</option>))}
-                            </FormBootstrap.Select>
-                        </FormBootstrap.Group>
-                        </Col>
-                
-                    </Row>
-                    <Row className="mb-3">
-                    <Col sm={2}>
-
-                        <FormBootstrap.Group  controlId="capital">
-                            <FormBootstrap.Switch 
-                                    type="switch"
-                                    value={values.capital}
-                                    checked={values.capital == 1 ? true: false}
-                                    onChange={(e) => setFieldValue('capital', e.target.checked ? 1 : 0)}
-                                    label="Capital?"
-                                />
-                        </FormBootstrap.Group>
-                        </Col>
-                    </Row>
-                        
-                        
+                            <FormBootstrap.Group  controlId="capital">
+                                <FormBootstrap.Switch 
+                                        type="switch"
+                                        value={values.capital}
+                                        checked={values.capital == 1 ? true: false}
+                                        onChange={(e) => setFieldValue('capital', e.target.checked ? 1 : 0)}
+                                        label="Capital?"
+                                    />
+                            </FormBootstrap.Group>
+                            </Col>
+                        </Row>
                     </Card.Body>
                 </Card>
             </Form>

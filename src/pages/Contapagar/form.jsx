@@ -27,7 +27,6 @@ export default function FormContaPagar() {
         valor: '0,00',
         conta_id: 1,
         fornecedor_id: 1,
-
     })
 
     const validationSchema = Yup.object().shape({
@@ -122,15 +121,11 @@ export default function FormContaPagar() {
 
     const getFornecedores = async () => {
         await api.get('api/fornecedores/search/all')
-            .then(res => {
-                setFornecedores(res.data)
-            })
+            .then(res => setFornecedores(res.data))
     }
     const getContas = async () => {
         await api.get('api/contas/search/all')
-            .then(res => {
-                setContas(res.data.data)
-            })
+            .then(res => setContas(res.data.data))
     }
  
     useEffect(() => {
@@ -191,7 +186,7 @@ export default function FormContaPagar() {
                                 <FormBootstrap.Group  controlId="fornecedor_id">
                                     <FormBootstrap.Label>Fornecedores</FormBootstrap.Label>
                                     <FormBootstrap.Select onChange={handleChange} value={values.fornecedor_id} disabled={desativado} >
-                                        {fornecedores.map((e) => <option  value={e.id} key={e.id} >{e.nome}</option>)}
+                                        {fornecedores.map((e) => <option value={e.id} key={e.id} >{e.nome}</option>)}
                                     </FormBootstrap.Select>
                                 </FormBootstrap.Group>
                             </Col>
@@ -201,7 +196,7 @@ export default function FormContaPagar() {
                                 <FormBootstrap.Group  controlId="conta_id">
                                     <FormBootstrap.Label>Contas</FormBootstrap.Label>
                                     <FormBootstrap.Select onChange={handleChange} value={values.conta_id} disabled={desativado} >
-                                        {contas.map((e) => (<option  value={e.id} key={e.id}  >Bco: {e.numero_banco} - Ag: {e.numero_agencia} - CC: {e.numero_conta}</option>))}
+                                        {contas.map((e) => <option value={e.id} key={e.id}  >Bco: {e.numero_banco} - Ag: {e.numero_agencia} - CC: {e.numero_conta}</option>)}
                                     </FormBootstrap.Select>
                                 </FormBootstrap.Group>
                             </Col>

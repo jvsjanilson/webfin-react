@@ -119,15 +119,11 @@ export default function FormContaReceber() {
 
     const getClientes = async () => {
         await api.get('api/clientes/search/all')
-            .then(res => {
-                setClientes(res.data)
-            })
+            .then(res => setClientes(res.data))
     }
     const getContas = async () => {
         await api.get('api/contas/search/all')
-            .then(res => {
-                setContas(res.data.data)
-            })
+            .then(res => setContas(res.data.data))
     }
  
     useEffect(() => {
