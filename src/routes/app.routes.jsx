@@ -26,12 +26,12 @@ import { useNavigate } from "react-router-dom";
 
 
 export default function AppRoutes() {
-    const { sigOut, logado, nomeLogin } = useAuth()
+    const { signOut, nomeLogin } = useAuth()
     const navigate = useNavigate()
     
 
     const handleLogout = async () => {
-        sigOut()
+        signOut()
         navigate("/")
     }
 

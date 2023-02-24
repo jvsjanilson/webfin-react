@@ -7,21 +7,32 @@ const defaultValue = {
     logado: false,
     nomeLogin: '',
     msgError: '',
+    isLogged: () => {},
     signIn: (email, password) => {},
-    sigOut: () => {}
+    signOut: () => {}
 }
 
 const AuthContext = createContext(defaultValue)
 
 const AuthProvider = ({children}) => {
     const [logado, setLogado] = useState(() => {
-        const isLogado =  localStorage.getItem('webfin:isLogado')
+        const isLog =  localStorage.getItem('webfin:isLogado')
         
-        return !!isLogado
+        return !!isLog
     })
 
     const [nomeLogin, setNomeLogin] = useState('')
     const [msgError, setMsgError] = useState('')
+
+    const isLogged = async () => {
+        const result =  await api.get('/api/user')
+            .then((res) => {
+                setNomeLogin(res.data.name)
+                return true
+            })
+            .catch(() => false)
+        setLogado(result)
+    }
 
     const signIn = async (email, password) => {
         // console.log(email, password)
@@ -41,15 +52,15 @@ const AuthProvider = ({children}) => {
         })
     }
 
-    const sigOut = async () => {
+    const signOut = async () => {
        const logout =  await api.post('/api/logout').then(() => {
             setLogado(false)
             localStorage.removeItem('webfin:isLogado')
-            return redirect("/")
+            //return redirect("/")
        })
     }
 
-    return (<AuthContext.Provider value={{logado, nomeLogin, msgError, signIn, sigOut }}>{children}</AuthContext.Provider> )
+    return (<AuthContext.Provider value={{logado, nomeLogin, msgError, signIn, signOut, isLogged }}>{children}</AuthContext.Provider> )
 }
 
 function useAuth() {
