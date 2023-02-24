@@ -5,7 +5,17 @@
     font-weight: 400;
 }
 
+.dropdown {
+    display: flex !important;
+    height: 25px !important; 
+    align-items: center !important;
+}
 
+.dropdown-toggle {
+    height: 28px;
+    margin-top: 0px;
+    padding-top: 3px;
+}
 /* 
 .card-outline {
         border-top: 3px solid #007bff;
