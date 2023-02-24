@@ -193,8 +193,8 @@ export default function FormConta() {
                                     <FormBootstrap.Label>Tipo Conta</FormBootstrap.Label>
 
                                     <FormBootstrap.Select onChange={handleChange} value={values.tipo_conta}>
-                                        <option key={1} selected={values.tipo_conta == 1} value="1">1 - Conta Corrente</option>
-                                        <option key={2} selected={values.tipo_conta == 2} value="2">2 - Conta Poupança</option>
+                                        <option key={1} value={1} >1 - Conta Corrente</option>
+                                        <option key={2} value={2} >2 - Conta Poupança</option>
                                     </FormBootstrap.Select>
                                 </FormBootstrap.Group>
                             </Col>
