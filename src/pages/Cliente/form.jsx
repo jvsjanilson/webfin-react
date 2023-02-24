@@ -183,7 +183,7 @@ export default function FormCliente(){
        
     },[])
 
-    return (<Container >
+    return (<Container fluid >
         <Formik 
             onSubmit={(values) => _id ? onSubmitUpdate(values) : onSubmitCreate(values)}
             validationSchema={validationSchema}
@@ -201,7 +201,7 @@ export default function FormCliente(){
             <Form >
                 <Card >
                     <Card.Header>
-                        <Button className='me-1'  type='submit' variant={ _id ? 'success' : 'primary' }>{(_id? (<FaSave/>) : (<FaPlus/>))} { _id ? 'SALVAR' : 'CRIAR' }</Button>
+                        <Button  className='me-1'  type='submit' variant={ _id ? 'success' : 'primary' }>{(_id? (<FaSave/>) : (<FaPlus/>))} { _id ? 'SALVAR' : 'CRIAR' }</Button>
 
                         <LinkContainer to={routeIndex}>
                             <Button  variant="secondary"><FaArrowLeft/> VOLTAR</Button>
@@ -341,13 +341,14 @@ export default function FormCliente(){
                             <Col sm={2}>
                                 <FormBootstrap.Group  controlId="estado_id">
                                     <FormBootstrap.Label>UF</FormBootstrap.Label>
-                                    <FormBootstrap.Select o
+                                    <FormBootstrap.Select 
                                         onChange={(e) => {
                                             setFieldValue('estado_id', e.target.value)
                                             getCidades(e.target.value)  
                                         }} 
-                                        value={values.estado_id}>
-                                        {estados.map((e) => (<option  value={e.id} key={e.id}>{e.uf}</option>))}
+                                        value={values.estado_id}
+                                    >
+                                        {estados.map((e) => <option value={e.id} key={e.id}>{e.uf}</option>)}
                                     </FormBootstrap.Select>
                                 </FormBootstrap.Group>
                             </Col>
@@ -358,12 +359,8 @@ export default function FormCliente(){
                                     <FormBootstrap.Select 
                                         onChange={handleChange} 
                                         value={values.cidade_id}
-                                        >
-                                        {cidades.map((e) => {
-                                            return (
-                                                <option value={e.id} key={e.id} >{e.nome}</option>
-                                            )
-                                        })}
+                                    >
+                                        {cidades.map((e) => <option value={e.id} key={e.id} >{e.nome}</option>)}
                                     </FormBootstrap.Select>
                                 </FormBootstrap.Group>
                             </Col>

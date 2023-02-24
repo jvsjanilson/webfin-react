@@ -75,7 +75,7 @@ export default function FormCidade() {
         getEstados()
     },[])
 
-    return (<Container >
+    return (<Container fluid >
         <Formik 
             onSubmit={(values) => _id ? onSubmitUpdate(values) : onSubmitCreate(values) }
             validationSchema={schema}

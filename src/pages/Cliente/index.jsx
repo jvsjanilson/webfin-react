@@ -115,7 +115,8 @@ export default function IndexCliente() {
                                 <td style={{width: '5rem'}} >
                                     {
                                         
-                                        <Dropdown>
+                                        <Dropdown >
+                                        {/* <Dropdown style={{display: 'flex', height: '25px', alignItems: 'center'}}> */}
                                             <div className="d-grid gap-2">
                                                 <Dropdown.Toggle   size="sm" variant="primary" id="dropdown-basic">
                                                     Opções

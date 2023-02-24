@@ -99,22 +99,14 @@ export default function FormFornecedor() {
         })
     }
 
-    const onSubmitUpdate = async (values) => {
+    const onSubmitUpdate = async ({
+        nome, nome_fantasia, cpfcnpj, logradouro, numero, cep, complemento,
+        bairro, estado_id, cidade_id, fone, celular, email
+    }) => {
 
-       let payload = {
-            nome: values.nome,
-            nome_fantasia: values.nome_fantasia,
-            cpfcnpj: values.cpfcnpj,
-            logradouro: values.logradouro,
-            numero: values.numero,
-            cep: values.cep,
-            complemento: values.complemento,
-            bairro: values.bairro,
-            estado_id: values.estado_id,
-            cidade_id: values.cidade_id,
-            fone: values.fone,
-            celular: values.celular,
-            email: values.email,
+       const payload = {
+            nome, nome_fantasia, cpfcnpj, logradouro, numero, cep, complemento,
+            bairro, estado_id, cidade_id, fone, celular,  email
         }
 
         await api.put(`${endpoint}/${_id}`, payload)
@@ -165,7 +157,7 @@ export default function FormFornecedor() {
         if (_id == undefined) getCidades(initialValues.estado_id)
     },[])
 
-    return (<Container >
+    return (<Container fluid>
         <Formik 
             onSubmit={(values) => _id ? onSubmitUpdate(values) : onSubmitCreate(values)}
             validationSchema={validationSchema}
@@ -320,7 +312,7 @@ export default function FormFornecedor() {
                             <Col sm={2}>
                                 <FormBootstrap.Group  controlId="estado_id">
                                     <FormBootstrap.Label>UF</FormBootstrap.Label>
-                                    <FormBootstrap.Select o
+                                    <FormBootstrap.Select
                                         onChange={(e) => {
                                             setFieldValue('estado_id', e.target.value)
                                             getCidades(e.target.value)  

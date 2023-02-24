@@ -75,7 +75,7 @@ export default function FormEstado() {
         findDado()
     },[])
 
-    return (<Container >
+    return (<Container fluid>
         <Formik 
             onSubmit={(values) =>_id ? onSubmitUpdate(values) : onSubmitCreate(values)}
             validationSchema={validationSchema}

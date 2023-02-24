@@ -108,7 +108,7 @@ export default function FormConta() {
        
     },[])
 
-    return (<Container >
+    return (<Container fluid>
         <Formik 
             onSubmit={(values) => _id ? onSubmitUpdate(values) : onSubmitCreate(values) }
             validationSchema={validationSchema}
@@ -191,7 +191,6 @@ export default function FormConta() {
                             <Col sm={4}>
                                 <FormBootstrap.Group  controlId="tipo_conta">
                                     <FormBootstrap.Label>Tipo Conta</FormBootstrap.Label>
-
                                     <FormBootstrap.Select onChange={handleChange} value={values.tipo_conta}>
                                         <option key={1} value={1} >1 - Conta Corrente</option>
                                         <option key={2} value={2} >2 - Conta Poupança</option>

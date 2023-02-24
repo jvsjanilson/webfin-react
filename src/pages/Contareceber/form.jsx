@@ -132,7 +132,7 @@ export default function FormContaReceber() {
         getContas()
     },[])
 
-    return (<Container >
+    return (<Container fluid>
         <Formik 
             onSubmit={(values) => _id ? onSubmitUpdate(values) : onSubmitCreate(values)}
             validationSchema={validationSchema}
