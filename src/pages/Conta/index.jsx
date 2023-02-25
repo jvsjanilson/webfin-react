@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Table, Form, Dropdown, Button, Container } from 'react-bootstrap';
+import { Table, Form, Dropdown, Button, Container, Row, Col } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap'
 import api from '../../config/api';
 import Paginacao from "../../components/Paginacao";
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { FaEdit, FaTrash, FaPlus } from "react-icons/fa";
 import MessageDelete from "../../components/MessageDelete";
 
 export default function IndexConta () {
@@ -87,19 +87,22 @@ export default function IndexConta () {
         <Container fluid>
 
             <MessageDelete show={show} onHide={handleClose} onConfirm={handleConfirmarDelete} />
-                
-            <Form className="d-flex mb-2">
-                <LinkContainer to="/contas/create">
-                    <Button active className="me-2" variant="primary">Adicionar</Button>
-                </LinkContainer>
-                  <Form.Control
-                    type="search"
-                    placeholder="Pesquisar"
-                    onChange={(e) => setSearch(e.target.value)}
-                    aria-label="Search"
-                  />
-    
-            </Form>
+            <Row className="mb-2 d-flex justify-content-between g-1">
+                <Col xs={6} md={11}>
+                    <Form.Control
+                        type="search"
+                        placeholder="Pesquisa"
+                        onChange={(e) => setSearch(e.target.value)}
+                        aria-label="Search"
+                        className="me-2"
+                        />
+                </Col>
+                <Col xs={6} md={1} className="d-flex justify-content-end">
+                    <LinkContainer to="/contas/create" className="btn-new">
+                        <Button  active variant="primary">Adicionar <FaPlus/></Button>
+                    </LinkContainer>
+                </Col>
+            </Row>      
             <Table responsive="sm" size="sm" striped bordered hover >
                 <thead  className="table-dark">
                     <tr>

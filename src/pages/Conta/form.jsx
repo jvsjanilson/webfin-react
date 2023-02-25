@@ -1,5 +1,8 @@
 import { React, useState, useEffect } from 'react'
-import { FloatingLabel, Card, Button, Container, Form as FormBootstrap, Row, Col} from 'react-bootstrap';
+import { 
+    FloatingLabel, Card, Button, Container, Form as FormBootstrap, 
+    Row, Col
+} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap'
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
@@ -126,10 +129,17 @@ export default function FormConta() {
             <Form >
                 <Card >
                     <Card.Header>
-                        <Button className='me-1'  type='submit' variant={ _id ? 'success' : 'primary' }>{(_id? (<FaSave/>) : (<FaPlus/>))} { _id ? 'SALVAR' : 'CRIAR' }</Button>
-                        <LinkContainer to={routeIndex}>
-                            <Button  variant="secondary"><FaArrowLeft/> VOLTAR</Button>
-                        </LinkContainer>
+                        <Row>
+                            <Col xs={6} md={6} >
+                                <Button className='me-1'  type='submit' variant={ _id ? 'success' : 'primary' }>{(_id? (<FaSave/>) : (<FaPlus/>))} { _id ? 'SALVAR' : 'CRIAR' }</Button>
+                                <LinkContainer to={routeIndex}>
+                                    <Button  variant="secondary"><FaArrowLeft/> VOLTAR</Button>
+                                </LinkContainer>
+                            </Col>
+                            <Col xs={6} md={6} className="d-flex justify-content-end align-items-center">
+                                <h5 className='titulo_cad' >CONTA</h5>
+                            </Col>   
+                        </Row>    
                     </Card.Header>
                     <Card.Body>
 

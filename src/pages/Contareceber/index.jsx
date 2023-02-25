@@ -6,7 +6,7 @@ import {
 import { LinkContainer } from 'react-router-bootstrap'
 import api from '../../config/api';
 import Paginacao from "../../components/Paginacao";
-import { FaEdit, FaTrash, FaFileInvoiceDollar, FaUndo } from "react-icons/fa";
+import { FaEdit, FaTrash, FaFileInvoiceDollar, FaUndo, FaPlus } from "react-icons/fa";
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import CurrencyInput from 'react-currency-input-field';
@@ -269,18 +269,22 @@ export default function IndexContaReceber() {
                 </Modal.Footer>
             </Modal>
                 
-            <Form className="d-flex mb-2">
-                <LinkContainer to="/contarecebers/create">
-                    <Button active className="me-2" variant="primary">Adicionar</Button>
-                </LinkContainer>
-                  <Form.Control
-                    type="search"
-                    placeholder="Pesquisar"
-                    onChange={(e) => setSearch(e.target.value)}
-                    aria-label="Search"
-                  />
-    
-            </Form>
+            <Row className="mb-2 d-flex justify-content-between g-1">
+                <Col xs={6} md={11}>
+                    <Form.Control
+                        type="search"
+                        placeholder="Pesquisa"
+                        onChange={(e) => setSearch(e.target.value)}
+                        aria-label="Search"
+                        className="me-2"
+                        />
+                </Col>
+                <Col xs={6} md={1} className="d-flex justify-content-end">
+                    <LinkContainer to="/contarecebers/create" className="btn-new">
+                        <Button  active variant="primary">Adicionar <FaPlus/></Button>
+                    </LinkContainer>
+                </Col>
+            </Row>              
             <Table responsive="sm" size="sm" striped bordered hover >
                 <thead  className="table-dark">
                     <tr>
