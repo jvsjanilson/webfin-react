@@ -76,7 +76,7 @@ export default function FormCliente(){
    
 
     const onSubmitCreate = async (values) => {
-        let payload = {
+        const payload = {
             nome: values.nome,
             nome_fantasia: values.nome_fantasia,
             cpfcnpj: values.cpfcnpj,
@@ -106,7 +106,7 @@ export default function FormCliente(){
 
     const onSubmitUpdate = async (values) => {
 
-       let payload = {
+       const payload = {
             nome: values.nome,
             nome_fantasia: values.nome_fantasia,
             cpfcnpj: values.cpfcnpj,
