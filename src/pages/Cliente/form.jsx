@@ -210,11 +210,11 @@ export default function FormCliente(){
                     </Card.Header>
                     <Card.Body>
 
-                        <Row className="mb-3 g-2">
+                        <Row className="mb-2 g-2">
 
-                            <Col sm={5}>
+                            <Col md={5}>
                                 <FormBootstrap.Group  controlId="nome">
-                                    <FloatingLabel controlId="nome" label="Nome" className="mb-3">
+                                    <FloatingLabel controlId="nome" label="Nome do cliente" >
                                         <FormBootstrap.Control type="text"  value={values.nome} 
                                             onChange={handleChange} isInvalid={!!errors.nome}
                                             maxLength={60} autoFocus />
@@ -226,9 +226,9 @@ export default function FormCliente(){
                                 </FormBootstrap.Group>
                             </Col>
                             
-                            <Col sm={5}>
+                            <Col md={5}>
                                 <FormBootstrap.Group  controlId="nome_fantasia">
-                                    <FloatingLabel controlId="nome_fantasia" label="Nome Fantasia" className="mb-3">
+                                    <FloatingLabel controlId="nome_fantasia" label="Nome Fantasia" >
                                         <FormBootstrap.Control  type="text" value={values.nome_fantasia} 
                                             onChange={handleChange} isInvalid={!!errors.nome_fantasia}
                                             maxLength={60}  />
@@ -240,9 +240,9 @@ export default function FormCliente(){
                                 </FormBootstrap.Group>
                             </Col>
 
-                            <Col sm={2}>
+                            <Col md={2}>
                                 <FormBootstrap.Group  controlId="cpfcnpj">
-                                    <FloatingLabel controlId="cpfcnpj" label="CPF/CNPJ" className="mb-3">
+                                    <FloatingLabel controlId="cpfcnpj" label="CPF/CNPJ" >
                                         <FormBootstrap.Control  type="text" value={values.cpfcnpj} 
                                             onChange={handleChange} isInvalid={!!errors.cpfcnpj}
                                             maxLength={14}/>
@@ -256,11 +256,11 @@ export default function FormCliente(){
 
                         </Row>
 
-                        <Row className="mb-3 g-2">
+                        <Row className="mb-2 g-2">
 
-                            <Col sm={8}>
+                            <Col md={8}>
                                 <FormBootstrap.Group  controlId="logradouro">
-                                    <FloatingLabel controlId="logradouro" label="Logradouro" className="mb-3">
+                                    <FloatingLabel controlId="logradouro" label="Logradouro" >
                                         <FormBootstrap.Control type="text" value={values.logradouro} 
                                             onChange={handleChange} maxLength={60}
                                             isInvalid={!!errors.logradouro} />
@@ -272,9 +272,9 @@ export default function FormCliente(){
                                 </FormBootstrap.Group>
                             </Col>
                     
-                            <Col sm={2}>
+                            <Col xs={6} md={2}>
                                 <FormBootstrap.Group  controlId="numero">
-                                    <FloatingLabel controlId="numero" label="Número" className="mb-3">
+                                    <FloatingLabel controlId="numero" label="Número" >
                                         <FormBootstrap.Control type="text" value={values.numero} 
                                             onChange={handleChange} maxLength={10}
                                             isInvalid={!!errors.numero} />
@@ -286,9 +286,9 @@ export default function FormCliente(){
                                 </FormBootstrap.Group>
                             </Col>
 
-                            <Col sm={2}>
+                            <Col xs={6} md={2}>
                                 <FormBootstrap.Group  controlId="cep">
-                                <FloatingLabel controlId="cep" label="CEP" className="mb-3">
+                                <FloatingLabel controlId="cep" label="CEP" >
                                     <MaskedInput id="cep" mask={[/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]}
                                         onChange={handleChange} value={values.cep}
                                         className="form-control" />
@@ -302,10 +302,10 @@ export default function FormCliente(){
                     
                         </Row>
 
-                        <Row className="mb-3 g-2">
-                            <Col sm={5}>
+                        <Row className="mb-2 g-2">
+                            <Col md={5}>
                                 <FormBootstrap.Group  controlId="complemento">
-                                    <FloatingLabel controlId="complemento" label="Complemento" className="mb-3">
+                                    <FloatingLabel controlId="complemento" label="Complemento" >
                                         <FormBootstrap.Control type="text" value={values.complemento} 
                                             onChange={handleChange} maxLength={60}
                                             isInvalid={!!errors.complemento}/>
@@ -317,9 +317,9 @@ export default function FormCliente(){
                                 </FormBootstrap.Group>
                             </Col>
 
-                            <Col sm={2}>
+                            <Col xs={3} md={2}>
                                 <FormBootstrap.Group  controlId="estado_id">
-                                    <FloatingLabel controlId="estado_id" label="UF" className="mb-3">
+                                    <FloatingLabel controlId="estado_id" label="UFs" >
                                         <FormBootstrap.Select value={values.estado_id}
                                             onChange={(e) => {
                                                 setFieldValue('estado_id', e.target.value)
@@ -331,9 +331,9 @@ export default function FormCliente(){
                                 </FormBootstrap.Group>
                             </Col>
 
-                            <Col sm={5}>
+                            <Col xs={9} md={5}>
                                 <FormBootstrap.Group  controlId="cidade_id">
-                                    <FloatingLabel controlId="cidade_id" label="Cidade" className="mb-3">
+                                    <FloatingLabel controlId="cidade_id" label="Cidades" >
                                         <FormBootstrap.Select onChange={handleChange} value={values.cidade_id}>
                                             {cidades.map((e) => <option value={e.id} key={e.id} >{e.nome}</option>)}
                                         </FormBootstrap.Select>
@@ -342,10 +342,10 @@ export default function FormCliente(){
                             </Col>
                         </Row>
 
-                        <Row className="mb-3 g-2">
-                            <Col sm={2}>
+                        <Row className="mb-2 g-2">
+                            <Col xs={6} md={2}>
                                 <FormBootstrap.Group  controlId="fone">
-                                    <FloatingLabel controlId="fone" label="Fone" className="mb-3">
+                                    <FloatingLabel controlId="fone" label="Fone" >
                                         <MaskedInput id="fone"
                                             mask={['(', /[1-9]/, /\d/, ')',  /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
                                             onChange={handleChange} value={values.fone} className="form-control"/>
@@ -356,9 +356,9 @@ export default function FormCliente(){
                                     </FormBootstrap.Control.Feedback>
                                 </FormBootstrap.Group>
                             </Col>
-                            <Col sm={2}>
+                            <Col xs={6} md={2}>
                                 <FormBootstrap.Group  controlId="celular">
-                                    <FloatingLabel controlId="celular" label="Celular" className="mb-3">
+                                    <FloatingLabel controlId="celular" label="Celular" >
                                         <MaskedInput id="celular"
                                             mask={['(', /[1-9]/, /\d/, ')',  /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
                                             onChange={handleChange} value={values.celular} className="form-control"/>
@@ -371,7 +371,7 @@ export default function FormCliente(){
 
                             <Col sm={8}>
                                 <FormBootstrap.Group  controlId="email">
-                                    <FloatingLabel controlId="email" label="E-mail" className="mb-3">
+                                    <FloatingLabel controlId="email" label="E-mail" >
                                         <FormBootstrap.Control type="text" value={values.email} onChange={handleChange}
                                             maxLength={120} isInvalid={!!errors.email}/>
                                     </FloatingLabel>

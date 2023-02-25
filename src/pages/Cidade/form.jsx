@@ -1,5 +1,8 @@
 import { React, useState, useEffect } from 'react'
-import { Card, Button, Container, Form as FormBootstrap, Row, Col} from 'react-bootstrap';
+import { 
+    Card, Button, Container, Form as FormBootstrap, 
+    Row, Col, FloatingLabel
+} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap'
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
@@ -99,14 +102,14 @@ export default function FormCidade() {
                         </LinkContainer>
                     </Card.Header>
                     <Card.Body>
-                        <Row className="mb-3">
+                        <Row className="mb-3 g-2">
 
                             <Col sm={10}>
                                 <FormBootstrap.Group  controlId="nome">
-                                    <FormBootstrap.Label>Nome da cidade</FormBootstrap.Label>
-                                    <FormBootstrap.Control type="text" value={values.nome} onChange={handleChange}
-                                        isInvalid={!!errors.nome}
-                                    />
+                                    <FloatingLabel controlId="nome" label="Nome" >
+                                        <FormBootstrap.Control type="text" value={values.nome} onChange={handleChange}
+                                            isInvalid={!!errors.nome} />
+                                    </FloatingLabel>
                                     
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.nome}
@@ -116,15 +119,16 @@ export default function FormCidade() {
                             <Col sm={2}>
 
                             <FormBootstrap.Group  controlId="estado_id">
-                                <FormBootstrap.Label>UF</FormBootstrap.Label>
+                            <FloatingLabel controlId="estado_id" label="UF" >
                                 <FormBootstrap.Select onChange={handleChange} value={values.estado_id}>
                                     {estados.map((e) => <option  value={e.id} key={e.id} >{e.uf}</option>)}
                                 </FormBootstrap.Select>
+                            </FloatingLabel>
                             </FormBootstrap.Group>
                             </Col>
                     
                         </Row>
-                        <Row className="mb-3">
+                        <Row >
                         <Col sm={2}>
 
                             <FormBootstrap.Group  controlId="capital">

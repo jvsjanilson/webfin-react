@@ -1,5 +1,8 @@
 import { React, useState, useEffect } from 'react'
-import { Card, Button, Container, Form as FormBootstrap, Row, Col} from 'react-bootstrap';
+import { 
+    Card, Button, Container, Form as FormBootstrap, 
+    Row, Col, FloatingLabel
+} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom';
 import { Formik, Form } from 'formik';
@@ -97,32 +100,27 @@ export default function FormEstado() {
                         </LinkContainer>
                     </Card.Header>
                     <Card.Body>
-                    <Row className="mb-3 g-2">
-                        <Col sm={2}>
+                    <Row className="g-2">
+                        <Col md={2}>
                             <FormBootstrap.Group  controlId="uf">
-                            <div className='form-floating'>
-                                <FormBootstrap.Control 
-                                        autoFocus type="text" value={values.uf} onChange={handleChange} 
-                                        isInvalid={!!errors.uf}
-                                        
-                                        />
-                                        <FormBootstrap.Label>UF</FormBootstrap.Label>
-                                </div>
+                                <FloatingLabel controlId="uf" label="UF" >
+                                    <FormBootstrap.Control autoFocus type="text" value={values.uf} 
+                                        onChange={handleChange} isInvalid={!!errors.uf}/>
+                                </FloatingLabel>
+                                
                                 <FormBootstrap.Control.Feedback type="invalid">
                                     {errors.uf}
                                 </FormBootstrap.Control.Feedback>
                             </FormBootstrap.Group>
                         </Col>
 
-                        <Col sm={10}>
+                        <Col md={10}>
                             <FormBootstrap.Group  controlId="nome">
-                                <div className='form-floating'>
-                                <FormBootstrap.Control type="text" value={values.nome} onChange={handleChange}
-                                    isInvalid={!!errors.nome}
-                                    />
+                                <FloatingLabel controlId="nome" label="Nome do estado" >
+                                    <FormBootstrap.Control type="text" value={values.nome} 
+                                        onChange={handleChange} isInvalid={!!errors.nome}/>
+                                </FloatingLabel>
                                 
-                                    <FormBootstrap.Label>Nome do estado</FormBootstrap.Label>
-                                </div>
                                 <FormBootstrap.Control.Feedback type="invalid">
                                     {errors.nome}
                                 </FormBootstrap.Control.Feedback>

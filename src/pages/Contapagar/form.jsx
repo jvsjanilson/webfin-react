@@ -1,5 +1,8 @@
 import { React, useState, useEffect } from 'react'
-import { Card, Button, Container, Form as FormBootstrap, Row, Col} from 'react-bootstrap';
+import { 
+    Card, Button, Container, Form as FormBootstrap, 
+    Row, Col, FloatingLabel
+} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap'
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
@@ -161,19 +164,15 @@ export default function FormContaPagar() {
                     
                     <Card.Body>
 
-                        <Row className="mb-3">
+                        <Row className="mb-2 g-2">
 
-                            <Col sm={2}>
+                            <Col md={2}>
                                 <FormBootstrap.Group  controlId="documento">
-                                    <FormBootstrap.Label>Documento</FormBootstrap.Label>
-                                    <FormBootstrap.Control 
-                                        type="text" 
-                                        value={values.documento} 
-                                        onChange={handleChange}
-                                        isInvalid={!!errors.documento}
-                                        maxLength={10}
-                                        disabled={desativado} 
-                                    />
+                                    <FloatingLabel controlId="documento" label="Documento">
+                                        <FormBootstrap.Control  type="text" value={values.documento} 
+                                            onChange={handleChange} isInvalid={!!errors.documento} autoFocus
+                                            maxLength={10} disabled={desativado} />
+                                    </FloatingLabel>
                                     
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.documento}
@@ -181,36 +180,37 @@ export default function FormContaPagar() {
                                 </FormBootstrap.Group>
                             </Col>
 
-                            <Col sm={6}>
+                            <Col md={6}>
 
                                 <FormBootstrap.Group  controlId="fornecedor_id">
-                                    <FormBootstrap.Label>Fornecedores</FormBootstrap.Label>
-                                    <FormBootstrap.Select onChange={handleChange} value={values.fornecedor_id} disabled={desativado} >
-                                        {fornecedores.map((e) => <option value={e.id} key={e.id} >{e.nome}</option>)}
-                                    </FormBootstrap.Select>
+                                    <FloatingLabel controlId="fornecedor_id" label="Fornecedores">
+                                        <FormBootstrap.Select onChange={handleChange} value={values.fornecedor_id} disabled={desativado} >
+                                            {fornecedores.map((e) => <option value={e.id} key={e.id} >{e.nome}</option>)}
+                                        </FormBootstrap.Select>
+                                    </FloatingLabel>
                                 </FormBootstrap.Group>
                             </Col>
 
-                            <Col sm={4}>
+                            <Col md={4}>
 
                                 <FormBootstrap.Group  controlId="conta_id">
-                                    <FormBootstrap.Label>Contas</FormBootstrap.Label>
+                                <FloatingLabel controlId="conta_id" label="Contas" >
                                     <FormBootstrap.Select onChange={handleChange} value={values.conta_id} disabled={desativado} >
                                         {contas.map((e) => <option value={e.id} key={e.id}  >Bco: {e.numero_banco} - Ag: {e.numero_agencia} - CC: {e.numero_conta}</option>)}
                                     </FormBootstrap.Select>
+                                </FloatingLabel>
                                 </FormBootstrap.Group>
                             </Col>
                         </Row>
 
-                        <Row className="mb-3">
+                        <Row className="g-2">
                             
-                            <Col sm={2}>
+                            <Col xs={6} md={2}>
                                 <FormBootstrap.Group  controlId="emissao">
-                                    <FormBootstrap.Label>Emissão</FormBootstrap.Label>
-                                    <FormBootstrap.Control type="date" value={values.emissao} onChange={handleChange}
-                                        isInvalid={!!errors.emissao}
-                                        disabled={desativado} 
-                                    />
+                                    <FloatingLabel controlId="emissao" label="Data da Emissão" >
+                                        <FormBootstrap.Control type="date" value={values.emissao} onChange={handleChange}
+                                            isInvalid={!!errors.emissao} disabled={desativado}/>
+                                    </FloatingLabel>
                                     
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.emissao}
@@ -218,13 +218,12 @@ export default function FormContaPagar() {
                                 </FormBootstrap.Group>
                             </Col>
 
-                            <Col sm={2}>
+                            <Col  xs={6} md={2}>
                                 <FormBootstrap.Group  controlId="vencimento">
-                                    <FormBootstrap.Label>Vencimento</FormBootstrap.Label>
-                                    <FormBootstrap.Control type="date" value={values.vencimento} onChange={handleChange}
-                                        isInvalid={!!errors.vencimento}
-                                        disabled={desativado} 
-                                    />
+                                    <FloatingLabel controlId="vencimento" label="Data do vencimento">
+                                        <FormBootstrap.Control type="date" value={values.vencimento} onChange={handleChange}
+                                            isInvalid={!!errors.vencimento} disabled={desativado}/>
+                                    </FloatingLabel>
                                     
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.vencimento}
@@ -232,18 +231,13 @@ export default function FormContaPagar() {
                                 </FormBootstrap.Group>
                             </Col>
                             
-                            <Col sm={2}>
+                            <Col md={2}>
                                 <FormBootstrap.Group >
-                                    <FormBootstrap.Label>Valor</FormBootstrap.Label>
-            
-                                    <CurrencyInput
-                                        value={values.valor}
-                                        className="form-control"
-                                        onValueChange={(value) => setFieldValue('valor', value)}
-                                        disabled={desativado} 
-                                        >
-
-                                    </CurrencyInput>
+                                    <FloatingLabel controlId="valor" label="Valor do título">
+                                        <CurrencyInput className="form-control"
+                                            value={values.valor} onValueChange={(value) => setFieldValue('valor', value)}
+                                            disabled={desativado}/>
+                                    </FloatingLabel>
                             
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.valor}

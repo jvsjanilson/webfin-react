@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Table, Form , Dropdown, Button, Container, Modal, Row, Col } from 'react-bootstrap';
+import { 
+    Table, Form , Dropdown, Button, Container, Modal, 
+    Row, Col, FloatingLabel 
+} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap'
 import api from '../../config/api';
 import Paginacao from "../../components/Paginacao";
@@ -38,7 +41,7 @@ export default function IndexContaPagar() {
     }
    
     async function getContas() {
-        await api.get('contas/search/all')
+        await api.get('api/contas/search/all')
             .then(res => {
 
                 setContas(res.data.data)
@@ -204,20 +207,18 @@ export default function IndexContaPagar() {
                 aria-labelledby="contained-modal-title-vcenter" centered
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Baixa de Titulo</Modal.Title>
+                    <Modal.Title>Pagamento de Titulo</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Row className="mb-3">
+                    <Row className="mb-3 g-2">
                         <Col xs={6} md={3}>
                             <Form.Group  controlId="data_pagamento">
-                            <Form.Label>Data Pagto</Form.Label>
-                            <Form.Control type="date" 
-                               value={dataPagamento}
-                               onChange={e => {
-                                console.log(e.target.value)
-                                setDataPagamento(e.target.value)
-                               } }
-                            />
+                            <FloatingLabel controlId="data_pagamento" label="Data do Pagto">
+                                <Form.Control type="date" autoFocus 
+                                    value={dataPagamento}
+                                    onChange={e => setDataPagamento(e.target.value) }
+                                />
+                            </FloatingLabel>
                             
                             <Form.Control.Feedback type="invalid">
                                 
@@ -227,65 +228,43 @@ export default function IndexContaPagar() {
 
                         <Col xs={6} md={2}>
                             <Form.Group >
-                                <Form.Label>Juros</Form.Label>
-        
-                                <CurrencyInput
-                                    className="form-control"
-                                    style={{textAlign: 'right'}}
-                                    value={juros}
-                                    onValueChange={value => setJuros(value) }
-                                    maxLength={9}
-                                    >
-
-                                </CurrencyInput>
+                                <FloatingLabel controlId="juros" label="Juros">
+                                    <CurrencyInput className="form-control" style={{textAlign: 'right'}}
+                                        value={juros} onValueChange={value => setJuros(value) }
+                                        maxLength={9}/>
+                                </FloatingLabel>
+                               
                             </Form.Group>
                         </Col>
 
                         <Col xs={6} md={2}>
                             <Form.Group >
-                                <Form.Label>Multa</Form.Label>
-        
-                                <CurrencyInput
-                                    className="form-control"
-                                    style={{textAlign: 'right'}}
-                                    value={multa}
-                                    onValueChange={value => setMulta(value) }
-                                    maxLength={9}
-                                    >
-
-                                </CurrencyInput>
+                                <FloatingLabel controlId="multa" label="Multa">
+                                    <CurrencyInput className="form-control" style={{textAlign: 'right'}}
+                                        value={multa} onValueChange={value => setMulta(value) }
+                                        maxLength={9}/>
+                                </FloatingLabel>
                             </Form.Group>
                         </Col>
 
                         <Col xs={6} md={2}>
                             <Form.Group >
-                                <Form.Label>Desconto</Form.Label>
-        
-                                <CurrencyInput
-                                    className="form-control"
-                                    style={{textAlign: 'right'}}
-                                    value={desconto}
-                                    onValueChange={value => setDesconto(value) }
-                                    maxLength={9}
-                                    >
-
-                                </CurrencyInput>
+                                <FloatingLabel controlId="desconto" label="Desconto">
+                                    <CurrencyInput className="form-control" style={{textAlign: 'right'}}
+                                        value={desconto} onValueChange={value => setDesconto(value) }
+                                        maxLength={9}/>
+                                </FloatingLabel>        
                             </Form.Group>
                         </Col>
 
                         <Col xs={6} md={3}>
                             <Form.Group >
-                                <Form.Label>Total Pago</Form.Label>
-        
-                                <CurrencyInput
-                                    className="form-control"
-                                    value={totalPago}
-                                    disabled
-                                    style={{textAlign: 'right'}}
-                                    >
+                                <FloatingLabel controlId="tota_pago" label="Total Pago">
+                                    <CurrencyInput className="form-control"
+                                        value={totalPago} disabled
+                                        style={{textAlign: 'right'}} />
+                                </FloatingLabel>
 
-                                </CurrencyInput>
-                        
                                 <Form.Control.Feedback type="invalid">
 
                                 </Form.Control.Feedback>
@@ -293,18 +272,19 @@ export default function IndexContaPagar() {
                         </Col>
 
                     </Row>
-                    <Row>
+                    <Row  className="mb-3 g-2">
                         <Col>
-                            <Form.Group  controlId="fornecedor_id">
-                                <Form.Label>Conta do débito</Form.Label>
-                                <Form.Select onChange={(e) => setContaSelected(e.target.value)} defaultValue={contaSeleted} >
-                                    {contas.map((e) => (<option  value={e.id} key={e.id} >
-                                        Banco: {e.numero_banco.padStart(4,'0')} - 
-                                        Agencia: {e.numero_agencia.padStart(6,'0')} - 
-                                        CC: {e.numero_conta.padStart(10,'0')} - 
-                                        Saldo: {new Intl.NumberFormat('pt-BR',{ style: 'currency', currency: 'BRL' }).format(parseFloat(e.saldo).toFixed(2))}</option>)
-                                    )}
-                                </Form.Select>
+                            <Form.Group  controlId="conta_id">
+                                <FloatingLabel controlId="conta_id" label="Conta do débito">
+                                    <Form.Select onChange={(e) => setContaSelected(e.target.value)} defaultValue={contaSeleted} >
+                                        {contas.map((e) => (<option  value={e.id} key={e.id} >
+                                            Banco: {e.numero_banco.padStart(4,'0')} - 
+                                            Agencia: {e.numero_agencia.padStart(6,'0')} - 
+                                            CC: {e.numero_conta.padStart(10,'0')} - 
+                                            Saldo: {new Intl.NumberFormat('pt-BR',{ style: 'currency', currency: 'BRL' }).format(parseFloat(e.saldo).toFixed(2))}</option>)
+                                        )}
+                                    </Form.Select>
+                                </FloatingLabel>
                             </Form.Group>
                         </Col>
                     </Row>
