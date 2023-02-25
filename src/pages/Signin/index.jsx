@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, {useState} from "react";
-import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Form, Row, FloatingLabel } from "react-bootstrap";
 import { useAuth } from "../../hooks/auth";
 
 export default function Signin() {
@@ -25,16 +25,20 @@ export default function Signin() {
                 <Row className="d-flex justify-content-center align-items-center vh-100">
                     <Col sm={3} >
                         <Card className="card-outline">
-                            <Card.Header className="text-center">Autenticação</Card.Header>
+                            <Card.Header className="text-center"><h5>Autenticação</h5></Card.Header>
+
                             <Card.Body>
-                                <Form.Label>E-mail</Form.Label>
-                                <Form.Control type="email" required autoFocus 
-                                    className="mb-3" onChange={(e) => setEmail(e.target.value)}/>
-                    
-                                <Form.Label>Senha</Form.Label>
-                                <Form.Control type="password" required minLength={6}
-                                    className="mb-3"  onChange={(e) => setPassword(e.target.value)}/>
-                                <Form.Control.Feedback style={{display: msgError ? 'block': 'none'}} type="invalid">{msgError}</Form.Control.Feedback>
+
+                                <FloatingLabel controlId="email" label="E-mail" className="mb-3">
+                                    <Form.Control type="email"  onChange={(e) => setEmail(e.target.value)} />
+                                </FloatingLabel>
+
+                                <FloatingLabel controlId="password" label="Senha" className="mb-3">
+                                    <Form.Control type="password" onChange={(e) => setPassword(e.target.value)} />
+                                </FloatingLabel>
+
+                                <Form.Control.Feedback style={{display: msgError ? 'block': 'none'}} 
+                                    type="invalid">{msgError}</Form.Control.Feedback>
 
                             </Card.Body>
                             <Card.Footer className="d-flex justify-content-end">
