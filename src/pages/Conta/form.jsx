@@ -133,18 +133,19 @@ export default function FormConta() {
                     </Card.Header>
                     <Card.Body>
 
-                        <Row className="mb-3">
+                        <Row className="mb-3 g-2">
                             <Col sm={2}>
                                 <FormBootstrap.Group  controlId="numero_banco">
-                                    <FormBootstrap.Label>Número do Banco</FormBootstrap.Label>
-                                    
+                                <div className='form-floating'>
                                     <FormBootstrap.Control 
                                         type="text" 
                                         value={values.numero_banco} 
                                         onChange={handleChange}
                                         isInvalid={!!errors.numero_banco}
                                         maxLength={4}
-                                    />
+                                        />
+                                    <FormBootstrap.Label>Número do Banco</FormBootstrap.Label>
+                                    </div>
                                     
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.numero_banco}
@@ -154,16 +155,16 @@ export default function FormConta() {
 
                             <Col sm={3}>
                                 <FormBootstrap.Group  controlId="numero_agencia">
-                                    <FormBootstrap.Label>Número do Agencia</FormBootstrap.Label>
-
-                                    <FormBootstrap.Control 
-                                        type="text" 
-                                        value={values.numero_agencia} 
-                                        onChange={handleChange}
-                                        isInvalid={!!errors.numero_agencia}
-                                        maxLength={15}
-                                    />
-                                    
+                                    <div className='form-floating'>
+                                        <FormBootstrap.Control 
+                                            type="text" 
+                                            value={values.numero_agencia} 
+                                            onChange={handleChange}
+                                            isInvalid={!!errors.numero_agencia}
+                                            maxLength={15}
+                                            />
+                                        <FormBootstrap.Label>Número do Agencia</FormBootstrap.Label>
+                                    </div>
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.numero_agencia}
                                     </FormBootstrap.Control.Feedback>
@@ -172,15 +173,16 @@ export default function FormConta() {
 
                             <Col sm={3}>
                                 <FormBootstrap.Group  controlId="numero_conta">
-                                    <FormBootstrap.Label>Número do Conta</FormBootstrap.Label>
-
-                                    <FormBootstrap.Control 
-                                        type="text" 
-                                        value={values.numero_conta} 
-                                        onChange={handleChange}
-                                        isInvalid={!!errors.numero_conta}
-                                        maxLength={30}
-                                    />
+                                    <div className='form-floating'>
+                                        <FormBootstrap.Control 
+                                            type="text" 
+                                            value={values.numero_conta} 
+                                            onChange={handleChange}
+                                            isInvalid={!!errors.numero_conta}
+                                            maxLength={30}
+                                            />
+                                        <FormBootstrap.Label>Número do Conta</FormBootstrap.Label>
+                                    </div>
                                     
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.numero_conta}
@@ -190,24 +192,27 @@ export default function FormConta() {
 
                             <Col sm={4}>
                                 <FormBootstrap.Group  controlId="tipo_conta">
-                                    <FormBootstrap.Label>Tipo Conta</FormBootstrap.Label>
-                                    <FormBootstrap.Select onChange={handleChange} value={values.tipo_conta}>
-                                        <option key={1} value={1} >1 - Conta Corrente</option>
-                                        <option key={2} value={2} >2 - Conta Poupança</option>
-                                    </FormBootstrap.Select>
+                                    <div className='form-floating'>
+                                        <FormBootstrap.Select onChange={handleChange} value={values.tipo_conta}>
+                                            <option key={1} value={1} >1 - Conta Corrente</option>
+                                            <option key={2} value={2} >2 - Conta Poupança</option>
+                                        </FormBootstrap.Select>
+                                        <FormBootstrap.Label>Tipo Conta</FormBootstrap.Label>
+                                    </div>
                                 </FormBootstrap.Group>
                             </Col>
 
                         </Row>
 
-                        <Row className="mb-3">
+                        <Row className="mb-3 g-2">
                             <Col sm={2}>
                                 <FormBootstrap.Group  controlId="data_abertura">
-                                    <FormBootstrap.Label>Data Abertura </FormBootstrap.Label>
-
-                                    <FormBootstrap.Control type="date" value={values.data_abertura} onChange={handleChange}
-                                        isInvalid={!!errors.data_abertura}
-                                    />
+                                    <div className='form-floating'>
+                                        <FormBootstrap.Control type="date" value={values.data_abertura} onChange={handleChange}
+                                            isInvalid={!!errors.data_abertura}
+                                            />
+                                        <FormBootstrap.Label>Data Abertura </FormBootstrap.Label>
+                                    </div>
                                     
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.data_abertura}
@@ -217,15 +222,16 @@ export default function FormConta() {
                     
                             <Col sm={8}>
                                 <FormBootstrap.Group  controlId="descricao">
-                                    <FormBootstrap.Label>Descrição</FormBootstrap.Label>
-
-                                    <FormBootstrap.Control 
-                                        type="text" 
-                                        value={values.descricao} 
-                                        onChange={handleChange}
-                                        maxLength={60}
-                                        isInvalid={!!errors.descricao}
-                                    />
+                                    <div className='form-floating'>
+                                        <FormBootstrap.Control 
+                                            type="text" 
+                                            value={values.descricao} 
+                                            onChange={handleChange}
+                                            maxLength={60}
+                                            isInvalid={!!errors.descricao}
+                                            />
+                                        <FormBootstrap.Label>Descrição</FormBootstrap.Label>
+                                    </div>
                                     
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.descricao}
@@ -234,16 +240,16 @@ export default function FormConta() {
                             </Col>
                             <Col sm={2}>
                                 <FormBootstrap.Group >
-                                    <FormBootstrap.Label>Saldo</FormBootstrap.Label>
-            
-                                    <CurrencyInput
-                                        value={values.saldo}
-                                        className="form-control"
-                                        onValueChange={(value) => setFieldValue('saldo', value)}
-                                        >
+                                    <div className='form-floating'>
+                                        <CurrencyInput
+                                            value={values.saldo}
+                                            className="form-control"
+                                            onValueChange={(value) => setFieldValue('saldo', value)}
+                                            >
 
-                                    </CurrencyInput>
-                            
+                                        </CurrencyInput>
+                                        <FormBootstrap.Label>Saldo</FormBootstrap.Label>
+                                    </div>
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.saldo}
                                     </FormBootstrap.Control.Feedback>

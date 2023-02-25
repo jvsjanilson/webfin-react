@@ -97,15 +97,17 @@ export default function FormEstado() {
                         </LinkContainer>
                     </Card.Header>
                     <Card.Body>
-                    <Row className="mb-3">
+                    <Row className="mb-3 g-2">
                         <Col sm={2}>
                             <FormBootstrap.Group  controlId="uf">
-                                <FormBootstrap.Label>UF</FormBootstrap.Label>
+                            <div className='form-floating'>
                                 <FormBootstrap.Control 
                                         autoFocus type="text" value={values.uf} onChange={handleChange} 
                                         isInvalid={!!errors.uf}
                                         
-                                    />
+                                        />
+                                        <FormBootstrap.Label>UF</FormBootstrap.Label>
+                                </div>
                                 <FormBootstrap.Control.Feedback type="invalid">
                                     {errors.uf}
                                 </FormBootstrap.Control.Feedback>
@@ -114,11 +116,13 @@ export default function FormEstado() {
 
                         <Col sm={10}>
                             <FormBootstrap.Group  controlId="nome">
-                                <FormBootstrap.Label>Nome do estado</FormBootstrap.Label>
+                                <div className='form-floating'>
                                 <FormBootstrap.Control type="text" value={values.nome} onChange={handleChange}
                                     isInvalid={!!errors.nome}
-                                />
+                                    />
                                 
+                                    <FormBootstrap.Label>Nome do estado</FormBootstrap.Label>
+                                </div>
                                 <FormBootstrap.Control.Feedback type="invalid">
                                     {errors.nome}
                                 </FormBootstrap.Control.Feedback>
