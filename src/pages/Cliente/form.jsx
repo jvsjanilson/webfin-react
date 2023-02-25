@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react'
-import { Card, Button, Container, Form as FormBootstrap, Row, Col} from 'react-bootstrap';
+import { Card, Button, Container, Form as FormBootstrap, Row, Col, FloatingLabel} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap'
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
@@ -210,19 +210,15 @@ export default function FormCliente(){
                     </Card.Header>
                     <Card.Body>
 
-                        <Row className="mb-3">
+                        <Row className="mb-3 g-2">
 
                             <Col sm={5}>
                                 <FormBootstrap.Group  controlId="nome">
-                                    <FormBootstrap.Label>Nome</FormBootstrap.Label>
-                                    <FormBootstrap.Control 
-                                        type="text" 
-                                        value={values.nome} 
-                                        onChange={handleChange}
-                                        isInvalid={!!errors.nome}
-                                        maxLength={60}
-                                        autoFocus
-                                    />
+                                    <FloatingLabel controlId="nome" label="Nome" className="mb-3">
+                                        <FormBootstrap.Control type="text"  value={values.nome} 
+                                            onChange={handleChange} isInvalid={!!errors.nome}
+                                            maxLength={60} autoFocus />
+                                    </FloatingLabel>
                                     
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.nome}
@@ -232,14 +228,11 @@ export default function FormCliente(){
                             
                             <Col sm={5}>
                                 <FormBootstrap.Group  controlId="nome_fantasia">
-                                    <FormBootstrap.Label>Nome Fantasia</FormBootstrap.Label>
-                                    <FormBootstrap.Control 
-                                        type="text" 
-                                        value={values.nome_fantasia} 
-                                        onChange={handleChange}
-                                        isInvalid={!!errors.nome_fantasia}
-                                        maxLength={60}
-                                    />
+                                    <FloatingLabel controlId="nome_fantasia" label="Nome Fantasia" className="mb-3">
+                                        <FormBootstrap.Control  type="text" value={values.nome_fantasia} 
+                                            onChange={handleChange} isInvalid={!!errors.nome_fantasia}
+                                            maxLength={60}  />
+                                    </FloatingLabel>
                                     
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.nome_fantasia}
@@ -249,14 +242,11 @@ export default function FormCliente(){
 
                             <Col sm={2}>
                                 <FormBootstrap.Group  controlId="cpfcnpj">
-                                    <FormBootstrap.Label>CPF/CNPJ</FormBootstrap.Label>
-                                    <FormBootstrap.Control 
-                                        type="text" 
-                                        value={values.cpfcnpj} 
-                                        onChange={handleChange}
-                                        isInvalid={!!errors.cpfcnpj}
-                                        maxLength={14}
-                                    />
+                                    <FloatingLabel controlId="cpfcnpj" label="CPF/CNPJ" className="mb-3">
+                                        <FormBootstrap.Control  type="text" value={values.cpfcnpj} 
+                                            onChange={handleChange} isInvalid={!!errors.cpfcnpj}
+                                            maxLength={14}/>
+                                    </FloatingLabel>
                                     
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.cpfcnpj}
@@ -266,17 +256,15 @@ export default function FormCliente(){
 
                         </Row>
 
-                        <Row className="mb-3">
+                        <Row className="mb-3 g-2">
 
                             <Col sm={8}>
                                 <FormBootstrap.Group  controlId="logradouro">
-                                    <FormBootstrap.Label>Logradouro </FormBootstrap.Label>
-                                    <FormBootstrap.Control type="text" 
-                                        value={values.logradouro} 
-                                        onChange={handleChange}
-                                        maxLength={60}
-                                        isInvalid={!!errors.logradouro}
-                                    />
+                                    <FloatingLabel controlId="logradouro" label="Logradouro" className="mb-3">
+                                        <FormBootstrap.Control type="text" value={values.logradouro} 
+                                            onChange={handleChange} maxLength={60}
+                                            isInvalid={!!errors.logradouro} />
+                                    </FloatingLabel>
                                     
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.logradouro}
@@ -286,14 +274,11 @@ export default function FormCliente(){
                     
                             <Col sm={2}>
                                 <FormBootstrap.Group  controlId="numero">
-                                    <FormBootstrap.Label>Número</FormBootstrap.Label>
-                                    <FormBootstrap.Control 
-                                        type="text" 
-                                        value={values.numero} 
-                                        onChange={handleChange}
-                                        maxLength={10}
-                                        isInvalid={!!errors.numero}
-                                    />
+                                    <FloatingLabel controlId="numero" label="Número" className="mb-3">
+                                        <FormBootstrap.Control type="text" value={values.numero} 
+                                            onChange={handleChange} maxLength={10}
+                                            isInvalid={!!errors.numero} />
+                                    </FloatingLabel>
                                     
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.numero}
@@ -303,14 +288,11 @@ export default function FormCliente(){
 
                             <Col sm={2}>
                                 <FormBootstrap.Group  controlId="cep">
-                                    <FormBootstrap.Label>CEP</FormBootstrap.Label>
-                                    <MaskedInput
-                                        id="cep"
-                                        mask={[/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]}
-                                        onChange={handleChange}
-                                        value={values.cep}
-                                        className="form-control"
-                                        />
+                                <FloatingLabel controlId="cep" label="CEP" className="mb-3">
+                                    <MaskedInput id="cep" mask={[/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]}
+                                        onChange={handleChange} value={values.cep}
+                                        className="form-control" />
+                                </FloatingLabel>
                                     
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.cep}
@@ -320,17 +302,14 @@ export default function FormCliente(){
                     
                         </Row>
 
-                        <Row className='mb-3'>
+                        <Row className="mb-3 g-2">
                             <Col sm={5}>
                                 <FormBootstrap.Group  controlId="complemento">
-                                    <FormBootstrap.Label>Complemento</FormBootstrap.Label>
-                                    <FormBootstrap.Control 
-                                        type="text" 
-                                        value={values.complemento} 
-                                        onChange={handleChange}
-                                        maxLength={60}
-                                        isInvalid={!!errors.complemento}
-                                    />
+                                    <FloatingLabel controlId="complemento" label="Complemento" className="mb-3">
+                                        <FormBootstrap.Control type="text" value={values.complemento} 
+                                            onChange={handleChange} maxLength={60}
+                                            isInvalid={!!errors.complemento}/>
+                                    </FloatingLabel>
                                     
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.complemento}
@@ -340,45 +319,38 @@ export default function FormCliente(){
 
                             <Col sm={2}>
                                 <FormBootstrap.Group  controlId="estado_id">
-                                    <FormBootstrap.Label>UF</FormBootstrap.Label>
-                                    <FormBootstrap.Select 
-                                        onChange={(e) => {
-                                            setFieldValue('estado_id', e.target.value)
-                                            getCidades(e.target.value)  
-                                        }} 
-                                        value={values.estado_id}
-                                    >
-                                        {estados.map((e) => <option value={e.id} key={e.id}>{e.uf}</option>)}
-                                    </FormBootstrap.Select>
+                                    <FloatingLabel controlId="estado_id" label="UF" className="mb-3">
+                                        <FormBootstrap.Select value={values.estado_id}
+                                            onChange={(e) => {
+                                                setFieldValue('estado_id', e.target.value)
+                                                getCidades(e.target.value)  
+                                            }}>
+                                            {estados.map((e) => <option value={e.id} key={e.id}>{e.uf}</option>)}
+                                        </FormBootstrap.Select>
+                                    </FloatingLabel>
                                 </FormBootstrap.Group>
                             </Col>
 
                             <Col sm={5}>
                                 <FormBootstrap.Group  controlId="cidade_id">
-                                    <FormBootstrap.Label>Cidade</FormBootstrap.Label>
-                                    <FormBootstrap.Select 
-                                        onChange={handleChange} 
-                                        value={values.cidade_id}
-                                    >
-                                        {cidades.map((e) => <option value={e.id} key={e.id} >{e.nome}</option>)}
-                                    </FormBootstrap.Select>
+                                    <FloatingLabel controlId="cidade_id" label="Cidade" className="mb-3">
+                                        <FormBootstrap.Select onChange={handleChange} value={values.cidade_id}>
+                                            {cidades.map((e) => <option value={e.id} key={e.id} >{e.nome}</option>)}
+                                        </FormBootstrap.Select>
+                                </FloatingLabel>
                                 </FormBootstrap.Group>
                             </Col>
                         </Row>
 
-                        <Row className='mb-3'>
+                        <Row className="mb-3 g-2">
                             <Col sm={2}>
                                 <FormBootstrap.Group  controlId="fone">
-                                    <FormBootstrap.Label>Fone</FormBootstrap.Label>
+                                    <FloatingLabel controlId="fone" label="Fone" className="mb-3">
+                                        <MaskedInput id="fone"
+                                            mask={['(', /[1-9]/, /\d/, ')',  /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+                                            onChange={handleChange} value={values.fone} className="form-control"/>
+                                    </FloatingLabel>
 
-                                    <MaskedInput
-                                        id="fone"
-                                        mask={['(', /[1-9]/, /\d/, ')',  /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
-                                        onChange={handleChange}
-                                        value={values.fone}
-                                        className="form-control"
-                                    />
-                                   
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.fone}
                                     </FormBootstrap.Control.Feedback>
@@ -386,15 +358,11 @@ export default function FormCliente(){
                             </Col>
                             <Col sm={2}>
                                 <FormBootstrap.Group  controlId="celular">
-                                    <FormBootstrap.Label>Celular</FormBootstrap.Label>
-                                <MaskedInput
-                                    id="celular"
-                                    mask={['(', /[1-9]/, /\d/, ')',  /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
-                                    onChange={handleChange}
-                                    value={values.celular}
-                                    className="form-control"
-        
-                                />
+                                    <FloatingLabel controlId="celular" label="Celular" className="mb-3">
+                                        <MaskedInput id="celular"
+                                            mask={['(', /[1-9]/, /\d/, ')',  /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+                                            onChange={handleChange} value={values.celular} className="form-control"/>
+                                    </FloatingLabel>
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.celular}
                                     </FormBootstrap.Control.Feedback>
@@ -403,14 +371,10 @@ export default function FormCliente(){
 
                             <Col sm={8}>
                                 <FormBootstrap.Group  controlId="email">
-                                    <FormBootstrap.Label>e-mail</FormBootstrap.Label>
-                                    <FormBootstrap.Control 
-                                        type="text" 
-                                        value={values.email} 
-                                        onChange={handleChange}
-                                        maxLength={120}
-                                        isInvalid={!!errors.email}
-                                    />
+                                    <FloatingLabel controlId="email" label="E-mail" className="mb-3">
+                                        <FormBootstrap.Control type="text" value={values.email} onChange={handleChange}
+                                            maxLength={120} isInvalid={!!errors.email}/>
+                                    </FloatingLabel>
                                     
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.email}
