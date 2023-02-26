@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from "react";
-import { Table, Form, Dropdown, Button, Modal, Col, Row} from 'react-bootstrap';
+import { Table, Form, Button, Col, Row} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap'
 import Container from 'react-bootstrap/Container';
 import Paginacao from "../../components/Paginacao";
-import { FaEdit, FaTrash, FaPlus } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
 import api from '../../config/api';
 import MessageDelete from "../../components/MessageDelete";
+import { Options } from "../../components/Components";
 
 export default function IndexCidade() {
     
@@ -125,24 +126,8 @@ export default function IndexCidade() {
                         return (
                             <tr key={el.id}>
                                 <td style={{width: '5rem'}} >
-                                    
-                                        
-                                        <Dropdown>
-                                            <div className="d-grid gap-2">
-                                                <Dropdown.Toggle size="sm" variant="primary" id="dropdown-basic">
-                                                    Opções
-                                                </Dropdown.Toggle>
-                                        
-                                                <Dropdown.Menu >
-                                                    <LinkContainer to={`/cidades/edit/${el.id}`} >
-                                                        <Dropdown.Item ><FaEdit className="text-success" /> Editar</Dropdown.Item>
-                                                    </LinkContainer>
-
-                                                    <Dropdown.Item onClick={dialogDelete.bind(this, el.id)}><FaTrash color="red" /> Remover</Dropdown.Item>
-                                                </Dropdown.Menu>
-                                            </div>
-                                        </Dropdown>
-                                    
+                                    <Options delete={dialogDelete.bind(this, el.id)} 
+                                        id={el.id} router="cidades" /> 
                                 </td>
                                 <td>{el.nome}</td>
                                 <td style={{textAlign: 'center'}}>{el.uf}</td>

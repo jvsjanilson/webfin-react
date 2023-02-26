@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from "react";
-import { Table, Form, Dropdown, Button, Container, Row, Col } from 'react-bootstrap';
+import { Table, Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap'
 import api from '../../config/api';
 import Paginacao from "../../components/Paginacao";
-import { FaEdit, FaTrash, FaPlus } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
 import MessageDelete from "../../components/MessageDelete";
+import { Options } from "../../components/Components";
 
 export default function IndexEstado() {
 
@@ -115,23 +116,8 @@ export default function IndexEstado() {
                         return (
                             <tr key={el.id}>
                                 <td style={{width: '5rem'}} >
-                                    {
-                                        
-                                        <Dropdown>
-                                            <div className="d-grid gap-2">
-                                                <Dropdown.Toggle   size="sm" variant="primary" id="dropdown-basic">
-                                                    Opções
-                                                </Dropdown.Toggle>
-                                        
-                                                <Dropdown.Menu variant="">
-                                                    <LinkContainer to={`/estados/edit/${el.id}`}>
-                                                        <Dropdown.Item ><FaEdit className="text-success" /> Editar</Dropdown.Item>
-                                                    </LinkContainer>
-                                                    <Dropdown.Item onClick={dialogDelete.bind(this,el.id)}><FaTrash color="red" /> Remover</Dropdown.Item>
-                                                </Dropdown.Menu>
-                                            </div>
-                                        </Dropdown>
-                                    }   
+                                    <Options delete={dialogDelete.bind(this, el.id)} 
+                                        id={el.id} router="estados" /> 
                                 </td>                                
                                 <td style={{textAlign: 'center'}}>{el.uf}</td>
                                 <td>{el.nome}</td>
