@@ -9,8 +9,7 @@ import { FaEdit, FaTrash, FaFileInvoiceDollar, FaUndo } from "react-icons/fa";
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import CurrencyInput from 'react-currency-input-field';
-import MessageDelete from "../../components/MessageDelete";
-import { Search, Paginacao } from "../../components";
+import { Search, Paginacao, MessageDelete } from "../../components";
 
 
 export default function IndexContaReceber() {

@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Card, Button,  Row, Col, Dropdown, Pagination } from 'react-bootstrap';
+import { Form, Card, Button,  Row, Col, Dropdown, Pagination, Container, Modal } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap'
 import { FaArrowLeft, FaSave, FaEdit, FaTrash, FaPlus } from "react-icons/fa";
 
@@ -117,10 +117,28 @@ function Paginacao({evento, paginas }) {
     )
 }
 
+function MessageDelete({onHide, onConfirm, show})  {
+    return (<Container>
+         <Modal show={show} onHide={onHide} animation={true}  
+                aria-labelledby="contained-modal-title-vcenter" centered
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Remover</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Deseja realmente remover?</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="danger" onClick={onHide} >Cancelar</Button>
+                    <Button variant="success" onClick={onConfirm}>Confirmar</Button>
+                </Modal.Footer>
+            </Modal>
+    </Container>)
+}
+
 export { 
     HeaderCadastro, 
     FooterCadastro, 
     Options, 
     Search,
-    Paginacao
+    Paginacao,
+    MessageDelete
 }

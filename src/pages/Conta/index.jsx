@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Table, Form, Container } from 'react-bootstrap';
 import api from '../../config/api';
-import MessageDelete from "../../components/MessageDelete";
-import { Options, Search, Paginacao } from "../../components";
+import { Options, Search, Paginacao, MessageDelete } from "../../components";
 
 export default function IndexConta () {
 
