@@ -1,7 +1,7 @@
 import React from "react";
-import { Card, Button,  Row, Col, Dropdown } from 'react-bootstrap';
+import { Form, Card, Button,  Row, Col, Dropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap'
-import { FaArrowLeft, FaSave, FaEdit, FaTrash } from "react-icons/fa";
+import { FaArrowLeft, FaSave, FaEdit, FaTrash, FaPlus } from "react-icons/fa";
 
 function HeaderCadastro({router, title, buttonTitle}) {
     return (
@@ -61,4 +61,22 @@ function Options({router, onDelete, editTitle, removeTitle, optionTitle, id}) {
     )
 }
 
-export { HeaderCadastro, FooterCadastro, Options }
+function Search({router, onChange, insertTitle}) {
+    return (
+        <Row className="mb-2 d-flex justify-content-between g-1" >
+            <Col xs={6} md={11}>
+                <Form.Control type="search" placeholder="Pesquisa"
+                    onChange={onChange} className="me-2" />
+            </Col>
+            <Col xs={6} md={1} className="d-flex justify-content-end">
+                <LinkContainer to={`/${router}/create`} className="btn-new">
+                    <Button active variant="primary">
+                        {insertTitle ? insertTitle : 'Adicionar'} <FaPlus/>
+                    </Button>
+                </LinkContainer>
+            </Col>
+        </Row>
+    )
+}
+
+export { HeaderCadastro, FooterCadastro, Options, Search }
