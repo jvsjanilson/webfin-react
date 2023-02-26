@@ -3,9 +3,9 @@ import {
     Card, Button,  Row, Col 
 } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap'
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaSave } from "react-icons/fa";
 
-export default function HeaderCadastro({router, title}) {
+function HeaderCadastro({router, title}) {
     return (
         <Card.Header>
             <Row>
@@ -21,3 +21,17 @@ export default function HeaderCadastro({router, title}) {
         </Card.Header>
     )
 }
+
+function FooterCadastro(props) {
+    return (
+        <Card.Footer>
+            <Row >
+                <Col className="d-flex justify-content-end" >
+                    <Button  type='submit' variant='success'><FaSave/> {props.saveTitle ? props.saveTitle : 'SALVAR'}</Button>
+                </Col>
+            </Row>
+        </Card.Footer> 
+    )
+}
+
+export { HeaderCadastro, FooterCadastro }

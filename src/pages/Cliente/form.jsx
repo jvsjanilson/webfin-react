@@ -1,13 +1,12 @@
 import { React, useState, useEffect } from 'react'
-import { Card, Button, Container, Form as FormBootstrap, Row, Col, FloatingLabel} from 'react-bootstrap';
+import { Card, Container, Form as FormBootstrap, Row, Col, FloatingLabel} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import api from '../../config/api';
-import { FaSave } from "react-icons/fa";
 import MaskedInput from 'react-text-mask'
-import HeaderCadastro from '../../components/HeaderCadastro';
+import { FooterCadastro, HeaderCadastro } from '../../components/FormComponents';
 
 
 export default function FormCliente(){
@@ -379,13 +378,8 @@ export default function FormCliente(){
                         </Row>
 
                     </Card.Body>
-                    <Card.Footer>
-                        <Row >
-                            <Col className="d-flex justify-content-end" >
-                                <Button  type='submit' variant='success'><FaSave/> SALVAR</Button>
-                            </Col>
-                        </Row>
-                    </Card.Footer>
+                    <FooterCadastro />
+                    
                 </Card>
             </Form>
 
