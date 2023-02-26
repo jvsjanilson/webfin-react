@@ -11,7 +11,7 @@ import * as Yup from 'yup';
 import api from '../../config/api';
 import { format } from 'date-fns';
 import CurrencyInput from 'react-currency-input-field';
-import { FooterCadastro, HeaderCadastro } from '../../components/Components';
+import { FooterCadastro, HeaderCadastro } from '../../components';
 
 export default function FormContaReceber() {
     

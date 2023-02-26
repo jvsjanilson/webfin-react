@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Paginacao from "../../components/Paginacao";
 import api from '../../config/api';
 import MessageDelete from "../../components/MessageDelete";
-import { Options, Search } from "../../components/Components";
+import { Options, Search } from "../../components";
 
 export default function IndexCidade() {
     

@@ -3,7 +3,7 @@ import { Table, Form, Container } from 'react-bootstrap';
 import api from '../../config/api';
 import Paginacao from "../../components/Paginacao";
 import MessageDelete from "../../components/MessageDelete";
-import { Options, Search } from "../../components/Components";
+import { Options, Search } from "../../components";
 
 export default function IndexConta () {
 
