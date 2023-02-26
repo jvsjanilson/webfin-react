@@ -3,14 +3,15 @@ import {
     Card, Button, Container, Form as FormBootstrap, 
     Row, Col, FloatingLabel
 } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap'
+
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import api from '../../config/api';
-import { FaArrowLeft, FaPlus, FaSave } from "react-icons/fa";
+import {  FaSave } from "react-icons/fa";
 import MaskedInput from 'react-text-mask'
+import HeaderCadastro from '../../components/HeaderCadastro';
 
 export default function FormFornecedor() {
     let navigate = useNavigate()
@@ -177,20 +178,7 @@ export default function FormFornecedor() {
 
             <Form >
                 <Card >
-                    <Card.Header>
-                        <Row>
-                            <Col xs={6} md={6} className="d-flex justify-content-start align-items-center">
-                                <LinkContainer to={routeIndex} className='me-1'>
-                                    <Button  variant="light"><FaArrowLeft/> VOLTAR</Button>
-                                </LinkContainer>
-                            </Col>
-                            <Col xs={6} md={6} className="d-flex align-items-center justify-content-end">
-                                <h5 className='titulo_cad' >FORNECEDOR</h5>
-                            </Col>
-
-                        </Row>
-
-                    </Card.Header>
+                    <HeaderCadastro  router={routeIndex} title="FORNECEDOR"/>
                     <Card.Body>
 
                         <Row className="mb-3 g-2">

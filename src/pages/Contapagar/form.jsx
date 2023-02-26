@@ -3,13 +3,12 @@ import {
     Card, Button, Container, Form as FormBootstrap, 
     Row, Col, FloatingLabel
 } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap'
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import api from '../../config/api';
-import { FaArrowLeft, FaPlus, FaSave } from "react-icons/fa";
+import { FaSave } from "react-icons/fa";
 import { format } from 'date-fns';
 import CurrencyInput from 'react-currency-input-field';
 import HeaderCadastro from '../../components/HeaderCadastro';
@@ -155,7 +154,7 @@ export default function FormContaPagar() {
 
             <Form >
                 <Card >
-                    <HeaderCadastro router={routeIndex}/>       
+                    <HeaderCadastro router={routeIndex} title="CONTA A PAGAR"/>       
                     <Card.Body>
 
                         <Row className="mb-2 g-2">
