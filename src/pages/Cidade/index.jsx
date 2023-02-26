@@ -125,7 +125,7 @@ export default function IndexCidade() {
                         return (
                             <tr key={el.id}>
                                 <td style={{width: '5rem'}} >
-                                    {
+                                    
                                         
                                         <Dropdown>
                                             <div className="d-grid gap-2">
@@ -142,7 +142,7 @@ export default function IndexCidade() {
                                                 </Dropdown.Menu>
                                             </div>
                                         </Dropdown>
-                                    }
+                                    
                                 </td>
                                 <td>{el.nome}</td>
                                 <td style={{textAlign: 'center'}}>{el.uf}</td>

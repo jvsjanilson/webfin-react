@@ -34,4 +34,7 @@ function FooterCadastro(props) {
     )
 }
 
+
+
+
 export { HeaderCadastro, FooterCadastro }

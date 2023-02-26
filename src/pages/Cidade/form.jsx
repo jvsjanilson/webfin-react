@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import api from '../../config/api';
-import { FooterCadastro, HeaderCadastro } from '../../components/FormComponents';
+import { FooterCadastro, HeaderCadastro } from '../../components/Components';
 
 export default function FormCidade() {
     

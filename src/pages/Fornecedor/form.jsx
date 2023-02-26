@@ -9,7 +9,7 @@ import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import api from '../../config/api';
 import MaskedInput from 'react-text-mask'
-import { FooterCadastro, HeaderCadastro } from '../../components/FormComponents';
+import { FooterCadastro, HeaderCadastro } from '../../components/Components';
 
 export default function FormFornecedor() {
     let navigate = useNavigate()
