@@ -29,11 +29,11 @@ export default function Signin() {
 
                             <Card.Body>
 
-                                <FloatingLabel controlId="email" label="E-mail" className="mb-3">
-                                    <Form.Control type="email"  onChange={(e) => setEmail(e.target.value)} />
+                                <FloatingLabel controlId="email" label="E-mail" className="mb-2">
+                                    <Form.Control type="email" autoFocus onChange={(e) => setEmail(e.target.value)} />
                                 </FloatingLabel>
 
-                                <FloatingLabel controlId="password" label="Senha" className="mb-3">
+                                <FloatingLabel controlId="password" label="Senha" className="">
                                     <Form.Control type="password" onChange={(e) => setPassword(e.target.value)} />
                                 </FloatingLabel>
 

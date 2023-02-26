@@ -202,17 +202,15 @@ export default function FormCliente(){
                 <Card >
                     <Card.Header>
                         <Row>
-                            <Col xs={6} md={6} >
-                                <Button  className='me-1'  type='submit' variant={ _id ? 'success' : 'primary' }>{(_id? (<FaSave/>) : (<FaPlus/>))} { _id ? 'SALVAR' : 'CRIAR' }</Button>
-
-                                <LinkContainer to={routeIndex}>
-                                    <Button  variant="secondary"><FaArrowLeft/> VOLTAR</Button>
+                            <Col xs={6} md={6} className="d-flex justify-content-start align-items-center">
+                                <LinkContainer to={routeIndex} className='me-1'>
+                                    <Button  variant="light"><FaArrowLeft/> VOLTAR</Button>
                                 </LinkContainer>
                             </Col>
-
-                            <Col xs={6} md={6} className="d-flex justify-content-end align-items-center">
+                            <Col xs={6} md={6} className="d-flex align-items-center justify-content-end">
                                 <h5 className='titulo_cad' >CLIENTE</h5>
                             </Col>
+
                         </Row>
 
                     </Card.Header>
@@ -329,9 +327,10 @@ export default function FormCliente(){
                                 <FormBootstrap.Group  controlId="estado_id">
                                     <FloatingLabel controlId="estado_id" label="UFs" >
                                         <FormBootstrap.Select value={values.estado_id}
-                                            onChange={(e) => {
+                                            onChange={ async (e) => {
                                                 setFieldValue('estado_id', e.target.value)
                                                 getCidades(e.target.value)  
+                                                
                                             }}>
                                             {estados.map((e) => <option value={e.id} key={e.id}>{e.uf}</option>)}
                                         </FormBootstrap.Select>
@@ -350,7 +349,7 @@ export default function FormCliente(){
                             </Col>
                         </Row>
 
-                        <Row className="mb-2 g-2">
+                        <Row className="g-2">
                             <Col xs={6} md={2}>
                                 <FormBootstrap.Group  controlId="fone">
                                     <FloatingLabel controlId="fone" label="Fone" >
@@ -393,6 +392,13 @@ export default function FormCliente(){
                         </Row>
 
                     </Card.Body>
+                    <Card.Footer>
+                        <Row>
+                            <Col className="d-flex justify-content-end" >
+                                <Button  type='submit' variant='success'><FaSave/> SALVAR</Button>
+                            </Col>
+                        </Row>
+                    </Card.Footer>
                 </Card>
             </Form>
 
