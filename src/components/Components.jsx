@@ -1,9 +1,9 @@
 import React from "react";
 import { 
-    Card, Button,  Row, Col 
+    Card, Button,  Row, Col, Dropdown 
 } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap'
-import { FaArrowLeft, FaSave } from "react-icons/fa";
+import { FaArrowLeft, FaSave, FaEdit, FaTrash } from "react-icons/fa";
 
 function HeaderCadastro({router, title}) {
     return (
@@ -35,6 +35,26 @@ function FooterCadastro(props) {
 }
 
 
+function Options(props) {
+    return (
+        <Dropdown>
+            <div className="d-grid gap-2">
+                <Dropdown.Toggle size="sm" variant="primary" id="dropdown-basic">
+                    Opções
+                </Dropdown.Toggle>
+        
+                <Dropdown.Menu >
+                    <LinkContainer to={`/${props.router}/edit/${props.id}`} >
+                        <Dropdown.Item ><FaEdit className="text-success" /> {props.titleEdit ? props.titleEdit : 'Editar'} </Dropdown.Item>
+                    </LinkContainer>
+
+                    <Dropdown.Item onClick={props.delete}><FaTrash color="red" /> {props.titleRemove ? props.titleRemove : 'Remover'}</Dropdown.Item>
+                </Dropdown.Menu>
+            </div>
+        </Dropdown>
+
+    )
+}
 
 
-export { HeaderCadastro, FooterCadastro }
+export { HeaderCadastro, FooterCadastro, Options }
