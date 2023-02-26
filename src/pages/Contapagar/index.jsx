@@ -6,11 +6,12 @@ import {
 import { LinkContainer } from 'react-router-bootstrap'
 import api from '../../config/api';
 import Paginacao from "../../components/Paginacao";
-import { FaEdit, FaTrash, FaFileInvoiceDollar, FaUndo, FaPlus } from "react-icons/fa";
+import { FaEdit, FaTrash, FaFileInvoiceDollar, FaUndo } from "react-icons/fa";
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import CurrencyInput from 'react-currency-input-field';
 import MessageDelete from "../../components/MessageDelete";
+import { Search } from "../../components/Components";
 
 
 export default function IndexContaPagar() {
@@ -297,22 +298,8 @@ export default function IndexContaPagar() {
                 </Modal.Footer>
             </Modal>
                 
-            <Row className="mb-2 d-flex justify-content-between g-1">
-                <Col xs={6} md={11}>
-                    <Form.Control
-                        type="search"
-                        placeholder="Pesquisa"
-                        onChange={(e) => setSearch(e.target.value)}
-                        aria-label="Search"
-                        className="me-2"
-                        />
-                </Col>
-                <Col xs={6} md={1} className="d-flex justify-content-end">
-                    <LinkContainer to="/contapagars/create" className="btn-new">
-                        <Button  active variant="primary">Adicionar <FaPlus/></Button>
-                    </LinkContainer>
-                </Col>
-            </Row>  
+            <Search onChange={(e) => setSearch(e.target.value)} router="contapagars" />
+          
             <Table responsive="sm" size="sm" striped bordered hover >
                 <thead  className="table-dark">
                     <tr>

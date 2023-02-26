@@ -1,17 +1,15 @@
 import React, {useState, useEffect} from "react";
-import { Table, Form, Button, Container, Row, Col } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap'
+import { Table, Form, Container } from 'react-bootstrap';
 import api from '../../config/api';
 import Paginacao from "../../components/Paginacao";
-import { FaPlus } from "react-icons/fa";
 import MessageDelete from "../../components/MessageDelete";
-import { Options } from "../../components/Components";
+import { Options, Search } from "../../components/Components";
 
 export default function IndexEstado() {
 
     const [ dados, setDados ] = useState([])
     const [ paginate, setPaginate ] = useState({});
-    const [ searchText, setSearchText ] = useState('')
+    const [ search, setSearch ] = useState('')
     const [ pk, setPk ] = useState(0)
     const [ showDelete, setShowDelete] = useState(false);
     const endpoint = '/api/estados';
@@ -21,10 +19,10 @@ export default function IndexEstado() {
 
         let busca = ''      
 
-        if (searchText != "" && page == '') {
-            busca = '?nome=' + searchText
-        } else if (searchText != "" && page != '') {
-            busca = '&nome=' + searchText
+        if (search != "" && page == '') {
+            busca = '?nome=' + search
+        } else if (search != "" && page != '') {
+            busca = '&nome=' + search
         }
         
         await api.get(`${endpoint}${page}${busca}`)
@@ -79,29 +77,14 @@ export default function IndexEstado() {
 
     useEffect( () => {
         getDados()
-    }, [searchText])
+    }, [search])
 
     return (
         <Container fluid>
 
             <MessageDelete show={showDelete} onHide={handleClose} onConfirm={handleConfirmarDelete} />
-                
-            <Row className="mb-2 d-flex justify-content-between g-1">
-                <Col xs={6} md={11}>
-                    <Form.Control
-                        type="search"
-                        placeholder="Pesquisa"
-                        onChange={(e) => setSearchText(e.target.value)}
-                        aria-label="Search"
-                        className="me-2"
-                        />
-                </Col>
-                <Col xs={6} md={1} className="d-flex justify-content-end">
-                    <LinkContainer to="/estados/create" className="btn-new">
-                        <Button  active variant="primary">Adicionar <FaPlus/></Button>
-                    </LinkContainer>
-                </Col>
-            </Row>            
+            <Search onChange={(e) => setSearch(e.target.value)} router="estados" />        
+
             <Table responsive="sm" size="sm" striped bordered hover >
                 <thead  className="table-dark">
                     <tr>

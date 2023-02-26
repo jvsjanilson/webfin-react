@@ -1,12 +1,10 @@
 import React, {useState, useEffect} from "react";
-import { Table, Form, Button, Col, Row} from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap'
+import { Table, Form } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Paginacao from "../../components/Paginacao";
-import { FaPlus } from "react-icons/fa";
 import api from '../../config/api';
 import MessageDelete from "../../components/MessageDelete";
-import { Options } from "../../components/Components";
+import { Options, Search } from "../../components/Components";
 
 export default function IndexCidade() {
     
@@ -94,24 +92,8 @@ export default function IndexCidade() {
         <Container fluid>
 
             <MessageDelete show={show} onHide={handleClose} onConfirm={handleConfirmarDelete} />
-
-            <Row className="mb-2 d-flex justify-content-between g-1" >
-                <Col xs={6} md={11}>
-                <Form.Control
-                    type="search"
-                    placeholder="Pesquisa"
-                    onChange={(e) => setSearch(e.target.value)}
-                    aria-label="Search"
-                    className="me-2"
-                    />
-                </Col>
-                <Col xs={6} md={1} className="d-flex justify-content-end">
-                    <LinkContainer to="/cidades/create" className="btn-new">
-                        <Button  active variant="primary">Adicionar <FaPlus/></Button>
-                    </LinkContainer>
-                </Col>
-            </Row>
-
+            <Search onChange={(e) => setSearch(e.target.value)} router="cidades" />
+            
             <Table responsive="sm" size="sm" bordered hover >
                 <thead className="table-dark">
                     <tr>
