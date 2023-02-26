@@ -120,7 +120,7 @@ export default function IndexCliente() {
                         return (
                             <tr key={el.id}>
                                 <td style={{width: '5rem'}} >
-                                    <Options delete={dialogDelete.bind(this, el.id)} 
+                                    <Options onDelete={dialogDelete.bind(this, el.id)} 
                                         id={el.id} router="clientes" /> 
                                 </td>                                
                                 <td>{el.nome}</td>

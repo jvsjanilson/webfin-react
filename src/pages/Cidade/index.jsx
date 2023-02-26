@@ -126,7 +126,7 @@ export default function IndexCidade() {
                         return (
                             <tr key={el.id}>
                                 <td style={{width: '5rem'}} >
-                                    <Options delete={dialogDelete.bind(this, el.id)} 
+                                    <Options onDelete={dialogDelete.bind(this, el.id)} 
                                         id={el.id} router="cidades" /> 
                                 </td>
                                 <td>{el.nome}</td>

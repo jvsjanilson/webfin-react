@@ -121,7 +121,7 @@ export default function IndexConta () {
                         return (
                             <tr key={el.id}>
                                 <td style={{width: '5rem'}} >
-                                    <Options delete={dialogDelete.bind(this, el.id)} 
+                                    <Options onDelete={dialogDelete.bind(this, el.id)} 
                                         id={el.id} router="contas" /> 
                                 </td>                                
                                 <td>{el.numero_banco}</td>
