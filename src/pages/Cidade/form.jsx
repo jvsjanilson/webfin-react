@@ -95,20 +95,18 @@ export default function FormCidade() {
 
             <Form >
                 <Card >
-                    <Card.Header>
+                <Card.Header>
                         <Row>
-                            <Col xs={6} md={6} >
-                                <Button className='me-1' type='submit' variant={ _id ? 'success' : 'primary' }>{(_id? (<FaSave/>) : (<FaPlus/>))} { _id ? 'SALVAR' : 'CRIAR' }</Button>
-                                <LinkContainer to={routeIndex}>
-                                    <Button  variant="secondary"><FaArrowLeft/> VOLTAR</Button>
+                            <Col xs={6} md={6} className="d-flex justify-content-start align-items-center">
+                                <LinkContainer to={routeIndex} className='me-1'>
+                                    <Button  variant="light"><FaArrowLeft/> VOLTAR</Button>
                                 </LinkContainer>
                             </Col>
-
-                            <Col xs={6} md={6} className="d-flex justify-content-end align-items-center">
+                            <Col xs={6} md={6} className="d-flex align-items-center justify-content-end">
                                 <h5 className='titulo_cad' >CIDADE</h5>
-                            </Col>   
-                        </Row>                     
-                    </Card.Header>
+                            </Col>
+                        </Row>
+                    </Card.Header>  
                     <Card.Body>
                         <Row className="mb-3 g-2">
 
@@ -151,6 +149,13 @@ export default function FormCidade() {
                             </Col>
                         </Row>
                     </Card.Body>
+                    <Card.Footer>
+                        <Row >
+                            <Col className="d-flex justify-content-end" >
+                                <Button  type='submit' variant='success'><FaSave/> SALVAR</Button>
+                            </Col>
+                        </Row>
+                    </Card.Footer>                     
                 </Card>
             </Form>
 

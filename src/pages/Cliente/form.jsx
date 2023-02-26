@@ -199,7 +199,7 @@ export default function FormCliente(){
         }) => (
 
             <Form >
-                <Card >
+                <Card className='mb-2'>
                     <Card.Header>
                         <Row>
                             <Col xs={6} md={6} className="d-flex justify-content-start align-items-center">
@@ -393,7 +393,7 @@ export default function FormCliente(){
 
                     </Card.Body>
                     <Card.Footer>
-                        <Row>
+                        <Row >
                             <Col className="d-flex justify-content-end" >
                                 <Button  type='submit' variant='success'><FaSave/> SALVAR</Button>
                             </Col>
