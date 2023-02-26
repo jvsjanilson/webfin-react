@@ -5,13 +5,12 @@ import {
 } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap'
 import api from '../../config/api';
-import Paginacao from "../../components/Paginacao";
 import { FaEdit, FaTrash, FaFileInvoiceDollar, FaUndo } from "react-icons/fa";
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import CurrencyInput from 'react-currency-input-field';
 import MessageDelete from "../../components/MessageDelete";
-import { Search } from "../../components";
+import { Search, Paginacao } from "../../components";
 
 
 export default function IndexContaPagar() {

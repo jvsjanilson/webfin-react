@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from "react";
 import { Table, Form, Container } from 'react-bootstrap';
 import api from '../../config/api';
-import Paginacao from "../../components/Paginacao";
 import MessageDelete from "../../components/MessageDelete";
-import { Options, Search } from "../../components";
+import { Options, Search, Paginacao } from "../../components";
 
 export default function IndexEstado() {
 

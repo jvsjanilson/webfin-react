@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Card, Button,  Row, Col, Dropdown } from 'react-bootstrap';
+import { Form, Card, Button,  Row, Col, Dropdown, Pagination } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap'
 import { FaArrowLeft, FaSave, FaEdit, FaTrash, FaPlus } from "react-icons/fa";
 
@@ -79,4 +79,48 @@ function Search({router, onChange, insertTitle}) {
     )
 }
 
-export { HeaderCadastro, FooterCadastro, Options, Search }
+function Paginacao({evento, paginas }) {
+    const { meta, links, ...rest } = paginas;
+    return (
+        
+        <Pagination >
+            <Pagination.First onClick={evento.bind(this,1)}/>
+            <Pagination.Prev disabled={ links?.prev == null ? true : false } 
+                onClick={links?.prev == null ? null: evento.bind(this, links?.prev.split('?')[1].split('=')[1])}
+            />
+            
+            {
+            
+                meta?.links?.map((item, index )=> {
+                    
+                    if (index > 0) {
+                        if (item.url == null && item.label == '...')
+                            return (<Pagination.Ellipsis key={index} disabled />)
+                        else {
+                            if (!isNaN(parseInt(item.label))) {
+
+                                return <Pagination.Item key={index}
+                                            disabled={item.active ? true: false} 
+                                            onClick={evento.bind(this, parseInt(item.label))}
+                                        >{item.label}</Pagination.Item>
+                            }
+                        }
+                    }
+
+                })
+            }
+            <Pagination.Next  disabled={ links?.next == null ? true : false }
+                onClick={links?.next == null ? null : evento.bind(this, links?.next.split('?')[1].split('=')[1])}
+            />
+            <Pagination.Last onClick={evento.bind(this, meta?.last_page)}/>
+        </Pagination> 
+    )
+}
+
+export { 
+    HeaderCadastro, 
+    FooterCadastro, 
+    Options, 
+    Search,
+    Paginacao
+}

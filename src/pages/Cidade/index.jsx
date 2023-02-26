@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from "react";
 import { Table, Form } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
-import Paginacao from "../../components/Paginacao";
 import api from '../../config/api';
 import MessageDelete from "../../components/MessageDelete";
-import { Options, Search } from "../../components";
+import { Options, Search, Paginacao } from "../../components";
 
 export default function IndexCidade() {
     
