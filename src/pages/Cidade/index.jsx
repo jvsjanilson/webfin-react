@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { Table, Form } from 'react-bootstrap';
+import { Table, Form, Col, Row } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import api from '../../config/api';
 import { Options, Search, Paginacao, MessageDelete } from "../../components";
@@ -90,14 +90,21 @@ export default function IndexCidade() {
         <Container fluid>
 
             <MessageDelete show={show} onHide={handleClose} onConfirm={handleConfirmarDelete} />
-            <Search onChange={(e) => setSearch(e.target.value)} router="cidades" />
+            <Row className="mb-2 d-flex justify-content-between g-1" >
+                <Col md={12}>
+                    <Form.Control type="search" placeholder="Pesquisa"
+                        onChange={(e) => setSearch(e.target.value)} className="me-2" />
+                </Col>
+            
+            </Row>
             
             <Table responsive="sm" size="sm" bordered hover >
                 <thead className="table-dark">
                     <tr>
-                        <th style={{textAlign: 'center'}} >#</th>
+                       
                         <th>Nome da cidade</th>
                         <th style={{width: '4rem', textAlign: 'center'}}>UF</th>
+                        <th style={{width: '4rem'}}>Capital</th>
                         <th style={{width: '4rem'}}>Status</th>
                     </tr>
                 </thead>
@@ -105,10 +112,7 @@ export default function IndexCidade() {
                     {dados.map(el => {
                         return (
                             <tr key={el.id}>
-                                <td style={{width: '5rem'}} >
-                                    <Options onDelete={dialogDelete.bind(this, el.id)} 
-                                        id={el.id} router="cidades" /> 
-                                </td>
+                               
                                 <td>{el.nome}</td>
                                 <td style={{textAlign: 'center'}}>{el.uf}</td>
                                 
@@ -116,8 +120,16 @@ export default function IndexCidade() {
                                 <Form.Switch style={{textAlign: 'center'}}
                                     type="switch"
                                     id="custom-switch"
+                                    checked={el.capital ? true: false}
+
+                                />
+                                </td>
+                                <td>
+                                <Form.Switch style={{textAlign: 'center'}}
+                                    type="switch"
+                                    id="custom-switch"
                                     checked={el.ativo ? true: false}
-                                    onChange={handleStatus.bind(this, el)}
+
                                 />
                                 </td>
                             </tr>

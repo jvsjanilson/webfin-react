@@ -97,13 +97,9 @@ export default function AppRoutes() {
             <Route path="/" element={<Home/>}/>
             
             <Route path="/estados" element={<IndexEstado/>}/>
-            <Route path="/estados/create" element={<FormEstado/>}/>
-            <Route path="/estados/edit/:_id" element={<FormEstado/>}/>
 
             <Route path="/cidades" element={<IndexCidade/>}/>
-            <Route path="/cidades/create" element={<FormCidade/>}/>
-            <Route path="/cidades/edit/:_id"  element={<FormCidade/>}/>
-
+            
             <Route path="/contas" element={<IndexConta/>}/>
             <Route path="/contas/create" element={<FormConta/>}/>
             <Route path="/contas/edit/:_id" element={<FormConta/>}/>
