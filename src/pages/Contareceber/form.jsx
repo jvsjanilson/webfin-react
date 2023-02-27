@@ -26,8 +26,8 @@ export default function FormContaReceber() {
         emissao: format(new Date(), "yyyy-MM-dd"), 
         vencimento: format(new Date(), "yyyy-MM-dd"),
         valor: '0,00',
-        conta_id: 1,
-        cliente_id: 1,
+        conta_id: 0,
+        cliente_id: 0,
     })
     const [clientes, setClientes] = useState([])
     const [contas, setContas] = useState([])
@@ -56,8 +56,8 @@ export default function FormContaReceber() {
             }),
         emissao: Yup.date().required('O campo obrigatório.'),
         vencimento: Yup.date().required('O campo obrigatório.'),
-        conta_id: Yup.number().integer('Aceita somente inteiro.').required('O campo obrigatório.') ,
-        cliente_id: Yup.number().integer('Aceita somente inteiro.').required('O campo obrigatório.') ,
+        conta_id: Yup.number().integer('Aceita somente inteiro.').moreThan(0,'Selecione uma conta').required('O campo obrigatório.') ,
+        cliente_id: Yup.number().integer('Aceita somente inteiro.').moreThan(0,'Selecione um cliente').required('O campo obrigatório.') ,
 
       });
    
@@ -164,11 +164,11 @@ export default function FormContaReceber() {
                                         <FormBootstrap.Control type="text" value={values.documento} 
                                             onChange={handleChange} autoFocus
                                             isInvalid={!!errors.documento} maxLength={10} disabled={desativado} />
-                                    </FloatingLabel>
-                                    
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.documento}
                                     </FormBootstrap.Control.Feedback>
+                                    </FloatingLabel>
+                                    
                                 </FormBootstrap.Group>
                             </Col>
 
@@ -176,9 +176,15 @@ export default function FormContaReceber() {
 
                                 <FormBootstrap.Group  controlId="cliente_id">
                                     <FloatingLabel controlId="cliente_id" label="Clientes" >
-                                        <FormBootstrap.Select onChange={handleChange} value={values.cliente_id} disabled={desativado} >
+                                        <FormBootstrap.Select onChange={handleChange} 
+                                            isInvalid={!!errors.cliente_id}
+                                            value={values.cliente_id} disabled={desativado} >
+                                            <option value={0} key={1000}>Selecione um cliente</option>
                                             {clientes.map((e) => <option value={e.id} key={e.id} >{e.nome}</option>)}
                                         </FormBootstrap.Select>
+                                    <FormBootstrap.Control.Feedback type="invalid">
+                                        {errors.cliente_id}
+                                    </FormBootstrap.Control.Feedback>
                                     </FloatingLabel>
                                 </FormBootstrap.Group>
                             </Col>
@@ -187,9 +193,15 @@ export default function FormContaReceber() {
 
                                 <FormBootstrap.Group  controlId="conta_id">
                                     <FloatingLabel controlId="conta_id" label="Contas" >
-                                        <FormBootstrap.Select onChange={handleChange} value={values.conta_id} disabled={desativado} >
+                                        <FormBootstrap.Select onChange={handleChange} value={values.conta_id} 
+                                            isInvalid={!!errors.conta_id}
+                                            disabled={desativado} >
+                                            <option value={0} key={100}>Selecione uma conta</option>
                                             {contas.map((e) => <option value={e.id} key={e.id}>Bco: {e.numero_banco} - Ag: {e.numero_agencia} - CC: {e.numero_conta}</option>)}
                                         </FormBootstrap.Select>
+                                    <FormBootstrap.Control.Feedback type="invalid">
+                                        {errors.conta_id}
+                                    </FormBootstrap.Control.Feedback>
                                     </FloatingLabel>
                                 </FormBootstrap.Group>
                             </Col>
@@ -200,13 +212,15 @@ export default function FormContaReceber() {
                             <Col xs={6} md={2}>
                                 <FormBootstrap.Group  controlId="emissao">
                                     <FloatingLabel controlId="emissao" label="Data da Emissão" >
-                                        <FormBootstrap.Control type="date" value={values.emissao} onChange={handleChange}
+                                        <FormBootstrap.Control type="date" 
+
+                                            value={values.emissao} onChange={handleChange}
                                             isInvalid={!!errors.emissao} disabled={desativado}/>
+                                        <FormBootstrap.Control.Feedback type="invalid">
+                                            {errors.emissao}
+                                        </FormBootstrap.Control.Feedback>
                                     </FloatingLabel>
                                     
-                                    <FormBootstrap.Control.Feedback type="invalid">
-                                        {errors.emissao}
-                                    </FormBootstrap.Control.Feedback>
                                 </FormBootstrap.Group>
                             </Col>
 
@@ -217,11 +231,11 @@ export default function FormContaReceber() {
                                             isInvalid={!!errors.vencimento}
                                             disabled={desativado} 
                                         />
-                                    </FloatingLabel>
-                                    
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.vencimento}
                                     </FormBootstrap.Control.Feedback>
+                                    </FloatingLabel>
+                                    
                                 </FormBootstrap.Group>
                             </Col>
                             

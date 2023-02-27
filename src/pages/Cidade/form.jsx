@@ -105,11 +105,11 @@ export default function FormCidade() {
                                     <FloatingLabel controlId="nome" label="Nome" >
                                         <FormBootstrap.Control type="text" value={values.nome} onChange={handleChange}
                                             isInvalid={!!errors.nome} />
-                                    </FloatingLabel>
                                     
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.nome}
                                     </FormBootstrap.Control.Feedback>
+                                    </FloatingLabel>
                                 </FormBootstrap.Group>
                             </Col>
                             <Col sm={2}>

@@ -210,11 +210,11 @@ export default function FormCliente(){
                                         <FormBootstrap.Control type="text"  value={values.nome} 
                                             onChange={handleChange} isInvalid={!!errors.nome}
                                             maxLength={60} autoFocus />
-                                    </FloatingLabel>
                                     
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.nome}
                                     </FormBootstrap.Control.Feedback>
+                                    </FloatingLabel>
                                 </FormBootstrap.Group>
                             </Col>
                             
@@ -224,11 +224,11 @@ export default function FormCliente(){
                                         <FormBootstrap.Control  type="text" value={values.nome_fantasia} 
                                             onChange={handleChange} isInvalid={!!errors.nome_fantasia}
                                             maxLength={60}  />
-                                    </FloatingLabel>
                                     
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.nome_fantasia}
                                     </FormBootstrap.Control.Feedback>
+                                    </FloatingLabel>
                                 </FormBootstrap.Group>
                             </Col>
 
@@ -238,11 +238,11 @@ export default function FormCliente(){
                                         <FormBootstrap.Control  type="text" value={values.cpfcnpj} 
                                             onChange={handleChange} isInvalid={!!errors.cpfcnpj}
                                             maxLength={14}/>
-                                    </FloatingLabel>
                                     
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.cpfcnpj}
                                     </FormBootstrap.Control.Feedback>
+                                    </FloatingLabel>
                                 </FormBootstrap.Group>
                             </Col>
 
@@ -256,11 +256,11 @@ export default function FormCliente(){
                                         <FormBootstrap.Control type="text" value={values.logradouro} 
                                             onChange={handleChange} maxLength={60}
                                             isInvalid={!!errors.logradouro} />
-                                    </FloatingLabel>
                                     
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.logradouro}
                                     </FormBootstrap.Control.Feedback>
+                                    </FloatingLabel>
                                 </FormBootstrap.Group>
                             </Col>
                     
@@ -270,11 +270,11 @@ export default function FormCliente(){
                                         <FormBootstrap.Control type="text" value={values.numero} 
                                             onChange={handleChange} maxLength={10}
                                             isInvalid={!!errors.numero} />
-                                    </FloatingLabel>
                                     
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.numero}
                                     </FormBootstrap.Control.Feedback>
+                                    </FloatingLabel>
                                 </FormBootstrap.Group>
                             </Col>
 
@@ -284,11 +284,11 @@ export default function FormCliente(){
                                     <MaskedInput id="cep" mask={[/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]}
                                         onChange={handleChange} value={values.cep}
                                         className="form-control" />
-                                </FloatingLabel>
                                     
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.cep}
                                     </FormBootstrap.Control.Feedback>
+                                </FloatingLabel>
                                 </FormBootstrap.Group>
                             </Col>
                     
@@ -301,11 +301,11 @@ export default function FormCliente(){
                                         <FormBootstrap.Control type="text" value={values.complemento} 
                                             onChange={handleChange} maxLength={60}
                                             isInvalid={!!errors.complemento}/>
-                                    </FloatingLabel>
                                     
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.complemento}
                                     </FormBootstrap.Control.Feedback>
+                                    </FloatingLabel>
                                 </FormBootstrap.Group>
                             </Col>
 
@@ -342,11 +342,11 @@ export default function FormCliente(){
                                         <MaskedInput id="fone"
                                             mask={['(', /[1-9]/, /\d/, ')',  /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
                                             onChange={handleChange} value={values.fone} className="form-control"/>
-                                    </FloatingLabel>
 
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.fone}
                                     </FormBootstrap.Control.Feedback>
+                                    </FloatingLabel>
                                 </FormBootstrap.Group>
                             </Col>
                             <Col xs={6} md={2}>
@@ -355,10 +355,10 @@ export default function FormCliente(){
                                         <MaskedInput id="celular"
                                             mask={['(', /[1-9]/, /\d/, ')',  /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
                                             onChange={handleChange} value={values.celular} className="form-control"/>
-                                    </FloatingLabel>
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.celular}
                                     </FormBootstrap.Control.Feedback>
+                                    </FloatingLabel>
                                 </FormBootstrap.Group>
                             </Col>
 
@@ -367,11 +367,11 @@ export default function FormCliente(){
                                     <FloatingLabel controlId="email" label="E-mail" >
                                         <FormBootstrap.Control type="text" value={values.email} onChange={handleChange}
                                             maxLength={120} isInvalid={!!errors.email}/>
-                                    </FloatingLabel>
                                     
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.email}
                                     </FormBootstrap.Control.Feedback>
+                                    </FloatingLabel>
                                 </FormBootstrap.Group>
                             </Col>
 

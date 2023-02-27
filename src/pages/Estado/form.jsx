@@ -101,11 +101,11 @@ export default function FormEstado() {
                                 <FloatingLabel controlId="uf" label="UF" >
                                     <FormBootstrap.Control autoFocus type="text" value={values.uf} 
                                         onChange={handleChange} isInvalid={!!errors.uf}/>
-                                </FloatingLabel>
                                 
                                 <FormBootstrap.Control.Feedback type="invalid">
                                     {errors.uf}
                                 </FormBootstrap.Control.Feedback>
+                                </FloatingLabel>
                             </FormBootstrap.Group>
                         </Col>
 
@@ -114,11 +114,11 @@ export default function FormEstado() {
                                 <FloatingLabel controlId="nome" label="Nome do estado" >
                                     <FormBootstrap.Control type="text" value={values.nome} 
                                         onChange={handleChange} isInvalid={!!errors.nome}/>
-                                </FloatingLabel>
                                 
                                 <FormBootstrap.Control.Feedback type="invalid">
                                     {errors.nome}
                                 </FormBootstrap.Control.Feedback>
+                                </FloatingLabel>
                             </FormBootstrap.Group>
                         </Col>
                         

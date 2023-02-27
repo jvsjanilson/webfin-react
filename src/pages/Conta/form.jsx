@@ -136,11 +136,11 @@ export default function FormConta() {
                                     <FloatingLabel controlId="numero_banco" label="Número do Banco" >
                                         <FormBootstrap.Control type="text" value={values.numero_banco} autoFocus
                                             onChange={handleChange} isInvalid={!!errors.numero_banco} maxLength={4} />
-                                    </FloatingLabel>
                                    
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.numero_banco}
                                     </FormBootstrap.Control.Feedback>
+                                    </FloatingLabel>
                                 </FormBootstrap.Group>
                             </Col>
 
@@ -149,11 +149,11 @@ export default function FormConta() {
                                     <FloatingLabel controlId="numero_agencia" label="Número do Agencia" >
                                         <FormBootstrap.Control type="text" value={values.numero_agencia} 
                                             onChange={handleChange} isInvalid={!!errors.numero_agencia} maxLength={15}/>
-                                    </FloatingLabel>
                                     
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.numero_agencia}
                                     </FormBootstrap.Control.Feedback>
+                                    </FloatingLabel>
                                 </FormBootstrap.Group>
                             </Col>
 
@@ -162,11 +162,11 @@ export default function FormConta() {
                                     <FloatingLabel controlId="numero_conta" label="Número do Conta" >
                                         <FormBootstrap.Control type="text" value={values.numero_conta} onChange={handleChange}
                                             isInvalid={!!errors.numero_conta} maxLength={30}/>
-                                    </FloatingLabel>
                                     
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.numero_conta}
                                     </FormBootstrap.Control.Feedback>
+                                    </FloatingLabel>
                                 </FormBootstrap.Group>
                             </Col>
 
@@ -189,11 +189,11 @@ export default function FormConta() {
                                     <FloatingLabel controlId="data_abertura" label="Data Abertura" >
                                         <FormBootstrap.Control type="date" value={values.data_abertura} onChange={handleChange}
                                             isInvalid={!!errors.data_abertura}/>
-                                    </FloatingLabel>
                                     
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.data_abertura}
                                     </FormBootstrap.Control.Feedback>
+                                    </FloatingLabel>
                                 </FormBootstrap.Group>
                             </Col>
                     
@@ -202,11 +202,11 @@ export default function FormConta() {
                                     <FloatingLabel controlId="descricao" label="Descrição" >
                                         <FormBootstrap.Control type="text" value={values.descricao} onChange={handleChange}
                                             maxLength={60} isInvalid={!!errors.descricao}/>
-                                    </FloatingLabel>
                                     
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.descricao}
                                     </FormBootstrap.Control.Feedback>
+                                    </FloatingLabel>
                                 </FormBootstrap.Group>
                             </Col>
                             <Col md={2}>
@@ -214,11 +214,11 @@ export default function FormConta() {
                                     <FloatingLabel controlId="saldo" label="Saldo" >
                                         <CurrencyInput className="form-control" value={values.saldo}
                                             onValueChange={(value) => setFieldValue('saldo', value)}/>
-                                    </FloatingLabel>
                                     
                                     <FormBootstrap.Control.Feedback type="invalid">
                                         {errors.saldo}
                                     </FormBootstrap.Control.Feedback>
+                                    </FloatingLabel>
                                 </FormBootstrap.Group>
                             </Col>
                   
