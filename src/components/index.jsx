@@ -40,6 +40,7 @@ function Options({router, onDelete, editTitle, removeTitle, optionTitle, id}) {
     return (
         <Dropdown>
             <div className="d-grid gap-2">
+                
                 <Dropdown.Toggle size="sm" variant="primary" id="dropdown-basic">
                     {optionTitle ? optionTitle : 'Opções'}
                 </Dropdown.Toggle>
@@ -54,6 +55,7 @@ function Options({router, onDelete, editTitle, removeTitle, optionTitle, id}) {
                     <Dropdown.Item onClick={onDelete}>
                         <FaTrash color="red" /> {removeTitle ? removeTitle : 'Remover'}
                     </Dropdown.Item>
+
                 </Dropdown.Menu>
             </div>
         </Dropdown>
@@ -90,7 +92,6 @@ function Paginacao({evento, paginas }) {
             />
             
             {
-            
                 meta?.links?.map((item, index )=> {
                     
                     if (index > 0) {
@@ -119,18 +120,21 @@ function Paginacao({evento, paginas }) {
 
 function MessageDelete({onHide, onConfirm, show})  {
     return (<Container>
-         <Modal show={show} onHide={onHide} animation={true}  
-                aria-labelledby="contained-modal-title-vcenter" centered
-            >
-                <Modal.Header closeButton>
-                    <Modal.Title>Remover</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Deseja realmente remover?</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="danger" onClick={onHide} >Cancelar</Button>
-                    <Button variant="success" onClick={onConfirm}>Confirmar</Button>
-                </Modal.Footer>
-            </Modal>
+        <Modal show={show} onHide={onHide} animation={true}  
+            aria-labelledby="contained-modal-title-vcenter" centered>
+
+            <Modal.Header closeButton>
+                <Modal.Title>Remover</Modal.Title>
+            </Modal.Header>
+
+            <Modal.Body>Deseja realmente remover?</Modal.Body>
+
+            <Modal.Footer>
+                <Button variant="danger" onClick={onHide} >Cancelar</Button>
+                <Button variant="success" onClick={onConfirm}>Confirmar</Button>
+            </Modal.Footer>
+
+        </Modal>
     </Container>)
 }
 

@@ -1,7 +1,9 @@
-import axios from "axios";
+
 import React, {useState} from "react";
 import { Button, Card, Col, Container, Form, Row, FloatingLabel } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 import { useAuth } from "../../hooks/auth";
+import { FaSignInAlt } from 'react-icons/fa'
 
 export default function Signin() {
     const [email, setEmail] = useState('')
@@ -41,8 +43,11 @@ export default function Signin() {
                                     type="invalid">{msgError}</Form.Control.Feedback>
 
                             </Card.Body>
-                            <Card.Footer className="d-flex justify-content-end">
-                                <Button type="submit" variant="primary">ENTRAR</Button>
+                            <Card.Footer className="d-flex justify-content-between align-items-center">
+                            <LinkContainer to="/register" className='me-1'>
+                                <a>Registrar</a>
+                            </LinkContainer>
+                                <Button type="submit" variant="primary"><FaSignInAlt/>  Entrar</Button>
                             </Card.Footer>
                         </Card>
                     </Col>

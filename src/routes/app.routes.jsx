@@ -23,7 +23,9 @@ import FormContaPagar from "../pages/Contapagar/form";
 
 import { useAuth } from "../hooks/auth";
 import { useNavigate } from "react-router-dom";
-
+import { MdExitToApp, MdPayment, MdAccountBalance,MdRealEstateAgent } from 'react-icons/md'
+import { GiReceiveMoney } from 'react-icons/gi'
+import { FaUsers, FaCity, FaHome } from 'react-icons/fa'
 
 export default function AppRoutes() {
     const { signOut, nomeLogin } = useAuth()
@@ -42,38 +44,38 @@ export default function AppRoutes() {
             <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark"  >
                 <Container  >
                     <LinkContainer to="/">
-                        <Navbar.Brand href="javascript:void(0)">Home</Navbar.Brand>
+                        <Navbar.Brand href="javascript:void(0)"><FaHome/></Navbar.Brand>
                     </LinkContainer>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
                             <NavDropdown title="Cadastros" id="collasible-nav-dropdown-cadastro" >
                                 <LinkContainer to="/clientes">
-                                    <NavDropdown.Item href="javascript:void(0)">Clientes</NavDropdown.Item>
+                                    <NavDropdown.Item href="javascript:void(0)"><FaUsers/>  Clientes</NavDropdown.Item>
                                 </LinkContainer>
                                 
                                 <LinkContainer to="/fornecedores">
-                                    <NavDropdown.Item href="#action/3.2">Fornecedores </NavDropdown.Item>
+                                    <NavDropdown.Item href="#action/3.2"><FaUsers/> Fornecedores </NavDropdown.Item>
                                 </LinkContainer>
 
                                 <LinkContainer to="/contas">
-                                    <NavDropdown.Item href="javascript:void(0)">Contas</NavDropdown.Item>
+                                    <NavDropdown.Item href="javascript:void(0)"><MdAccountBalance/> Contas</NavDropdown.Item>
                                 </LinkContainer>
                                 
                                 <LinkContainer to="/estados">
-                                    <NavDropdown.Item href="javascript:void(0)" >Estados</NavDropdown.Item>
+                                    <NavDropdown.Item href="javascript:void(0)"><MdRealEstateAgent/> Estados</NavDropdown.Item>
                                 </LinkContainer>
                                 <LinkContainer to="/cidades">
-                                    <NavDropdown.Item href="javascript:void(0)">Cidades</NavDropdown.Item>
+                                    <NavDropdown.Item href="javascript:void(0)"><FaCity/> Cidades</NavDropdown.Item>
                                 </LinkContainer>
                             </NavDropdown>
 
                             <NavDropdown title="Financeiro" id="collasible-nav-dropdown_financeiro" >
                             <LinkContainer to="/contarecebers">
-                                <NavDropdown.Item href="javascript:void(0)">Contas a Receber</NavDropdown.Item>
+                                <NavDropdown.Item href="javascript:void(0)"><GiReceiveMoney/> Contas a Receber</NavDropdown.Item>
                             </LinkContainer>
                             <LinkContainer to="/contapagars">
-                                <NavDropdown.Item href="javascript:void(0)">Contas a Pagar</NavDropdown.Item>
+                                <NavDropdown.Item href="javascript:void(0)"><MdPayment/> Contas a Pagar</NavDropdown.Item>
                             </LinkContainer>
                                 
                                 
@@ -82,7 +84,7 @@ export default function AppRoutes() {
 
                         <Nav  >
                             <NavDropdown title={nomeLogin} id="collasible-nav-dropdown-user" >
-                                <NavDropdown.Item onClick={handleLogout} href="javascript:void(0)">Sair</NavDropdown.Item>
+                                <NavDropdown.Item onClick={handleLogout} href="javascript:void(0)"><MdExitToApp/> Sair</NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
                     </Navbar.Collapse>
