@@ -3,7 +3,7 @@ import axios from 'axios'
 
 // const { sigOut } = useAuth()
 const api = axios.create({
-    baseURL: 'https://webfin-react.vercel.app',
+    baseURL: 'https://webfin.plugsystem.natal.br',
     headers: {
       'X-Requested-Width': 'XMLHttpRequest',
     },

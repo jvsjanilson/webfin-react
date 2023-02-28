@@ -1,7 +1,5 @@
 import React, {useState, createContext, useContext} from "react";
 import api from "../config/api";
-import { redirect } from "react-router-dom";
-
 
 const defaultValue = {
     logado: false,
@@ -25,7 +23,7 @@ const AuthProvider = ({children}) => {
     const [msgError, setMsgError] = useState('')
 
     const isLogged = async () => {
-        const result =  await api.get('https://webfin-react.vercel.app/api/user')
+        const result =  await api.get('/api/user')
             .then((res) => {
                 setNomeLogin(res.data.name)
                 return true
@@ -36,8 +34,8 @@ const AuthProvider = ({children}) => {
 
     const signIn = async (email, password) => {
         // console.log(email, password)
-        await api.get('https://webfin-react.vercel.app/sanctum/csrf-cookie')
-        await api.post('https://webfin-react.vercel.app/api/login',{
+        await api.get('/sanctum/csrf-cookie')
+        await api.post('/api/login',{
             email,
             password
         }).then((res) => {
@@ -53,7 +51,7 @@ const AuthProvider = ({children}) => {
     }
 
     const signOut = async () => {
-       const logout =  await api.post('https://webfin-react.vercel.app/api/logout').then(() => {
+       const logout =  await api.post('/api/logout').then(() => {
             setLogado(false)
             localStorage.removeItem('webfin:isLogado')
             //return redirect("/")
