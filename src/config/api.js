@@ -3,7 +3,7 @@ import axios from 'axios'
 
 // const { sigOut } = useAuth()
 const api = axios.create({
-    baseURL: 'http://webfin.test',
+    baseURL: 'https://webfin-react.vercel.app',
     headers: {
       'X-Requested-Width': 'XMLHttpRequest',
     },
