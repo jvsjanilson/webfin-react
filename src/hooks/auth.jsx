@@ -25,7 +25,7 @@ const AuthProvider = ({children}) => {
     const [msgError, setMsgError] = useState('')
 
     const isLogged = async () => {
-        const result =  await api.get('/api/user')
+        const result =  await api.get('https://webfin-react.vercel.app/api/user')
             .then((res) => {
                 setNomeLogin(res.data.name)
                 return true
@@ -36,8 +36,8 @@ const AuthProvider = ({children}) => {
 
     const signIn = async (email, password) => {
         // console.log(email, password)
-        await api.get('/sanctum/csrf-cookie')
-        await api.post('/api/login',{
+        await api.get('https://webfin-react.vercel.app/sanctum/csrf-cookie')
+        await api.post('https://webfin-react.vercel.app/api/login',{
             email,
             password
         }).then((res) => {
@@ -53,7 +53,7 @@ const AuthProvider = ({children}) => {
     }
 
     const signOut = async () => {
-       const logout =  await api.post('/api/logout').then(() => {
+       const logout =  await api.post('https://webfin-react.vercel.app/api/logout').then(() => {
             setLogado(false)
             localStorage.removeItem('webfin:isLogado')
             //return redirect("/")
