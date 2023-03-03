@@ -1,13 +1,13 @@
 import axios from 'axios'
-// import { useAuth } from '../hooks/auth';
 
-// const { sigOut } = useAuth()
+
 const api = axios.create({
-    baseURL: 'https://webfin.plugsystem.natal.br',
-    // baseURL: 'http://webfin.test',
+    baseURL: import.meta.env.VITE_BASE_URL,//'https://webfin.plugsystem.natal.br',
+    
     headers: {
       'X-Requested-Width': 'XMLHttpRequest', 
-      // 'Referer': 'webfin-react.vercel.app',
+      'Accept': '*/*',
+      //'Content-Type': 'application/json'
     },
     withCredentials: true,
         
@@ -15,6 +15,7 @@ const api = axios.create({
 api.interceptors.response.use((response) => {
   return response
 }, (error) => {
+  
   if (error.response.status == 401 || error.response.status == 419)
     // sigOut()
     localStorage.removeItem('webfin:isLogado')

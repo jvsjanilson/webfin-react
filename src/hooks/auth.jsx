@@ -7,7 +7,8 @@ const defaultValue = {
     msgError: '',
     isLogged: () => {},
     signIn: (email, password) => {},
-    signOut: () => {}
+    signOut: () => {},
+    xCsrfToken: () => {},
 }
 
 const AuthContext = createContext(defaultValue)
@@ -33,7 +34,22 @@ const AuthProvider = ({children}) => {
     }
 
     const signIn = async (email, password) => {
-        // console.log(email, password)
+        // await api.get('/sanctum/csrf-cookie').then(async response => {
+        //         await api.post('/api/login',{
+        //         email,
+        //         password
+        //     }).then((res) => {
+        //         setMsgError('')
+        //         setNomeLogin(res.data.name)
+        //         setLogado(true)
+        //         localStorage.setItem('webfin:isLogado', true)
+        //     }).catch((e) => {
+        //         setLogado(false)
+        //         setMsgError(e.response.data.message)
+        //         localStorage.removeItem('webfin:isLogado')
+        //     }) 
+        // })
+
         await api.get('/sanctum/csrf-cookie')
         await api.post('/api/login',{
             email,
@@ -50,6 +66,11 @@ const AuthProvider = ({children}) => {
         })
     }
 
+    const xCsrfToken = async () => {
+        
+        await api.get('/sanctum/csrf-cookie').then(res => console.log(res)) 
+    }
+
     const signOut = async () => {
        const logout =  await api.post('/api/logout').then(() => {
             setLogado(false)
@@ -58,7 +79,7 @@ const AuthProvider = ({children}) => {
        })
     }
 
-    return (<AuthContext.Provider value={{logado, nomeLogin, msgError, signIn, signOut, isLogged }}>{children}</AuthContext.Provider> )
+    return (<AuthContext.Provider value={{logado, nomeLogin, msgError, signIn, signOut, isLogged, xCsrfToken }}>{children}</AuthContext.Provider> )
 }
 
 function useAuth() {

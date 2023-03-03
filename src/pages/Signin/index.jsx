@@ -8,7 +8,7 @@ import { FaSignInAlt } from 'react-icons/fa'
 export default function Signin() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const { signIn, msgError } = useAuth()
+    const { signIn, msgError, signOut, xCsrfToken } = useAuth()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -47,6 +47,7 @@ export default function Signin() {
                             <LinkContainer to="/register" className='me-1'>
                                 <a>Registrar</a>
                             </LinkContainer>
+                                <Button type="button" onClick={xCsrfToken} >get X-CSRF-TOKEN</Button>
                                 <Button type="submit" variant="primary"><FaSignInAlt/>  Entrar</Button>
                             </Card.Footer>
                         </Card>
